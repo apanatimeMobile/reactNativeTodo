@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 interface ActivityBarItem {
   label: string;

@@ -8,10 +8,10 @@ import {
   StyleSheet, Text, TextInput, View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import type { BackupRestoreMode, BackupTask } from '../types/user_settings.types';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import type { BackupRestoreMode, BackupTask } from "@/features/frontend_user/user_settings/settings_profile/types/user_settings.types";
 
 export interface UserSettingsBackupRestoreDialogProps {
   visible: boolean;

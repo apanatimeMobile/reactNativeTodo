@@ -6,10 +6,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Flame, CheckCircle2, Target } from 'lucide-react-native';
-import type { OverviewMetrics } from '../types/user_overview.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { displayValue } from '../../../../../core/utils/displayValue';
+import type { OverviewMetrics } from "@/features/frontend_user/user_overview/overview_dashboard/types/user_overview.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { displayValue } from "@/core/utils/displayValue";
 
 interface UserOverviewKPISectionProps {
   metrics: OverviewMetrics;

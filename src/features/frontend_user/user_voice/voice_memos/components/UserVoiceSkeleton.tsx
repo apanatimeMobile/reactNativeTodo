@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 export function UserVoiceSkeleton() {
   const tokens = useThemeTokens();

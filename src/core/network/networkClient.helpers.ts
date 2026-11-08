@@ -3,7 +3,7 @@
  * FLOW: Axios response/error → these typed helpers → ApiResponse contract.
  */
 import axios from 'axios';
-import type { ApiFailure, ApiSuccess, ValidationErrorItem } from './apiResponse.types';
+import type { ApiFailure, ApiSuccess, ValidationErrorItem } from "@/core/network/apiResponse.types";
 
 type JsonRecord = Record<string, unknown>;
 

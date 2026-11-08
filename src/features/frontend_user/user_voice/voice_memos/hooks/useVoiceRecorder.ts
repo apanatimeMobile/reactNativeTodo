@@ -4,12 +4,12 @@
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Linking, Platform } from 'react-native';
-import { requestMicrophonePermission } from '../utils/userVoiceMicrophonePermission';
+import { requestMicrophonePermission } from "@/features/frontend_user/user_voice/voice_memos/utils/userVoiceMicrophonePermission";
 import RNFS from 'react-native-fs';
 import Sound from 'react-native-nitro-sound';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { showToast } from '../../../../../core/toast/showToast';
-import type { VoiceMemoEntity } from '../types/user_voice.types';
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { showToast } from "@/core/toast/showToast";
+import type { VoiceMemoEntity } from "@/features/frontend_user/user_voice/voice_memos/types/user_voice.types";
 
 const RECORDINGS_DIRECTORY = `${RNFS.DocumentDirectoryPath}/tasklume-voice-memos`;
 type SaveMemo = (memo: VoiceMemoEntity) => Promise<boolean>;

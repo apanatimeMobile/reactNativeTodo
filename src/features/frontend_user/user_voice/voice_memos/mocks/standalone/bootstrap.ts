@@ -3,7 +3,7 @@
  * FLOW: Configures mock network interceptors, seeds initial test fixtures, and mounts harness.
  */
 
-import { UserVoiceHarness } from '../../tests/harness/UserVoiceHarness';
+import { UserVoiceHarness } from "@/features/frontend_user/user_voice/voice_memos/tests/harness/UserVoiceHarness";
 
 export function bootstrapUserVoice() {
   return {

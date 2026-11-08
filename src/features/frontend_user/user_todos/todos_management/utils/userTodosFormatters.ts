@@ -3,8 +3,8 @@
  * FLOW: Consumed by UserTodosTodoCard, UserTodosTodoList, and UserTodosDetailMainView.
  */
 
-import type { TodoPriority } from '../types/user_todos.types';
-import type { Tokens } from '../../../../../core/theme/tokenDefinitions';
+import type { TodoPriority } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import type { Tokens } from "@/core/theme/tokenDefinitions";
 
 export interface PriorityBadgeStyle {
   textColor: string;

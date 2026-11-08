@@ -6,13 +6,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Check, Star, Clock, Tag } from 'lucide-react-native';
-import type { TodoEntity } from '../types/user_todos.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact, triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
-import { getPriorityBadgeStyle } from '../utils/userTodosFormatters';
-import { displayValue } from '../../../../../core/utils/displayValue';
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact, triggerSuccessHaptic } from "@/core/interaction/haptics";
+import { getPriorityBadgeStyle } from "@/features/frontend_user/user_todos/todos_management/utils/userTodosFormatters";
+import { displayValue } from "@/core/utils/displayValue";
 
 interface UserTodosTodoCardProps {
   todo: TodoEntity;

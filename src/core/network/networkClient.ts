@@ -3,14 +3,14 @@
  * FLOW: Feature API → networkClient → configured base URL + Axios → normalized ApiResponse<T>.
  */
 import axios from 'axios';
-import type { ApiFailure, ApiResponse } from './apiResponse.types';
-import { getActiveLocale } from '../i18n/locale';
+import type { ApiFailure, ApiResponse } from "@/core/network/apiResponse.types";
+import { getActiveLocale } from "@/core/i18n/locale";
 import {
   normalizeHttpFailure,
   normalizeHttpSuccess,
   normalizeTransportFailure,
   requestIdFrom,
-} from './networkClient.helpers';
+} from "@/core/network/networkClient.helpers";
 
 export interface RequestOptions {
   headers?: Record<string, string>;

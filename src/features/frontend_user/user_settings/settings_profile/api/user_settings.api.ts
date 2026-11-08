@@ -3,7 +3,7 @@
  * FLOW: Updates user profile and submits feedback ratings via networkClient.
  */
 
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
+import type { ApiResponse } from "@/core/network/apiResponse.types";
 
 export interface FeedbackDto {
   category: string;

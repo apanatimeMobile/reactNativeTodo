@@ -1,16 +1,16 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { UserOverviewScreen } from './UserOverviewScreen';
+import { UserOverviewScreen } from "@/features/frontend_user/user_overview/overview_dashboard/screens/UserOverviewScreen";
 
 const mockRetry = jest.fn();
 const mockState = { loading: false, loadError: false, retryLoad: mockRetry };
-jest.mock('../hooks/useUserOverview', () => ({ useUserOverview: () => mockState }));
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
-  useThemeTokens: () => require('../../../../../core/theme/darkTheme').darkTheme,
+jest.mock("@/features/frontend_user/user_overview/overview_dashboard/hooks/useUserOverview", () => ({ useUserOverview: () => mockState }));
+jest.mock("@/core/theme/useThemeTokens", () => ({
+  useThemeTokens: () => require("@/core/theme/darkTheme").darkTheme,
 }));
-jest.mock('../components/UserOverviewMainView', () => ({ UserOverviewMainView: () => 'main' }));
-jest.mock('../components/UserOverviewSkeleton', () => ({ UserOverviewSkeleton: () => 'loading' }));
-jest.mock('../components/UserOverviewErrorFallback', () => ({ UserOverviewErrorFallback: () => 'error' }));
+jest.mock("@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewMainView", () => ({ UserOverviewMainView: () => 'main' }));
+jest.mock("@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewSkeleton", () => ({ UserOverviewSkeleton: () => 'loading' }));
+jest.mock("@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewErrorFallback", () => ({ UserOverviewErrorFallback: () => 'error' }));
 
 describe('UserOverviewScreen loading states', () => {
   it.each([

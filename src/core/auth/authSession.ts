@@ -3,7 +3,7 @@
  * FLOW: Stores/retrieves access and refresh tokens from iOS Keychain / Android Keystore via secureStorage.
  */
 
-import { getSecureToken, setSecureToken, removeSecureToken } from '../storage/secureStorage';
+import { getSecureToken, setSecureToken, removeSecureToken } from "@/core/storage/secureStorage";
 
 const ACCESS_TOKEN_KEY = 'auth_access_token';
 const REFRESH_TOKEN_KEY = 'auth_refresh_token';

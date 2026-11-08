@@ -6,8 +6,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { CheckCircle2, Award, Flame } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 interface UserProfileStatsCardsProps {
   completedTasks: number;

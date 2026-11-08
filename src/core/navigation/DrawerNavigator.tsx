@@ -7,17 +7,17 @@ import React from 'react';
 import { useWindowDimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { BottomTabNavigator } from './BottomTabNavigator';
-import { PremiumDrawerContent } from './PremiumDrawerContent';
-import { CORE_ROUTES } from './routes';
+import { BottomTabNavigator } from "@/core/navigation/BottomTabNavigator";
+import { PremiumDrawerContent } from "@/core/navigation/PremiumDrawerContent";
+import { CORE_ROUTES } from "@/core/navigation/routes";
 
-import { UserRemindersNavigator } from '../../features/frontend_user/user_reminders/screens/UserRemindersNavigator';
-import { UserVoiceNavigator } from '../../features/frontend_user/user_voice/screens/UserVoiceNavigator';
-import { UserSettingsNavigator } from '../../features/frontend_user/user_settings/screens/UserSettingsNavigator';
-import { UserTodosNavigator } from '../../features/frontend_user/user_todos/screens/UserTodosNavigator';
-import { UserCalendarNavigator } from '../../features/frontend_user/user_calendar/screens/UserCalendarNavigator';
-import { UserOverviewNavigator } from '../../features/frontend_user/user_overview/screens/UserOverviewNavigator';
-import { UserPomodoroNavigator } from '../../features/frontend_user/user_pomodoro/screens/UserPomodoroNavigator';
+import { UserRemindersNavigator } from "@/features/frontend_user/user_reminders/screens/UserRemindersNavigator";
+import { UserVoiceNavigator } from "@/features/frontend_user/user_voice/screens/UserVoiceNavigator";
+import { UserSettingsNavigator } from "@/features/frontend_user/user_settings/screens/UserSettingsNavigator";
+import { UserTodosNavigator } from "@/features/frontend_user/user_todos/screens/UserTodosNavigator";
+import { UserCalendarNavigator } from "@/features/frontend_user/user_calendar/screens/UserCalendarNavigator";
+import { UserOverviewNavigator } from "@/features/frontend_user/user_overview/screens/UserOverviewNavigator";
+import { UserPomodoroNavigator } from "@/features/frontend_user/user_pomodoro/screens/UserPomodoroNavigator";
 
 const Drawer = createDrawerNavigator();
 

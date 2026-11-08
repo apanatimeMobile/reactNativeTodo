@@ -4,10 +4,10 @@
  */
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import type { TodoEntity } from '../types/user_todos.types';
-import { UserTodosTrashMainView } from './UserTodosTrashMainView';
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { UserTodosTrashMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosTrashMainView";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: {
       background: '#F4F4F5',
@@ -51,7 +51,7 @@ const trashedTodo: TodoEntity = {
   createdAt: 1,
 };
 
-jest.mock('../../../../../core/i18n/useTranslation', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+jest.mock("@/core/i18n/useTranslation", () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
 
 describe('UserTodosTrashMainView destructive actions', () => {
   it('requires confirmation before permanently deleting one task', () => {

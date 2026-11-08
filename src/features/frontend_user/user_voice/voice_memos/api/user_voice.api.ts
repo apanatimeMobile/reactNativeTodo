@@ -3,9 +3,9 @@
  * FLOW: Saves recorded audio clips and transcript conversions via networkClient.
  */
 
-import { networkClient } from '../../../../../core/network/networkClient';
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
-import { USER_VOICE_URL_CONFIG } from '../config/user_voice.url_config';
+import { networkClient } from "@/core/network/networkClient";
+import type { ApiResponse } from "@/core/network/apiResponse.types";
+import { USER_VOICE_URL_CONFIG } from "@/features/frontend_user/user_voice/voice_memos/config/user_voice.url_config";
 
 export interface VoiceMemoDto {
   id: string;

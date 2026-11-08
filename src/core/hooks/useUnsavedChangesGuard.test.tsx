@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
 import { usePreventRemove } from '@react-navigation/native';
-import { useUnsavedChangesGuard } from './useUnsavedChangesGuard';
+import { useUnsavedChangesGuard } from "@/core/hooks/useUnsavedChangesGuard";
 
 type PreventRemoveCallback = Parameters<typeof usePreventRemove>[1];
 type PreventRemoveEvent = Parameters<PreventRemoveCallback>[0];

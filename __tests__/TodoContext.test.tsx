@@ -1,12 +1,13 @@
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { TodoProvider, useTodoContext } from '../src/context/TodoContext';
-import APP_CONFIG from '../src/constants/appConfig';
+import { TodoProvider } from "@/features/frontend_user/user_todos/todos_management/state/UserTodosContext";
+import { useTaskHost } from "@/core/contracts/taskHost";
+import APP_CONFIG from "@/core/config/appConfig";
 
-let state: ReturnType<typeof useTodoContext>;
+let state: ReturnType<typeof useTaskHost>;
 function Capture() {
-  state = useTodoContext();
+  state = useTaskHost();
   return null;
 }
 

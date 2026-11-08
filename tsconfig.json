@@ -3,7 +3,12 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",

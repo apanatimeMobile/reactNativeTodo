@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { DrawerNavigator } from './DrawerNavigator';
+import { DrawerNavigator } from "@/core/navigation/DrawerNavigator";
 
 export function RootNavigator() {
   return (

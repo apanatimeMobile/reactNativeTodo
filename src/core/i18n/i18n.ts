@@ -9,6 +9,6 @@ export {
   setActiveLocale,
   normalizeLocale,
   detectDeviceLocale,
-} from './locale';
+} from "@/core/i18n/locale";
 
-export { useTranslation, I18nProvider } from './useTranslation';
+export { useTranslation, I18nProvider } from "@/core/i18n/useTranslation";

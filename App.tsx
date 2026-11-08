@@ -8,46 +8,40 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import notifee, {EventType} from '@notifee/react-native';
 
 import {
-  AuthProvider,
-} from './src/context/AuthContext';
+  LocalProfileProvider,
+} from "@/core/auth/LocalProfileProvider";
+
+import { TodoProvider } from "@/features/frontend_user/user_todos/todos_management/state/UserTodosContext";
 
 import {
-  TodoProvider,
-} from './src/context/TodoContext';
+  AccentPreferencesProvider,
+} from "@/core/theme/AccentThemeProvider";
 
 import {
-  ThemeProvider,
-} from './src/context/ThemeContext';
+  PreferencesProvider,
+} from "@/core/preferences/PreferencesProvider";
 
-import {
-  SettingsProvider,
-} from './src/context/SettingsContext';
-
-import RootNavigator from './src/core/navigation/RootNavigator';
+import RootNavigator from "@/core/navigation/RootNavigator";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { I18nProvider } from './src/core/i18n/useTranslation';
+import { I18nProvider } from "@/core/i18n/useTranslation";
 
-import {
-  prepareTodoTimerNotifications,
-} from './src/utils/todoTimerNotifications';
-import {
-  initSoundService,
-  playAlarmSound,
-  playAlertSound,
-  stopSound,
-} from './src/services/soundService';
+import { prepareTodoTimerNotifications } from "@/core/notifications/prepareTodoTimerNotifications";
+import { initSoundService } from "@/core/audio/soundInitialization";
+import { playAlarmSound } from "@/core/audio/alarmPlayback";
+import { playAlertSound } from "@/core/audio/alertPlayback";
+import { stopSound } from "@/core/audio/audioState";
 
 import Toast from 'react-native-toast-message';
 
 import {
   AppLockProvider,
-} from './src/context/AppLockContext';
-import LockScreen from './src/core/ui/LockScreen';
-import ErrorBoundary from './src/core/ui/ErrorBoundary';
+} from "@/core/security/AppLockProvider";
+import LockScreen from "@/core/ui/LockScreen";
+import ErrorBoundary from "@/core/ui/ErrorBoundary";
 
 import {
   ThemeProvider as CoreThemeProvider,
-} from './src/core/theme/ThemeProvider';
+} from "@/core/theme/ThemeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -105,19 +99,19 @@ function App() {
           <CoreThemeProvider>
             <QueryClientProvider client={queryClient}>
               <I18nProvider>
-                <ThemeProvider>
-                  <SettingsProvider>
+                <AccentPreferencesProvider>
+                  <PreferencesProvider>
                 <AppLockProvider>
-                  <AuthProvider>
+                  <LocalProfileProvider>
                     <TodoProvider>
                       <RootNavigator />
                       <LockScreen />
                       <Toast />
                     </TodoProvider>
-                  </AuthProvider>
+                  </LocalProfileProvider>
                 </AppLockProvider>
-                  </SettingsProvider>
-                </ThemeProvider>
+                  </PreferencesProvider>
+                </AccentPreferencesProvider>
               </I18nProvider>
             </QueryClientProvider>
           </CoreThemeProvider>

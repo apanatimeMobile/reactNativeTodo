@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_OVERVIEW_ROUTES } from '../overview_dashboard/config/user_overview.url_config';
-import { UserOverviewScreen } from '../overview_dashboard/screens/UserOverviewScreen';
+import { USER_OVERVIEW_ROUTES } from "@/features/frontend_user/user_overview/overview_dashboard/config/user_overview.url_config";
+import { UserOverviewScreen } from "@/features/frontend_user/user_overview/overview_dashboard/screens/UserOverviewScreen";
 
 const Stack = createNativeStackNavigator();
 

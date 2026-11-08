@@ -6,10 +6,10 @@
 import React, { useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserTodosAddMainView } from '../components/UserTodosAddMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserTodos } from '../hooks/useUserTodos';
-import type { TodoFormInput } from '../schemas/user_todos.schemas';
+import { UserTodosAddMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosAddMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserTodos } from "@/features/frontend_user/user_todos/todos_management/hooks/useUserTodos";
+import type { TodoFormInput } from "@/features/frontend_user/user_todos/todos_management/schemas/user_todos.schemas";
 
 export function UserTodosAddScreen({ navigation }: { navigation: { goBack: () => void } }) {
   const tokens = useThemeTokens();

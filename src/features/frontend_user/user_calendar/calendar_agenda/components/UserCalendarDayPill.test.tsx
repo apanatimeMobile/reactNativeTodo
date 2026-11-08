@@ -1,19 +1,19 @@
 import React from 'react';
 import { act, create } from 'react-test-renderer';
-import { UserCalendarDayPill } from './UserCalendarDayPill';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import { UserCalendarDayPill } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarDayPill";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: { primary: '#06c', card: '#fff', border: '#ddd', onPrimary: '#fff', muted: '#555', foreground: '#111' },
     radius: { lg: 12 },
     typography: { caption: {}, body: {} },
   }),
 }));
-jest.mock('../../../../../core/i18n/useTranslation', () => ({
+jest.mock("@/core/i18n/useTranslation", () => ({
   useTranslation: () => ({ t: () => 'Select date Monday, June 8, 2026' }),
 }));
-jest.mock('../../../../../core/interaction/haptics', () => ({ triggerLightImpact: jest.fn() }));
+jest.mock("@/core/interaction/haptics", () => ({ triggerLightImpact: jest.fn() }));
 
 describe('UserCalendarDayPill', () => {
   it('announces the full date and selects it without navigation haptics', () => {

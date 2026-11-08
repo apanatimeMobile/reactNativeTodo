@@ -3,9 +3,9 @@
  * FLOW: Dispatches typed HTTP requests via networkClient and returns ApiResponse<T>.
  */
 
-import { networkClient } from '../../../../../core/network/networkClient';
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
-import { USER_TODOS_URL_CONFIG } from '../config/user_todos.url_config';
+import { networkClient } from "@/core/network/networkClient";
+import type { ApiResponse } from "@/core/network/apiResponse.types";
+import { USER_TODOS_URL_CONFIG } from "@/features/frontend_user/user_todos/todos_management/config/user_todos.url_config";
 
 export interface TodoDto {
   id: string;

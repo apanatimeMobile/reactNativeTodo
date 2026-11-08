@@ -6,11 +6,11 @@
 import React, { useMemo } from 'react';
 import { View, StyleSheet, Text, Pressable } from 'react-native';
 import { ArrowLeft } from 'lucide-react-native';
-import type { TodoEntity } from '../types/user_todos.types';
-import { UserTodosTodoList } from './UserTodosTodoList';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { UserTodosTodoList } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosTodoList";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserTodosFavoritesMainViewProps {
   todos: TodoEntity[];

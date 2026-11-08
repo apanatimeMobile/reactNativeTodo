@@ -1,4 +1,4 @@
-import { captureException } from './sentry';
+import { captureException } from "@/core/observability/sentry";
 
 it('does not log raw exception payloads and redacts structured personal data', () => {
   const log = jest.spyOn(console, 'error').mockImplementation(() => undefined);

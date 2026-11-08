@@ -3,10 +3,10 @@
  * FLOW: UserRemindersScreen → useUserReminders → TodoContext.updateTodo → scheduleTodoReminder.
  */
 import { useMemo, useCallback } from 'react';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import { showToast } from '../../../../../core/toast/showToast';
-import type { ReminderTaskEntity } from '../types/user_reminders.types';
-import { calculateSnoozedReminderSchedule } from '../utils/userRemindersSnooze';
+import { useTaskHost } from "@/core/contracts/taskHost";
+import { showToast } from "@/core/toast/showToast";
+import type { ReminderTaskEntity } from "@/features/frontend_user/user_reminders/reminders_active/types/user_reminders.types";
+import { calculateSnoozedReminderSchedule } from "@/features/frontend_user/user_reminders/reminders_active/utils/userRemindersSnooze";
 
 type ReminderTaskWithDueTime = ReminderTaskEntity & { dueTime?: string | null };
 
@@ -16,7 +16,7 @@ type ReminderTaskWithDueTime = ReminderTaskEntity & { dueTime?: string | null };
  * @sideEffects Updates the host task context; its updateTodo path reschedules native notifications.
  */
 export function useUserReminders() {
-  const todoCtx = useTodoContext();
+  const todoCtx = useTaskHost();
   const tasks = useMemo(() => (todoCtx?.tasks ?? []) as ReminderTaskWithDueTime[], [todoCtx?.tasks]);
 
   const activeReminders = useMemo(
