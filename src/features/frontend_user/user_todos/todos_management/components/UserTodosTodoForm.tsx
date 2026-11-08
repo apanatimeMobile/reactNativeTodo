@@ -22,12 +22,15 @@ import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerErrorHaptic, triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
+import { useUnsavedChangesGuard } from '../../../../../core/hooks/useUnsavedChangesGuard';
+import { UserTodosConfirmDialog } from './UserTodosConfirmDialog';
 
 interface UserTodosTodoFormProps {
   initialValues?: Partial<TodoFormInput>;
   submitLabel?: string;
   isSubmitting?: boolean;
   onSubmit: (values: TodoFormInput) => void | Promise<void>;
+  onSubmitSuccess?: () => void;
   categories: string[];
 }
 
@@ -42,6 +45,7 @@ export function UserTodosTodoForm({
   submitLabel = '',
   isSubmitting = false,
   onSubmit,
+  onSubmitSuccess,
   categories,
 }: UserTodosTodoFormProps) {
   const tokens = useThemeTokens();
@@ -49,7 +53,7 @@ export function UserTodosTodoForm({
   const minTarget = getMinTouchTarget();
   const {
     control, handleSubmit, watch, setValue, setError, clearErrors,
-    formState: { errors, isSubmitting: formSubmitting },
+    formState: { errors, isSubmitting: formSubmitting, isDirty },
   } = useForm<TodoFormInput>({
     mode: 'onSubmit',
     defaultValues: {
@@ -62,6 +66,13 @@ export function UserTodosTodoForm({
       reminderTime: initialValues?.reminderTime ?? '',
       recurrence: initialValues?.recurrence ?? 'none',
     },
+  });
+  const guard = useUnsavedChangesGuard(isDirty, {
+    title: t('user_todos_management.DISCARD_CHANGES_TITLE'),
+    description: t('user_todos_management.DISCARD_CHANGES_DESCRIPTION'),
+    confirmLabel: t('user_todos_management.DISCARD_CHANGES_CONFIRM'),
+    cancelLabel: t('user_todos_management.CANCEL'),
+    isDestructive: true,
   });
   const priority = watch('priority');
   const category = watch('category');
@@ -85,6 +96,10 @@ export function UserTodosTodoForm({
     clearErrors();
     try {
       await onSubmit(parsed.data);
+      if (onSubmitSuccess) {
+        guard.allowNavigationAfterSubmit();
+        onSubmitSuccess();
+      }
       triggerSuccessHaptic();
     } catch {
       setError('root', { type: 'server', message: 'user_todos_management.SUBMIT_FAILED' });

@@ -64,8 +64,9 @@ export function UserVoiceMainView({ onOpenDrawer }: UserVoiceMainViewProps) {
       <Text style={styles.subtitle}>{t('user_voice_memos.VOICE_CAPTURE_CONTRACT')}</Text>
       {voice.recordingError && (
         <UserVoiceErrorFallback
-          message={t('user_voice_memos.RECORDING_ERROR')}
-          onRetry={() => { void voice.startRecording(); }}
+          message={t(voice.permissionBlocked ? 'user_voice_memos.MIC_PERMISSION_BLOCKED' : 'user_voice_memos.RECORDING_ERROR')}
+          onRetry={voice.permissionBlocked ? undefined : () => { void voice.startRecording(); }}
+          onOpenSettings={voice.permissionBlocked ? voice.openPermissionSettings : undefined}
         />
       )}
       {voice.storageError && <Text style={styles.error}>{t('user_voice_memos.STORAGE_ERROR')}</Text>}

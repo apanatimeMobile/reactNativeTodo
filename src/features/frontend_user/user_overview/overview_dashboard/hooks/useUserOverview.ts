@@ -4,10 +4,12 @@
  */
 
 import { useMemo, useState, useCallback } from 'react';
+import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { useTodoContext } from '../../../../../context/TodoContext';
 import { buildWeeklyCompletionActivity, calculateTaskCompletionStreak, type OverviewTaskRecord } from '../utils/userOverviewAnalytics';
 
 export function useUserOverview() {
+  const { t } = useTranslation();
   const todoCtx = useTodoContext();
   const tasks = useMemo(() => (todoCtx?.tasks ?? []) as OverviewTaskRecord[], [todoCtx?.tasks]);
   const loadTodos = todoCtx?.loadTodos;
@@ -49,6 +51,9 @@ export function useUserOverview() {
   const activityData = useMemo(() => buildWeeklyCompletionActivity(tasks), [tasks]);
 
   return {
+    loading: Boolean(todoCtx.loading),
+    loadError: Boolean(todoCtx.loadError),
+    retryLoad: todoCtx.loadTodos,
     metrics,
     categoryData,
     activityData,
@@ -56,9 +61,9 @@ export function useUserOverview() {
     refresh,
     refreshOverview: refresh,
     insightText: metrics.totalTasks === 0
-      ? 'Add a task to start tracking your progress.'
+      ? t('user_overview_dashboard.INSIGHT_EMPTY')
       : metrics.completionRate >= 70
-        ? 'Great progress. Keep your momentum going.'
-        : 'Complete one task at a time to build momentum.',
+        ? t('user_overview_dashboard.INSIGHT_HIGH')
+        : t('user_overview_dashboard.INSIGHT_PROGRESS'),
   };
 }
