@@ -7,6 +7,8 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
+import { UserTodosSkeleton } from '../components/UserTodosSkeleton';
+import { UserTodosErrorFallback } from '../components/UserTodosErrorFallback';
 import { UserTodosHomeMainView } from '../components/UserTodosHomeMainView';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useUserTodos } from '../hooks/useUserTodos';
@@ -14,7 +16,7 @@ import { USER_TODOS_ROUTES } from '../config/user_todos.url_config';
 
 export function UserTodosHomeScreen({ navigation }: { navigation: any }) {
   const tokens = useThemeTokens();
-  const { todos, categories, toggleComplete, toggleFavorite, refreshTodos, loading } = useUserTodos();
+  const { todos, categories, toggleComplete, toggleFavorite, refreshTodos, loading, loadError } = useUserTodos();
 
   const handleOpenDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -44,7 +46,7 @@ export function UserTodosHomeScreen({ navigation }: { navigation: any }) {
       <StatusBar
         barStyle={tokens.isDark ? 'light-content' : 'dark-content'}
       />
-      <UserTodosHomeMainView
+      {loading ? <UserTodosSkeleton /> : loadError ? <UserTodosErrorFallback onRetry={refreshTodos} /> : <UserTodosHomeMainView
         todos={todos}
         categories={categories}
         onOpenDrawer={handleOpenDrawer}
@@ -55,7 +57,7 @@ export function UserTodosHomeScreen({ navigation }: { navigation: any }) {
         onPressReminders={handlePressReminders}
         refreshing={loading}
         onRefresh={refreshTodos}
-      />
+      />}
     </SafeAreaView>
   );
 }
