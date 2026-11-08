@@ -12,10 +12,10 @@ export interface TelemetryBreadcrumb {
   data?: Record<string, unknown>;
 }
 
-export function captureException(error: unknown, context?: Record<string, unknown>): void {
+export function captureException(_error: unknown, context?: Record<string, unknown>): void {
   const sanitizedContext = context ? sanitizeTelemetry(context) : undefined;
   if (__DEV__) {
-    console.error('[Observability] Exception captured:', error, sanitizedContext);
+    console.error('[Observability] Exception captured:', sanitizedContext);
   }
 }
 

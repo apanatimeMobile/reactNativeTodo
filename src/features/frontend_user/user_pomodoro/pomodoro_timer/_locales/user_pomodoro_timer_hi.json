@@ -10,6 +10,10 @@
     "OPEN_DRAWER": "नेविगेशन मेनू खोलें",
     "FOCUS_TIMER_TITLE": "फोकस टाइमर",
     "STAY_FOCUSED": "ध्यान केंद्रित रखें",
-    "REST": "आराम"
+    "REST": "आराम",
+    "MODE_FOCUS": "फोकस",
+    "MODE_SHORT_BREAK": "छोटा विराम",
+    "MODE_LONG_BREAK": "लंबा विराम",
+    "SWITCH_TO_MODE": "{mode} मोड पर जाएँ"
   }
 }
