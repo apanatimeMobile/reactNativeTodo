@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   getItem,
   setItem,
@@ -21,6 +22,13 @@ describe('Storage Service', () => {
     await setItem('test_obj', data);
     const result = await getItem('test_obj', null);
     expect(result).toEqual(data);
+  });
+
+  it('surfaces strict read failures instead of silently returning an empty value', async () => {
+    AsyncStorage.getItem.mockRejectedValueOnce(new Error('read failed'));
+    await expect(getItem('tasks', [], true)).rejects.toThrow('read failed');
+    AsyncStorage.getItem.mockRejectedValueOnce(new Error('read failed'));
+    await expect(getItem('tasks', [])).resolves.toEqual([]);
   });
 
   it('returns defaultValue when key is not present', async () => {
