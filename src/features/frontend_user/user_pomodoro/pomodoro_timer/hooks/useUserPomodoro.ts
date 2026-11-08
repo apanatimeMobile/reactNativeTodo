@@ -1,18 +1,17 @@
 /**
- * RESPONSIBILITY: Owns the local Pomodoro timer state and its lifecycle. Does not
- * make API requests or persist completed sessions.
- *
- * FLOW: UserPomodoroTimerMainView → useUserPomodoro → local timer state → timer controls.
+ * RESPONSIBILITY: Owns the local timer lifecycle and persists completed sessions without API calls.
+ * FLOW: UserPomodoroTimerMainView → useUserPomodoro → timer state and local session history.
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
+import { recordFocusSession } from '../utils/userPomodoroSessions';
 import type { PomodoroMode } from '../types/user_pomodoro.types';
 
 /**
  * Manages the countdown timer, mode durations, start/pause, reset, and completion.
  * @param onSessionComplete - Optional callback invoked once when the active session reaches zero.
  * @returns Timer state and handlers consumed by UserPomodoroTimerMainView.
- * @sideEffects Starts a one-second interval only while the timer is running and emits completion haptics.
+ * @sideEffects Starts a one-second interval while running, emits completion haptics, and records completed sessions.
  */
 export function useUserPomodoro(
   onSessionComplete?: (mode: PomodoroMode, durationMinutes: number) => void,
@@ -51,6 +50,7 @@ export function useUserPomodoro(
       if (!completionHandledRef.current) {
         completionHandledRef.current = true;
         triggerSuccessHaptic();
+        void recordFocusSession({ mode, durationMinutes: selectedMinutes });
         onSessionComplete?.(mode, selectedMinutes);
       }
       return undefined;

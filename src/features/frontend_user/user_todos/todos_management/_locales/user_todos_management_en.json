@@ -70,6 +70,10 @@
     "VALIDATION_CATEGORY_REQUIRED": "Choose a category.",
     "VALIDATION_PRIORITY_INVALID": "Choose a valid priority.",
     "VALIDATION_DUE_DATE_INVALID": "Use YYYY-MM-DD for the due date.",
-    "VALIDATION_REMINDER_TIME_INVALID": "Use HH:mm for the reminder time."
+    "VALIDATION_REMINDER_TIME_INVALID": "Use HH:mm for the reminder time.",
+    "TAB_UPCOMING": "Upcoming",
+    "SUBMIT_FAILED": "Task could not be saved. Please try again.",
+    "TASK_NOT_FOUND": "This task is no longer available.",
+    "BACK_TO_TASKS": "Back to tasks"
   }
 }
