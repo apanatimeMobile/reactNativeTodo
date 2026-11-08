@@ -359,5 +359,9 @@
     "Full standalone host stubs/mock/E2E coverage and individual 43P evidence remain incomplete",
     "Verified backend contracts and compatible dependency remediation remain unresolved"
   ],
-  "migration_status": "STRUCTURAL_MIGRATION_COMPLETE"
+  "migration_status": "STRUCTURAL_MIGRATION_COMPLETE",
+  "architecture_review_notes": [
+    "Existing accent preference does not recolor canonical Gold tokens; explicit design decision required before changing that behavior.",
+    "Typed task host port owns no task business state/logic; reviewer flagged domain-specific core contract as a remaining strict-isolation concern."
+  ]
 }

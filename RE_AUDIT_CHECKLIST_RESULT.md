@@ -46,3 +46,8 @@ Exact final commands/counts and Metro bundle result are recorded in `compliance_
 | Final all-RBG ZIP | Not issued while the broader release gates remain open. |
 
 Historical baseline documents describe earlier revisions. This report and the integration map supersede their old-path placement statements, not their unresolved external contracts or runtime checks.
+
+## Independent review notes
+
+- **Accent behavior — existing source/design conflict:** saved accent selection remains a preference, while canonical visual tokens stay Gold as required by the supplied design guide. The previous drawer already used canonical `useThemeTokens()` independently of the legacy accent provider (`cf6b2a5:src/core/navigation/PremiumDrawerContent.tsx:170-171`). This migration preserves that behavior; it does not claim that selecting a palette changes all application tokens. Resolving customization versus the mandatory Gold theme needs an explicit design decision.
+- **Task host boundary — architecture review remains open:** `core/contracts/taskHost.js` hosts only injected context and its DTO/capability contract; task state, mutations, normalization, retention and selectors remain in the owning feature. This removes sibling store imports without duplicating persisted state. The reviewer flagged the todo-specific core port as a strict-isolation concern. It is recorded, not treated as proof of complete architectural compliance; replacing it with fully autonomous local ports is separate from preserving the existing integrated offline app.
