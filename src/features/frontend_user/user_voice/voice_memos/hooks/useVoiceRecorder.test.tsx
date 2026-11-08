@@ -2,8 +2,8 @@ import React from 'react';
 import { Linking, PermissionsAndroid, Platform } from 'react-native';
 import Sound from 'react-native-nitro-sound';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { useVoiceRecorder } from './useVoiceRecorder';
-import { showToast } from '../../../../../core/toast/showToast';
+import { useVoiceRecorder } from "@/features/frontend_user/user_voice/voice_memos/hooks/useVoiceRecorder";
+import { showToast } from "@/core/toast/showToast";
 
 jest.mock('react-native', () => {
   const native = jest.requireActual('react-native');
@@ -14,10 +14,10 @@ jest.mock('react-native', () => {
   return native;
 });
 
-jest.mock('../../../../../core/i18n/useTranslation', () => ({
+jest.mock("@/core/i18n/useTranslation", () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
-jest.mock('../../../../../core/toast/showToast', () => ({ showToast: jest.fn() }));
+jest.mock("@/core/toast/showToast", () => ({ showToast: jest.fn() }));
 let recorder: ReturnType<typeof useVoiceRecorder>;
 const save = jest.fn(async () => true);
 const stop = jest.fn(async () => undefined);

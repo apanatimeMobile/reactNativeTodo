@@ -2,8 +2,8 @@
  * RESPONSIBILITY: Persist local Pomodoro session history with retention-safe storage I/O.
  * FLOW: Timer completion → recordFocusSession → strict history read/write → local session list.
  */
-import { getItem, setItem } from '../../../../../storage/storage';
-import { getFocusDateKey } from './userPomodoroSessionStats';
+import { getItem, setItem } from "@/core/storage/jsonStorage";
+import { getFocusDateKey } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/utils/userPomodoroSessionStats";
 
 export const FOCUS_SESSIONS_STORAGE_KEY = '@todomaster/focus_sessions_history';
 const MAX_SAVED_SESSIONS = 100;

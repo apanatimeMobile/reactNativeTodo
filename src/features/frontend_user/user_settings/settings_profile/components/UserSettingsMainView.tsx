@@ -6,17 +6,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Menu } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { UserSettingsProfileCard } from './UserSettingsProfileCard';
-import type { BackupRestoreMode, BackupTask } from '../types/user_settings.types';
-import { UserSettingsAppearanceSection } from './UserSettingsAppearanceSection';
-import { UserSettingsPreferencesSection } from './UserSettingsPreferencesSection';
-import { UserSettingsSecuritySection } from './UserSettingsSecuritySection';
-import { UserSettingsDataSection } from './UserSettingsDataSection';
-import { UserSettingsLinksSection } from './UserSettingsLinksSection';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { UserSettingsProfileCard } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsProfileCard";
+import type { BackupRestoreMode, BackupTask } from "@/features/frontend_user/user_settings/settings_profile/types/user_settings.types";
+import { UserSettingsAppearanceSection } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsAppearanceSection";
+import { UserSettingsPreferencesSection } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsPreferencesSection";
+import { UserSettingsSecuritySection } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsSecuritySection";
+import { UserSettingsDataSection } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsDataSection";
+import { UserSettingsLinksSection } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsLinksSection";
 
 interface UserSettingsMainViewProps {
   userName: string;

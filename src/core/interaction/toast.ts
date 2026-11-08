@@ -3,7 +3,7 @@
  * FLOW: Re-exports showToast from core toast engine for unified interaction boundary.
  */
 
-import { showToast } from '../toast/showToast';
+import { showToast } from "@/core/toast/showToast";
 
 export { showToast };
 export default { showToast };

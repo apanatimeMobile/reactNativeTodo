@@ -6,12 +6,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { User, ChevronRight, ShieldCheck } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { displayValue } from '../../../../../core/utils/displayValue';
-import { maskSensitiveData } from '../../../../../core/utils/maskSensitiveData';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { displayValue } from "@/core/utils/displayValue";
+import { maskSensitiveData } from "@/core/utils/maskSensitiveData";
 
 interface UserSettingsProfileCardProps {
   name: string;

@@ -4,11 +4,11 @@
  */
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
-import { I18nProvider } from '../../../../../../core/i18n/useTranslation';
-import { ThemeProvider } from '../../../../../../core/theme/ThemeProvider';
-import { useThemeTokens } from '../../../../../../core/theme/useThemeTokens';
-import type { PomodoroMode } from '../../types/user_pomodoro.types';
-import { UserPomodoroTimerMainView } from '../../components/UserPomodoroTimerMainView';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import type { PomodoroMode } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/types/user_pomodoro.types";
+import { UserPomodoroTimerMainView } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/components/UserPomodoroTimerMainView";
 
 function HarnessInner() {
   const tokens = useThemeTokens();

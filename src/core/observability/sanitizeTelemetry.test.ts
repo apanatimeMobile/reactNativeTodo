@@ -1,4 +1,4 @@
-import { sanitizeTelemetry } from './sanitizeTelemetry';
+import { sanitizeTelemetry } from "@/core/observability/sanitizeTelemetry";
 
 describe('sanitizeTelemetry', () => {
   it('redacts auth and SSN values, including nested objects and arrays', () => {

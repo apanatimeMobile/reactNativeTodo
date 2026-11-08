@@ -6,17 +6,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, RefreshControl, Pressable } from 'react-native';
 import { Flame, Target, Trophy, Clock, Menu } from 'lucide-react-native';
-import { UserOverviewKPISection } from './UserOverviewKPISection';
-import { UserOverviewCompletionCard } from './UserOverviewCompletionCard';
-import { UserOverviewDonutChart } from './UserOverviewDonutChart';
-import { UserOverviewActivityBarChart } from './UserOverviewActivityBarChart';
-import { UserOverviewCategoryBar } from './UserOverviewCategoryBar';
-import { UserOverviewInsightCard } from './UserOverviewInsightCard';
-import type { OverviewMetrics } from '../types/user_overview.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import { UserOverviewKPISection } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewKPISection";
+import { UserOverviewCompletionCard } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewCompletionCard";
+import { UserOverviewDonutChart } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewDonutChart";
+import { UserOverviewActivityBarChart } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewActivityBarChart";
+import { UserOverviewCategoryBar } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewCategoryBar";
+import { UserOverviewInsightCard } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewInsightCard";
+import type { OverviewMetrics } from "@/features/frontend_user/user_overview/overview_dashboard/types/user_overview.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserOverviewMainViewProps {
   metrics: OverviewMetrics;

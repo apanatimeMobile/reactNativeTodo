@@ -6,11 +6,11 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserProfileMainView } from '../components/UserProfileMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { useUserSettings } from '../hooks/useUserSettings';
-import { showToast } from '../../../../../core/toast/showToast';
+import { UserProfileMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserProfileMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { useUserSettings } from "@/features/frontend_user/user_settings/settings_profile/hooks/useUserSettings";
+import { showToast } from "@/core/toast/showToast";
 
 export function UserProfileScreen({ navigation }: { navigation?: any }) {
   const tokens = useThemeTokens();

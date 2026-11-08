@@ -5,10 +5,10 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Play, Pause, Trash2, ListTodo } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import type { VoiceMemoEntity } from '../types/user_voice.types';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import type { VoiceMemoEntity } from "@/features/frontend_user/user_voice/voice_memos/types/user_voice.types";
 
 interface UserVoiceMemoCardProps {
   memo: VoiceMemoEntity;

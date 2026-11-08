@@ -2,7 +2,7 @@
  * RESPONSIBILITY: Covers Todo form defaults, normalization, date/time validation and reminder safety.
  * FLOW: Test input is parsed through TodoFormSchema → assert normalized values or explicit field issues.
  */
-import { TodoFormSchema } from './user_todos.schemas';
+import { TodoFormSchema } from "@/features/frontend_user/user_todos/todos_management/schemas/user_todos.schemas";
 
 describe('TodoFormSchema', () => {
   it('normalizes text and provides safe defaults for optional task fields', () => {

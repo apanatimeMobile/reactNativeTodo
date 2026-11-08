@@ -4,7 +4,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { triggerLightImpact } from '../interaction/haptics';
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 export interface ConfirmOptions {
   title: string;

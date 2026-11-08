@@ -4,10 +4,10 @@
  */
 import { useCallback, useMemo } from 'react';
 import { Share } from 'react-native';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import { showToast } from '../../../../../core/toast/showToast';
-import type { BackupRestoreMode, BackupTask } from '../types/user_settings.types';
-import { selectCompletedTaskIds, selectTrashedTaskIds, type SettingsTaskSummary } from '../utils/userSettingsTaskStats';
+import { useTaskHost } from "@/core/contracts/taskHost";
+import { showToast } from "@/core/toast/showToast";
+import type { BackupRestoreMode, BackupTask } from "@/features/frontend_user/user_settings/settings_profile/types/user_settings.types";
+import { selectCompletedTaskIds, selectTrashedTaskIds, type SettingsTaskSummary } from "@/features/frontend_user/user_settings/settings_profile/utils/userSettingsTaskStats";
 
 /**
  * Provides confirmed task-data operations used by the Settings data-management section.
@@ -15,7 +15,7 @@ import { selectCompletedTaskIds, selectTrashedTaskIds, type SettingsTaskSummary 
  * @sideEffects Uses the operating-system Share UI and the host TodoContext.
  */
 export function useUserSettingsData() {
-  const todoCtx = useTodoContext();
+  const todoCtx = useTaskHost();
   const tasks = useMemo(() => (todoCtx?.tasks ?? []) as SettingsTaskSummary[], [todoCtx?.tasks]);
 
   const exportData = useCallback(async (): Promise<boolean> => {

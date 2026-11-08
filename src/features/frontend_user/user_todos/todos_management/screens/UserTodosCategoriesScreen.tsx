@@ -6,9 +6,9 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserTodosCategoriesMainView } from '../components/UserTodosCategoriesMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserTodos } from '../hooks/useUserTodos';
+import { UserTodosCategoriesMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosCategoriesMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserTodos } from "@/features/frontend_user/user_todos/todos_management/hooks/useUserTodos";
 
 export function UserTodosCategoriesScreen() {
   const tokens = useThemeTokens();

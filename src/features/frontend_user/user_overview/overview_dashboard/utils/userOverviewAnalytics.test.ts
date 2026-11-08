@@ -6,7 +6,7 @@ import {
   buildWeeklyCompletionActivity,
   calculateTaskCompletionStreak,
   type OverviewTaskRecord,
-} from './userOverviewAnalytics';
+} from "@/features/frontend_user/user_overview/overview_dashboard/utils/userOverviewAnalytics";
 
 describe('user overview task analytics', () => {
   it('calculates streak from persisted completion dates only', () => {

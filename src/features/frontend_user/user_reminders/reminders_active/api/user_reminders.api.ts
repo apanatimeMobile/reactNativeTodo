@@ -3,9 +3,9 @@
  * FLOW: Fetches alarms, schedules snoozes, and dismisses notifications via networkClient.
  */
 
-import { networkClient } from '../../../../../core/network/networkClient';
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
-import { USER_REMINDERS_URL_CONFIG } from '../config/user_reminders.url_config';
+import { networkClient } from "@/core/network/networkClient";
+import type { ApiResponse } from "@/core/network/apiResponse.types";
+import { USER_REMINDERS_URL_CONFIG } from "@/features/frontend_user/user_reminders/reminders_active/config/user_reminders.url_config";
 
 export interface ReminderDto {
   id: string;

@@ -6,9 +6,10 @@
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { Tokens } from './tokenDefinitions';
-import { darkTheme } from './darkTheme';
-import { lightTheme } from './lightTheme';
+import type { Tokens } from "@/core/theme/tokenDefinitions";
+import { darkTheme } from "@/core/theme/darkTheme";
+import APP_CONFIG from "@/core/config/appConfig";
+import { lightTheme } from "@/core/theme/lightTheme";
 
 const THEME_STORAGE_KEY = '@todomaster/theme_mode';
 
@@ -40,6 +41,12 @@ export function ThemeProvider({ children, initialDarkMode }: ThemeProviderProps)
   useEffect(() => {
     let mounted = true;
     AsyncStorage.getItem(THEME_STORAGE_KEY)
+      .then(async (saved) => {
+        if (saved !== null) return saved;
+        const legacy = await AsyncStorage.getItem(APP_CONFIG.STORAGE_KEYS.THEME);
+        if (legacy === null) return null;
+        try { return JSON.parse(legacy) === 'dark' ? 'dark' : 'light'; } catch { return null; }
+      })
       .then((saved) => {
         if (!mounted || !saved || userChangedThemeRef.current) return;
         if (saved === 'dark') setIsDarkMode(true);

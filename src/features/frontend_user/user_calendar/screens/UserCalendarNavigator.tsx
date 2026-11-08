@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_CALENDAR_ROUTES } from '../calendar_agenda/config/user_calendar.url_config';
-import { UserCalendarScreen } from '../calendar_agenda/screens/UserCalendarScreen';
+import { USER_CALENDAR_ROUTES } from "@/features/frontend_user/user_calendar/calendar_agenda/config/user_calendar.url_config";
+import { UserCalendarScreen } from "@/features/frontend_user/user_calendar/calendar_agenda/screens/UserCalendarScreen";
 
 const Stack = createNativeStackNavigator();
 

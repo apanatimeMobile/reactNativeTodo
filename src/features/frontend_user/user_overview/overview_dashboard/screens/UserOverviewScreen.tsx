@@ -7,11 +7,11 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
-import { UserOverviewSkeleton } from '../components/UserOverviewSkeleton';
-import { UserOverviewErrorFallback } from '../components/UserOverviewErrorFallback';
-import { UserOverviewMainView } from '../components/UserOverviewMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserOverview } from '../hooks/useUserOverview';
+import { UserOverviewSkeleton } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewSkeleton";
+import { UserOverviewErrorFallback } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewErrorFallback";
+import { UserOverviewMainView } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserOverview } from "@/features/frontend_user/user_overview/overview_dashboard/hooks/useUserOverview";
 
 export function UserOverviewScreen({ navigation }: { navigation?: any }) {
   const tokens = useThemeTokens();

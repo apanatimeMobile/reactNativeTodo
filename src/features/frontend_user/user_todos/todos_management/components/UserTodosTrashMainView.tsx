@@ -6,13 +6,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { RotateCcw, Trash2, ArrowLeft } from 'lucide-react-native';
-import type { TodoEntity, UserTodosTrashConfirmAction } from '../types/user_todos.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { displayValue } from '../../../../../core/utils/displayValue';
-import { UserTodosConfirmDialog } from './UserTodosConfirmDialog';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import type { TodoEntity, UserTodosTrashConfirmAction } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { displayValue } from "@/core/utils/displayValue";
+import { UserTodosConfirmDialog } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosConfirmDialog";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserTodosTrashMainViewProps {
   trashTodos: TodoEntity[];

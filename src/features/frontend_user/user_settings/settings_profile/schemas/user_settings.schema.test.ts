@@ -2,7 +2,7 @@
  * RESPONSIBILITY: Verifies profile field validation, normalization and optional-phone compatibility.
  * FLOW: Profile payloads pass through UserProfileEditSchema before the save callback is invoked.
  */
-import { UserFeedbackSubmitSchema, UserProfileEditSchema } from './user_settings.schema';
+import { UserFeedbackSubmitSchema, UserProfileEditSchema } from "@/features/frontend_user/user_settings/settings_profile/schemas/user_settings.schema";
 
 describe('UserProfileEditSchema', () => {
   it('trims valid profile values while allowing an empty optional phone number', () => {

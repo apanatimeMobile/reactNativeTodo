@@ -6,40 +6,40 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
 import RNFS from 'react-native-fs';
-import { useUserVoice } from './useUserVoice';
-import { showToast } from '../../../../../core/toast/showToast';
+import { useUserVoice } from "@/features/frontend_user/user_voice/voice_memos/hooks/useUserVoice";
+import { showToast } from "@/core/toast/showToast";
 
-jest.mock('../../../../../context/TodoContext', () => {
+jest.mock("@/core/contracts/taskHost", () => {
   const context = { addTodo: jest.fn() };
-  return { useTodoContext: () => context, __mockContext: context };
+  return { useTaskHost: () => context, __mockContext: context };
 });
-jest.mock('../../../../../core/toast/showToast', () => ({ showToast: jest.fn() }));
-jest.mock('../../../../../core/i18n/useTranslation', () => ({
+jest.mock("@/core/toast/showToast", () => ({ showToast: jest.fn() }));
+jest.mock("@/core/i18n/useTranslation", () => ({
   useTranslation: () => ({ t: (key: string) => ({
     'user_voice_memos.TASK_CREATED': 'Task created from voice memo.',
     'user_voice_memos.TASK_CREATE_ERROR': 'Task could not be created from this voice memo.',
     'user_voice_memos.TRANSCRIPT_REQUIRED': 'Add transcript or notes before creating a task.',
   }[key] ?? key) }),
 }));
-jest.mock('./useUserVoiceMemos', () => ({
+jest.mock("@/features/frontend_user/user_voice/voice_memos/hooks/useUserVoiceMemos", () => ({
   useUserVoiceMemos: jest.fn(),
 }));
-jest.mock('./useVoicePlayback', () => ({
+jest.mock("@/features/frontend_user/user_voice/voice_memos/hooks/useVoicePlayback", () => ({
   useVoicePlayback: () => ({
     activePlayingId: null,
     togglePlayback: jest.fn(async () => undefined),
     stopPlayback: jest.fn(async () => undefined),
   }),
 }));
-jest.mock('./useVoiceRecorder', () => ({
+jest.mock("@/features/frontend_user/user_voice/voice_memos/hooks/useVoiceRecorder", () => ({
   useVoiceRecorder: () => ({
     isRecording: false, isProcessing: false, elapsedMs: 0, recordingError: false,
     startRecording: jest.fn(async () => undefined),
     stopRecording: jest.fn(async () => undefined),
   }),
 }));
-const mockTodoContext = jest.requireMock('../../../../../context/TodoContext').__mockContext;
-const mockUseUserVoiceMemos = jest.requireMock('./useUserVoiceMemos').useUserVoiceMemos as jest.Mock;
+const mockTodoContext = jest.requireMock("@/core/contracts/taskHost").__mockContext;
+const mockUseUserVoiceMemos = jest.requireMock("@/features/frontend_user/user_voice/voice_memos/hooks/useUserVoiceMemos").useUserVoiceMemos as jest.Mock;
 
 const testMemo = {
   id: 'test-memo', title: 'Voice memo', transcript: '', audioPath: '/mock/audio.m4a', durationMs: 0, createdAt: 1,

@@ -13,9 +13,9 @@ import {
   Pressable,
 } from 'react-native';
 import { Fingerprint, ShieldCheck } from 'lucide-react-native';
-import { useAppLock } from '../../context/AppLockContext';
-import { useThemeTokens } from '../theme/useThemeTokens';
-import { triggerLightImpact } from '../interaction/haptics';
+import { useAppLock } from "@/core/security/AppLockProvider";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 export function LockScreen() {
   const { isLocked, authenticateWithDevice } = (useAppLock() || {}) as any;
@@ -123,7 +123,7 @@ export function LockScreen() {
       <View style={styles.centerCard}>
         <View style={styles.glowOuter}>
           <Image
-            source={require('../../assets/images/tasklume_icon.png')}
+            source={require("@/assets/images/tasklume_icon.png")}
             style={styles.avatar}
             resizeMode="cover"
           />

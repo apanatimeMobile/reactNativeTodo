@@ -3,6 +3,6 @@
  * FLOW: Re-exports I18nProvider and useTranslation hook from useTranslation.tsx.
  */
 
-export * from './useTranslation.tsx';
-export { useTranslation, I18nProvider, resolveTranslation } from './useTranslation.tsx';
-export type { TranslationResources, TranslationContextValue } from './useTranslation.tsx';
+export * from "@/core/i18n/useTranslation.tsx";
+export { useTranslation, I18nProvider, resolveTranslation } from "@/core/i18n/useTranslation.tsx";
+export type { TranslationResources, TranslationContextValue } from "@/core/i18n/useTranslation.tsx";

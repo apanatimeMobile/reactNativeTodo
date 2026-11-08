@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { ErrorBoundary } from './ErrorBoundary';
-import { setActiveLocale } from '../i18n/locale';
+import { ErrorBoundary } from "@/core/ui/ErrorBoundary";
+import { setActiveLocale } from "@/core/i18n/locale";
 
 describe('ErrorBoundary', () => {
   it('shows safe recovery copy and can retry without exposing the exception', async () => {

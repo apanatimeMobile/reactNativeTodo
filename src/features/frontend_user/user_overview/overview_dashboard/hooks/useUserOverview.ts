@@ -4,13 +4,13 @@
  */
 
 import { useMemo, useState, useCallback } from 'react';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import { buildWeeklyCompletionActivity, calculateTaskCompletionStreak, type OverviewTaskRecord } from '../utils/userOverviewAnalytics';
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { useTaskHost } from "@/core/contracts/taskHost";
+import { buildWeeklyCompletionActivity, calculateTaskCompletionStreak, type OverviewTaskRecord } from "@/features/frontend_user/user_overview/overview_dashboard/utils/userOverviewAnalytics";
 
 export function useUserOverview() {
   const { t, locale } = useTranslation();
-  const todoCtx = useTodoContext();
+  const todoCtx = useTaskHost();
   const tasks = useMemo(() => (todoCtx?.tasks ?? []) as OverviewTaskRecord[], [todoCtx?.tasks]);
   const loadTodos = todoCtx?.loadTodos;
   const [refreshing, setRefreshing] = useState(false);

@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { UserOverviewProgressRing } from './UserOverviewProgressRing';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { UserOverviewProgressRing } from "@/features/frontend_user/user_overview/overview_dashboard/components/UserOverviewProgressRing";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 interface UserOverviewCompletionCardProps {
   completionRate: number;

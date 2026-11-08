@@ -5,11 +5,11 @@
 
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
-import { I18nProvider } from '../../../../../../core/i18n/useTranslation';
-import { ThemeProvider } from '../../../../../../core/theme/ThemeProvider';
-import { useThemeTokens } from '../../../../../../core/theme/useThemeTokens';
-import { UserCalendarMainView } from '../../components/UserCalendarMainView';
-import { formatCalendarDateKey } from '../../utils/userCalendarFormatters';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { UserCalendarMainView } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarMainView";
+import { formatCalendarDateKey } from "@/features/frontend_user/user_calendar/calendar_agenda/utils/userCalendarFormatters";
 
 function HarnessInner({ title, children }: { title: string; children: React.ReactNode }) {
   const tokens = useThemeTokens();

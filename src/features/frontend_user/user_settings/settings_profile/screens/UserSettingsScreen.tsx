@@ -7,10 +7,10 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
-import { UserSettingsMainView } from '../components/UserSettingsMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserSettings } from '../hooks/useUserSettings';
-import { USER_SETTINGS_ROUTES } from '../config/user_settings.url_config';
+import { UserSettingsMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserSettings } from "@/features/frontend_user/user_settings/settings_profile/hooks/useUserSettings";
+import { USER_SETTINGS_ROUTES } from "@/features/frontend_user/user_settings/settings_profile/config/user_settings.url_config";
 
 export function UserSettingsScreen() {
   const navigation = useNavigation<any>();

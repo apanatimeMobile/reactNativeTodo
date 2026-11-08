@@ -5,10 +5,10 @@
 
 import React, { useCallback } from 'react';
 import { FlatList, RefreshControl, StyleSheet } from 'react-native';
-import type { TodoEntity } from '../types/user_todos.types';
-import { UserTodosTodoCard } from './UserTodosTodoCard';
-import { UserTodosEmptyState } from './UserTodosEmptyState';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { UserTodosTodoCard } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosTodoCard";
+import { UserTodosEmptyState } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosEmptyState";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 interface UserTodosTodoListProps {
   todos: TodoEntity[];
