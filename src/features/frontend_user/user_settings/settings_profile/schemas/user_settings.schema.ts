@@ -12,9 +12,15 @@ export const UserProfileEditSchema = z.object({
 });
 
 export const UserFeedbackSubmitSchema = z.object({
-  category: z.enum(['bug', 'feature', 'praise', 'other']),
-  rating: z.number().min(1).max(5),
-  message: z.string().min(5, 'Feedback must be at least 5 characters').max(1000),
+  category: z.enum(['bug', 'feature', 'praise', 'other'], {
+    errorMap: () => ({ message: 'user_settings_profile.VALIDATION_FEEDBACK_CATEGORY' }),
+  }),
+  rating: z.number()
+    .min(1, 'user_settings_profile.VALIDATION_FEEDBACK_RATING_MIN')
+    .max(5, 'user_settings_profile.VALIDATION_FEEDBACK_RATING_MAX'),
+  message: z.string()
+    .min(5, 'user_settings_profile.VALIDATION_FEEDBACK_MESSAGE_MIN')
+    .max(1000, 'user_settings_profile.VALIDATION_FEEDBACK_MESSAGE_MAX'),
 });
 
 export type UserProfileEditValues = z.infer<typeof UserProfileEditSchema>;

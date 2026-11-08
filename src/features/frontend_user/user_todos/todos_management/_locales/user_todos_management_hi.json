@@ -25,6 +25,9 @@
     "FILTER_TASKS_BY": "कार्य फ़िल्टर करें",
     "CANCEL_ACTION": "कार्रवाई रद्द करें",
     "CANCEL": "रद्द करें",
+    "DISCARD_CHANGES_TITLE": "बदलाव छोड़ें?",
+    "DISCARD_CHANGES_DESCRIPTION": "आपके सहेजे नहीं गए बदलाव खो जाएँगे।",
+    "DISCARD_CHANGES_CONFIRM": "बदलाव छोड़ें",
     "DELETE_CONFIRM_DESCRIPTION": "यह कार्य स्थायी रूप से हटा दिया जाएगा। इसे पूर्ववत नहीं किया जा सकता।",
     "DELETE_TASK": "कार्य हटाएँ",
     "EMPTY_TRASH": "ट्रैश खाली करें",
@@ -70,6 +73,10 @@
     "VALIDATION_CATEGORY_REQUIRED": "एक श्रेणी चुनें।",
     "VALIDATION_PRIORITY_INVALID": "मान्य प्राथमिकता चुनें।",
     "VALIDATION_DUE_DATE_INVALID": "अंतिम तारीख YYYY-MM-DD प्रारूप में लिखें।",
-    "VALIDATION_REMINDER_TIME_INVALID": "रिमाइंडर समय HH:mm प्रारूप में लिखें।"
+    "VALIDATION_REMINDER_TIME_INVALID": "रिमाइंडर समय HH:mm प्रारूप में लिखें।",
+    "TAB_UPCOMING": "आगामी",
+    "SUBMIT_FAILED": "कार्य सहेजा नहीं जा सका। फिर प्रयास करें।",
+    "TASK_NOT_FOUND": "यह कार्य अब उपलब्ध नहीं है।",
+    "BACK_TO_TASKS": "कार्यों पर वापस जाएँ"
   }
 }
