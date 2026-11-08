@@ -8,20 +8,20 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import notifee, {EventType} from '@notifee/react-native';
 
 import {
-  AuthProvider,
-} from './src/context/AuthContext';
+  LocalProfileProvider,
+} from "./src/core/auth/LocalProfileProvider";
 
 import {
   TodoProvider,
 } from './src/context/TodoContext';
 
 import {
-  ThemeProvider,
-} from './src/context/ThemeContext';
+  AccentPreferencesProvider,
+} from "./src/core/theme/AccentThemeProvider";
 
 import {
-  SettingsProvider,
-} from './src/context/SettingsContext';
+  PreferencesProvider,
+} from "./src/core/preferences/PreferencesProvider";
 
 import RootNavigator from './src/core/navigation/RootNavigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -41,7 +41,7 @@ import Toast from 'react-native-toast-message';
 
 import {
   AppLockProvider,
-} from './src/context/AppLockContext';
+} from "./src/core/security/AppLockProvider";
 import LockScreen from './src/core/ui/LockScreen';
 import ErrorBoundary from './src/core/ui/ErrorBoundary';
 
@@ -105,19 +105,19 @@ function App() {
           <CoreThemeProvider>
             <QueryClientProvider client={queryClient}>
               <I18nProvider>
-                <ThemeProvider>
-                  <SettingsProvider>
+                <AccentPreferencesProvider>
+                  <PreferencesProvider>
                 <AppLockProvider>
-                  <AuthProvider>
+                  <LocalProfileProvider>
                     <TodoProvider>
                       <RootNavigator />
                       <LockScreen />
                       <Toast />
                     </TodoProvider>
-                  </AuthProvider>
+                  </LocalProfileProvider>
                 </AppLockProvider>
-                  </SettingsProvider>
-                </ThemeProvider>
+                  </PreferencesProvider>
+                </AccentPreferencesProvider>
               </I18nProvider>
             </QueryClientProvider>
           </CoreThemeProvider>
