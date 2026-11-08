@@ -3,9 +3,9 @@
  * FLOW: Fetches month dates with scheduled items and agenda day tasks via networkClient.
  */
 
-import { networkClient } from '../../../../../core/network/networkClient';
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
-import { USER_CALENDAR_URL_CONFIG } from '../config/user_calendar.url_config';
+import { networkClient } from "@/core/network/networkClient";
+import type { ApiResponse } from "@/core/network/apiResponse.types";
+import { USER_CALENDAR_URL_CONFIG } from "@/features/frontend_user/user_calendar/calendar_agenda/config/user_calendar.url_config";
 
 export interface CalendarMonthDto {
   year: number;

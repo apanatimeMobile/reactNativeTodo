@@ -9,4 +9,4 @@ export {
   type CoreRouteKey,
   type CoreRouteName,
   type RootDrawerParamList,
-} from './routes';
+} from "@/core/navigation/routes";

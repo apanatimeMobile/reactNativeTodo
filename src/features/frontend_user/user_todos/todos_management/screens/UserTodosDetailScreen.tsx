@@ -6,13 +6,13 @@
 import React, { useMemo } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserTodosDetailMainView } from '../components/UserTodosDetailMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserTodos } from '../hooks/useUserTodos';
-import { UserTodosMissingRecord } from '../components/UserTodosMissingRecord';
-import { UserTodosSkeleton } from '../components/UserTodosSkeleton';
-import { UserTodosErrorFallback } from '../components/UserTodosErrorFallback';
-import { USER_TODOS_ROUTES } from '../config/user_todos.url_config';
+import { UserTodosDetailMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosDetailMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserTodos } from "@/features/frontend_user/user_todos/todos_management/hooks/useUserTodos";
+import { UserTodosMissingRecord } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosMissingRecord";
+import { UserTodosSkeleton } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosSkeleton";
+import { UserTodosErrorFallback } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosErrorFallback";
+import { USER_TODOS_ROUTES } from "@/features/frontend_user/user_todos/todos_management/config/user_todos.url_config";
 
 export function UserTodosDetailScreen({ route, navigation }: { route: any; navigation: any }) {
   const tokens = useThemeTokens();

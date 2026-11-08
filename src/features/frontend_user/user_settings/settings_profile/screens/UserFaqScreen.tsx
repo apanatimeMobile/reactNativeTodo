@@ -6,8 +6,8 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserFaqMainView } from '../components/UserFaqMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { UserFaqMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserFaqMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 export function UserFaqScreen({ navigation }: { navigation?: any }) {
   const tokens = useThemeTokens();

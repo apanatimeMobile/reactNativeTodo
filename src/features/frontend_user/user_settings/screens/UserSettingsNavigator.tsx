@@ -5,13 +5,13 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_SETTINGS_ROUTES } from '../settings_profile/config/user_settings.url_config';
-import { UserSettingsScreen } from '../settings_profile/screens/UserSettingsScreen';
-import { UserProfileScreen } from '../settings_profile/screens/UserProfileScreen';
-import { UserFeedbackScreen } from '../settings_profile/screens/UserFeedbackScreen';
-import { UserFaqScreen } from '../settings_profile/screens/UserFaqScreen';
-import { UserMoreAppsScreen } from '../settings_profile/screens/UserMoreAppsScreen';
-import { UserAboutScreen } from '../settings_profile/screens/UserAboutScreen';
+import { USER_SETTINGS_ROUTES } from "@/features/frontend_user/user_settings/settings_profile/config/user_settings.url_config";
+import { UserSettingsScreen } from "@/features/frontend_user/user_settings/settings_profile/screens/UserSettingsScreen";
+import { UserProfileScreen } from "@/features/frontend_user/user_settings/settings_profile/screens/UserProfileScreen";
+import { UserFeedbackScreen } from "@/features/frontend_user/user_settings/settings_profile/screens/UserFeedbackScreen";
+import { UserFaqScreen } from "@/features/frontend_user/user_settings/settings_profile/screens/UserFaqScreen";
+import { UserMoreAppsScreen } from "@/features/frontend_user/user_settings/settings_profile/screens/UserMoreAppsScreen";
+import { UserAboutScreen } from "@/features/frontend_user/user_settings/settings_profile/screens/UserAboutScreen";
 
 const Stack = createNativeStackNavigator();
 

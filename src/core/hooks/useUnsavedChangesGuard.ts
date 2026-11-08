@@ -5,7 +5,7 @@
 import { useCallback, useRef } from 'react';
 import { useNavigation, usePreventRemove } from '@react-navigation/native';
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useConfirm, type ConfirmOptions } from './useConfirm';
+import { useConfirm, type ConfirmOptions } from "@/core/hooks/useConfirm";
 
 export function useUnsavedChangesGuard(isDirty: boolean, options: ConfirmOptions) {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();

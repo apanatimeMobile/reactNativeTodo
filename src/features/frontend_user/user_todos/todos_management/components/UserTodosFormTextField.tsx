@@ -5,8 +5,8 @@
 import React from 'react';
 import { Controller, type Control } from 'react-hook-form';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import type { TodoFormInput } from '../schemas/user_todos.schemas';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import type { TodoFormInput } from "@/features/frontend_user/user_todos/todos_management/schemas/user_todos.schemas";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 type TextFieldName = 'title' | 'description' | 'dueDate' | 'reminderTime';
 

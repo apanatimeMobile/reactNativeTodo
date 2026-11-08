@@ -5,11 +5,11 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import type { PomodoroMode } from '../types/user_pomodoro.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import type { PomodoroMode } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/types/user_pomodoro.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserPomodoroModeSelectorProps {
   currentMode: PomodoroMode;

@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_VOICE_ROUTES } from '../voice_memos/config/user_voice.url_config';
-import { UserVoiceScreen } from '../voice_memos/screens/UserVoiceScreen';
+import { USER_VOICE_ROUTES } from "@/features/frontend_user/user_voice/voice_memos/config/user_voice.url_config";
+import { UserVoiceScreen } from "@/features/frontend_user/user_voice/voice_memos/screens/UserVoiceScreen";
 
 const Stack = createNativeStackNavigator();
 

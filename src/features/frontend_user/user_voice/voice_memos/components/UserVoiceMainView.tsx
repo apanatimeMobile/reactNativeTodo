@@ -5,15 +5,15 @@
 import React from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Menu } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { UserVoiceAudioRecorder } from './UserVoiceAudioRecorder';
-import { UserVoiceEmptyState } from './UserVoiceEmptyState';
-import { UserVoiceErrorFallback } from './UserVoiceErrorFallback';
-import { UserVoiceMemoCard } from './UserVoiceMemoCard';
-import { UserVoiceSkeleton } from './UserVoiceSkeleton';
-import { useUserVoice } from '../hooks/useUserVoice';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { UserVoiceAudioRecorder } from "@/features/frontend_user/user_voice/voice_memos/components/UserVoiceAudioRecorder";
+import { UserVoiceEmptyState } from "@/features/frontend_user/user_voice/voice_memos/components/UserVoiceEmptyState";
+import { UserVoiceErrorFallback } from "@/features/frontend_user/user_voice/voice_memos/components/UserVoiceErrorFallback";
+import { UserVoiceMemoCard } from "@/features/frontend_user/user_voice/voice_memos/components/UserVoiceMemoCard";
+import { UserVoiceSkeleton } from "@/features/frontend_user/user_voice/voice_memos/components/UserVoiceSkeleton";
+import { useUserVoice } from "@/features/frontend_user/user_voice/voice_memos/hooks/useUserVoice";
 
 interface UserVoiceMainViewProps {
   onOpenDrawer?: () => void;

@@ -2,7 +2,7 @@
  * RESPONSIBILITY: Tests deterministic reminder snooze date/time math including day boundaries.
  * FLOW: Inject known local instants and intervals → assert the exact scheduled date and time.
  */
-import { calculateSnoozedReminderSchedule } from './userRemindersSnooze';
+import { calculateSnoozedReminderSchedule } from "@/features/frontend_user/user_reminders/reminders_active/utils/userRemindersSnooze";
 
 describe('calculateSnoozedReminderSchedule', () => {
   it('moves the reminder by the requested number of minutes', () => {

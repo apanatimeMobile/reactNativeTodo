@@ -5,10 +5,10 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { useUserReminders } from './useUserReminders';
-import { showToast } from '../../../../../core/toast/showToast';
+import { useUserReminders } from "@/features/frontend_user/user_reminders/reminders_active/hooks/useUserReminders";
+import { showToast } from "@/core/toast/showToast";
 
-jest.mock('../../../../../context/TodoContext', () => {
+jest.mock("@/core/contracts/taskHost", () => {
   const context = {
     tasks: [
       {
@@ -24,14 +24,14 @@ jest.mock('../../../../../context/TodoContext', () => {
     updateTodo: jest.fn(),
   };
   return {
-    useTodoContext: () => context,
+    useTaskHost: () => context,
     __mockContext: context,
   };
 });
 
-const mockTodoContext = jest.requireMock('../../../../../context/TodoContext').__mockContext;
+const mockTodoContext = jest.requireMock("@/core/contracts/taskHost").__mockContext;
 
-jest.mock('../../../../../core/toast/showToast', () => ({
+jest.mock("@/core/toast/showToast", () => ({
   showToast: jest.fn(),
 }));
 

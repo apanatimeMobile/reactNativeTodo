@@ -4,21 +4,21 @@
  */
 
 import { useCallback, useMemo } from 'react';
-import { useSettings } from '../../../../../context/SettingsContext';
-import { useAppLock } from '../../../../../context/AppLockContext';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import useAuth from '../../../../../hooks/useAuth';
-import { showToast } from '../../../../../core/toast/showToast';
-import { useUserSettingsData } from './useUserSettingsData';
-import { calculateTaskCompletionStreak, type SettingsTaskSummary } from '../utils/userSettingsTaskStats';
+import { usePreferences } from "@/core/preferences/PreferencesProvider";
+import { useAppLock } from "@/core/security/AppLockProvider";
+import { useTaskHost } from "@/core/contracts/taskHost";
+import useLocalProfile from "@/core/auth/useLocalProfile";
+import { showToast } from "@/core/toast/showToast";
+import { useUserSettingsData } from "@/features/frontend_user/user_settings/settings_profile/hooks/useUserSettingsData";
+import { calculateTaskCompletionStreak, type SettingsTaskSummary } from "@/features/frontend_user/user_settings/settings_profile/utils/userSettingsTaskStats";
 
 
 export function useUserSettings() {
-  const settingsCtx = useSettings() as any;
+  const settingsCtx = usePreferences() as any;
   const appLock = useAppLock() as any;
-  const todoCtx = useTodoContext() as any;
+  const todoCtx = useTaskHost() as any;
   const dataActions = useUserSettingsData();
-  const auth = useAuth() as any;
+  const auth = useLocalProfile() as any;
 
   const tasks = useMemo(() => (todoCtx?.tasks ?? []) as SettingsTaskSummary[], [todoCtx?.tasks]);
   const completedTasks = useMemo(() => tasks.filter((task) => task.completed === true && task.deleted !== true).length, [tasks]);

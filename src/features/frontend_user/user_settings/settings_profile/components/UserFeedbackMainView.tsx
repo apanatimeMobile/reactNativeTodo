@@ -7,13 +7,13 @@ import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { ArrowLeft, Send } from 'lucide-react-native';
-import { UserFeedbackCategorySelector } from './UserFeedbackCategorySelector';
-import { UserFeedbackDetailsFields } from './UserFeedbackDetailsFields';
-import { UserFeedbackSubmitSchema, type UserFeedbackSubmitValues } from '../schemas/user_settings.schema';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerSuccessNotification, triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import { UserFeedbackCategorySelector } from "@/features/frontend_user/user_settings/settings_profile/components/UserFeedbackCategorySelector";
+import { UserFeedbackDetailsFields } from "@/features/frontend_user/user_settings/settings_profile/components/UserFeedbackDetailsFields";
+import { UserFeedbackSubmitSchema, type UserFeedbackSubmitValues } from "@/features/frontend_user/user_settings/settings_profile/schemas/user_settings.schema";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerSuccessNotification, triggerLightImpact } from "@/core/interaction/haptics";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 interface UserFeedbackMainViewProps {
   onSubmit: (feedback: { category: string; rating: number; message: string }) => Promise<boolean>;

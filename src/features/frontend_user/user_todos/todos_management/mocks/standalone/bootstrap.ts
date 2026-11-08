@@ -3,7 +3,7 @@
  * FLOW: Exposes the scenario-driven standalone harness; network interception is not configured here.
  */
 
-import { UserTodosHarness } from '../../tests/harness/UserTodosHarness';
+import { UserTodosHarness } from "@/features/frontend_user/user_todos/todos_management/tests/harness/UserTodosHarness";
 
 export function bootstrapUserTodos() {
   return {

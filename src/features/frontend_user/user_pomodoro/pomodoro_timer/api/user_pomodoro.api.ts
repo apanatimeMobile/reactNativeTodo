@@ -3,9 +3,9 @@
  * FLOW: Logs focus intervals and synchronizes timer settings via networkClient.
  */
 
-import { networkClient } from '../../../../../core/network/networkClient';
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
-import { USER_POMODORO_URL_CONFIG } from '../config/user_pomodoro.url_config';
+import { networkClient } from "@/core/network/networkClient";
+import type { ApiResponse } from "@/core/network/apiResponse.types";
+import { USER_POMODORO_URL_CONFIG } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/config/user_pomodoro.url_config";
 
 export interface PomodoroSessionDto {
   durationMinutes: number;

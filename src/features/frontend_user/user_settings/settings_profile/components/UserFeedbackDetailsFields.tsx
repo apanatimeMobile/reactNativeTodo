@@ -7,11 +7,11 @@ import React from 'react';
 import { Controller, type Control, type UseFormClearErrors } from 'react-hook-form';
 import { View, Text, StyleSheet, TextInput, Pressable } from 'react-native';
 import { Star } from 'lucide-react-native';
-import type { UserFeedbackSubmitValues } from '../schemas/user_settings.schema';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import type { UserFeedbackSubmitValues } from "@/features/frontend_user/user_settings/settings_profile/schemas/user_settings.schema";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 interface UserFeedbackDetailsFieldsProps {
   control: Control<UserFeedbackSubmitValues>;

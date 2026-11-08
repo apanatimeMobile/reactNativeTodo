@@ -7,12 +7,12 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
-import { UserTodosSkeleton } from '../components/UserTodosSkeleton';
-import { UserTodosErrorFallback } from '../components/UserTodosErrorFallback';
-import { UserTodosHomeMainView } from '../components/UserTodosHomeMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserTodos } from '../hooks/useUserTodos';
-import { USER_TODOS_ROUTES } from '../config/user_todos.url_config';
+import { UserTodosSkeleton } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosSkeleton";
+import { UserTodosErrorFallback } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosErrorFallback";
+import { UserTodosHomeMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosHomeMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserTodos } from "@/features/frontend_user/user_todos/todos_management/hooks/useUserTodos";
+import { USER_TODOS_ROUTES } from "@/features/frontend_user/user_todos/todos_management/config/user_todos.url_config";
 
 export function UserTodosHomeScreen({ navigation }: { navigation: any }) {
   const tokens = useThemeTokens();

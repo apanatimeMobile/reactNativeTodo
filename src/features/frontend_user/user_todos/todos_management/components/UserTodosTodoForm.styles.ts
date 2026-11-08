@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import type { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import type { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 type ThemeTokens = ReturnType<typeof useThemeTokens>;
 

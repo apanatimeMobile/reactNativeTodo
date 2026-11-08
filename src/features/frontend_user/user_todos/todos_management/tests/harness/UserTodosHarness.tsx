@@ -4,11 +4,11 @@
  */
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, Pressable } from 'react-native';
-import { I18nProvider } from '../../../../../../core/i18n/useTranslation';
-import { ThemeProvider } from '../../../../../../core/theme/ThemeProvider';
-import { useThemeTokens } from '../../../../../../core/theme/useThemeTokens';
-import type { TodoEntity } from '../../types/user_todos.types';
-import { UserTodosHomeMainView } from '../../components/UserTodosHomeMainView';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { UserTodosHomeMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosHomeMainView";
 
 const FIXTURES: TodoEntity[] = [{
   id: 'harness-todo-1',

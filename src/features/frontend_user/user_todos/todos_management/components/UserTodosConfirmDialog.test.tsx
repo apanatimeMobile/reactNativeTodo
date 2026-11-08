@@ -4,9 +4,9 @@
  */
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { UserTodosConfirmDialog } from './UserTodosConfirmDialog';
+import { UserTodosConfirmDialog } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosConfirmDialog";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: {
       overlayBackdrop: 'rgba(0,0,0,0.6)',
@@ -29,7 +29,7 @@ jest.mock('../../../../../core/theme/useThemeTokens', () => ({
   }),
 }));
 
-jest.mock('../../../../../core/i18n/useTranslation', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+jest.mock("@/core/i18n/useTranslation", () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
 
 describe('UserTodosConfirmDialog', () => {
   it('does not run the destructive callback unless Confirm is explicitly pressed', () => {

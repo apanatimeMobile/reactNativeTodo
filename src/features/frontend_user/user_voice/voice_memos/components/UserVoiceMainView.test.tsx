@@ -4,13 +4,13 @@
  */
 import React from 'react';
 import { create, act, type ReactTestRenderer } from 'react-test-renderer';
-import { UserVoiceMainView } from './UserVoiceMainView';
+import { UserVoiceMainView } from "@/features/frontend_user/user_voice/voice_memos/components/UserVoiceMainView";
 
-jest.mock('../../../../../context/TodoContext', () => ({
-  useTodoContext: () => ({ addTodo: jest.fn() }),
+jest.mock("@/core/contracts/taskHost", () => ({
+  useTaskHost: () => ({ addTodo: jest.fn() }),
 }));
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: {
       background: '#F4F4F5',
@@ -34,7 +34,7 @@ jest.mock('../../../../../core/theme/useThemeTokens', () => ({
   }),
 }));
 
-jest.mock('../../../../../core/i18n/useTranslation', () => ({ useTranslation: () => ({ t: (key: string) => ({
+jest.mock("@/core/i18n/useTranslation", () => ({ useTranslation: () => ({ t: (key: string) => ({
   'user_voice_memos.PAGE_TITLE': 'Voice Memos',
   'user_voice_memos.VOICE_CAPTURE_CONTRACT': 'Record and play audio locally. Add a transcript or notes manually; automatic speech-to-text is not connected.',
   'user_voice_memos.START_RECORDING': 'Start recording',

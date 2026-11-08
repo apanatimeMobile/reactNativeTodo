@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_POMODORO_ROUTES } from '../pomodoro_timer/config/user_pomodoro.url_config';
-import { UserPomodoroScreen } from '../pomodoro_timer/screens/UserPomodoroScreen';
+import { USER_POMODORO_ROUTES } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/config/user_pomodoro.url_config";
+import { UserPomodoroScreen } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/screens/UserPomodoroScreen";
 
 const Stack = createNativeStackNavigator();
 

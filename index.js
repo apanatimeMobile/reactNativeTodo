@@ -5,7 +5,7 @@ import notifee, {EventType} from '@notifee/react-native';
 
 import App from './App';
 import {name as appName} from './app.json';
-import {stopSound} from './src/services/soundService';
+import { stopSound } from "@/core/audio/audioState";
 
 // Ignore harmless New Architecture & Reanimated warnings
 LogBox.ignoreLogs([

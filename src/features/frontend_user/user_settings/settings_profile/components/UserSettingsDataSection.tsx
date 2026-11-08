@@ -5,13 +5,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Download, Upload, Trash2, RotateCcw } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact, triggerWarningNotification } from '../../../../../core/interaction/haptics';
-import { UserSettingsConfirmDialog } from './UserSettingsConfirmDialog';
-import { UserSettingsBackupRestoreDialog } from './UserSettingsBackupRestoreDialog';
-import type { BackupRestoreMode, BackupTask } from '../types/user_settings.types';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact, triggerWarningNotification } from "@/core/interaction/haptics";
+import { UserSettingsConfirmDialog } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsConfirmDialog";
+import { UserSettingsBackupRestoreDialog } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsBackupRestoreDialog";
+import type { BackupRestoreMode, BackupTask } from "@/features/frontend_user/user_settings/settings_profile/types/user_settings.types";
 
 type PendingDataAction = 'clear-completed' | 'empty-trash';
 
