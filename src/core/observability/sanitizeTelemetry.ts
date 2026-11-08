@@ -3,7 +3,7 @@
  * FLOW: Recursively scans objects and masks sensitive keys (password, token, secret, auth, pin, ssn).
  */
 
-const SENSITIVE_KEY_PATTERN = /password|token|secret|authorization|auth|api[-_]?key|credit[-_]?card|pin|cvv|ssn/i;
+const SENSITIVE_KEY_PATTERN = /password|token|secret|authorization|auth|api[-_]?key|credit[-_]?card|pin|cvv|ssn|email|phone|address|birth|full[-_]?name/i;
 
 export function sanitizeTelemetry(data: unknown): unknown {
   if (data === null || data === undefined) {
