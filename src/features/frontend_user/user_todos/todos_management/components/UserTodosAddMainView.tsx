@@ -17,6 +17,7 @@ interface UserTodosAddMainViewProps {
   onSubmit: (values: TodoFormInput) => void;
   isSubmitting?: boolean;
   onBack?: () => void;
+  onSubmitSuccess?: () => void;
 }
 
 export function UserTodosAddMainView({
@@ -24,6 +25,7 @@ export function UserTodosAddMainView({
   onSubmit,
   isSubmitting = false,
   onBack,
+  onSubmitSuccess,
 }: UserTodosAddMainViewProps) {
   const tokens = useThemeTokens();
   const minTarget = getMinTouchTarget();
@@ -80,6 +82,7 @@ export function UserTodosAddMainView({
       <UserTodosTodoForm
         categories={categories}
         onSubmit={onSubmit}
+        onSubmitSuccess={onSubmitSuccess}
         isSubmitting={isSubmitting}
         submitLabel="Create Task"
       />

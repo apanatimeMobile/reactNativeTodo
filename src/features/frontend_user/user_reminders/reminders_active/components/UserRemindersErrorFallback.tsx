@@ -6,6 +6,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { AlertTriangle, RefreshCw } from 'lucide-react-native';
+import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 
@@ -15,10 +16,11 @@ interface UserRemindersErrorFallbackProps {
 }
 
 export function UserRemindersErrorFallback({
-  message = 'Failed to load reminders schedule',
+  message,
   onRetry,
 }: UserRemindersErrorFallbackProps) {
   const tokens = useThemeTokens();
+  const { t } = useTranslation();
   const minTarget = getMinTouchTarget();
 
   const styles = StyleSheet.create({
@@ -69,21 +71,21 @@ export function UserRemindersErrorFallback({
   });
 
   return (
-    <View style={styles.container} accessible={true} accessibilityLabel="Error loading reminders">
+    <View style={styles.container} accessibilityLabel={t('user_reminders_active.ERROR_TITLE')}>
       <View style={styles.iconWrapper}>
-        <AlertTriangle size={28} color={tokens.color.statusDangerText} />
+        <AlertTriangle size={tokens.icon.lg} color={tokens.color.statusDangerText} />
       </View>
-      <Text style={styles.title}>Reminder Service Error</Text>
-      <Text style={styles.message}>{message}</Text>
+      <Text style={styles.title}>{t('user_reminders_active.ERROR_TITLE')}</Text>
+      <Text style={styles.message}>{message ?? t('user_reminders_active.LOAD_ERROR')}</Text>
       {onRetry && (
         <Pressable
           style={styles.retryButton}
           onPress={onRetry}
           accessibilityRole="button"
-          accessibilityLabel="Retry loading reminders"
+          accessibilityLabel={t('user_reminders_active.RETRY')}
         >
-          <RefreshCw size={16} color={tokens.color.foreground} />
-          <Text style={styles.retryText}>Retry</Text>
+          <RefreshCw size={tokens.icon.sm} color={tokens.color.foreground} />
+          <Text style={styles.retryText}>{t('user_reminders_active.RETRY')}</Text>
         </Pressable>
       )}
     </View>

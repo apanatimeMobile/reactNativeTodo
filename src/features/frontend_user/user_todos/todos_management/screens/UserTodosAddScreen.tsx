@@ -20,7 +20,6 @@ export function UserTodosAddScreen({ navigation }: { navigation: { goBack: () =>
     setIsSubmitting(true);
     try {
       await addTodo(values);
-      navigation.goBack();
     } catch (error) {
       setIsSubmitting(false);
       throw error;
@@ -44,6 +43,7 @@ export function UserTodosAddScreen({ navigation }: { navigation: { goBack: () =>
         onSubmit={handleSubmit}
         isSubmitting={isSubmitting}
         onBack={() => navigation.goBack()}
+        onSubmitSuccess={() => navigation.goBack()}
       />
     </SafeAreaView>
   );
