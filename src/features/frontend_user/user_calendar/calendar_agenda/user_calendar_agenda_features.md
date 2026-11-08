@@ -207,3 +207,9 @@ This feature is **NOT production-verified**. Findings and current status:
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Legacy context coupling, non-executable scenario fixtures, incomplete tests and deferred runtime verification remain open.
+
+### Source repair follow-up — 2026-11-08
+
+Calendar selection uses locale-aware date labels without navigation haptics. Task checkboxes have localized names, checked state and minimum targets. The connected screen selects storage error/loading/agenda branches and retries the actual host load. Backend day/reschedule endpoints and native accessibility behavior remain unverified.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

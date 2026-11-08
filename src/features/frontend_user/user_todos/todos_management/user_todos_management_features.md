@@ -234,3 +234,9 @@ This feature is **NOT production-verified**. Findings and current status:
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Legacy TodoContext, API/query separation, RHF/Zod, executable mock handlers, behavioral tests and runtime checks remain open.
+
+### Source repair follow-up — 2026-11-08
+
+Add/edit persistence errors reach the validated form; UI-only All is excluded from form categories. Dirty form removal uses the native navigation guard and explicit confirmation; successful persistence has a separate navigation bypass. Missing edit/detail records render a recovery action instead of a blank screen. Local storage loading/error branches are connected. Remote API/400 field mapping and full standalone mock coverage remain unverified.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

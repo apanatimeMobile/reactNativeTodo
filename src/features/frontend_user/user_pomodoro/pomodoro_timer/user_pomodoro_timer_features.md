@@ -208,3 +208,9 @@ This feature is **NOT production-verified**. Findings and current status:
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Session API wiring, legacy state coupling, executable mock handlers, behavioral tests and runtime verification remain open.
+
+### Source repair follow-up — 2026-11-08
+
+The local timer now records completed sessions using utils/userPomodoroSessions.js; pause does not record a session, and completion records once. History retains @todomaster/focus_sessions_history and the 100-session cap. The former global focusService location and root test were migrated into this capability, not evicted. Mode controls are localized with selected state and minimum targets. Remote session/settings APIs and background/device behavior are not certified.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

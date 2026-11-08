@@ -1,37 +1,43 @@
 /**
- * RESPONSIBILITY: Canonical navigation interceptor guarding against accidental loss of unsaved form data.
- * FLOW: Listens to React Navigation beforeRemove event and requires user confirmation when isDirty is true.
+ * RESPONSIBILITY: Prevents navigation away from dirty forms until the user decides.
+ * FLOW: React Navigation removal → confirmation state → cancel or dispatch original action.
  */
+import { useCallback, useRef } from 'react';
+import { useNavigation, usePreventRemove } from '@react-navigation/native';
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useConfirm, type ConfirmOptions } from './useConfirm';
 
-import { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { Alert } from 'react-native';
+export function useUnsavedChangesGuard(isDirty: boolean, options: ConfirmOptions) {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const confirmation = useConfirm();
+  const pendingRef = useRef(false);
+  const submitNavigationRef = useRef(false);
 
-export function useUnsavedChangesGuard(isDirty: boolean, message: string = 'You have unsaved changes. Discard them?') {
-  const navigation = useNavigation<any>();
+  usePreventRemove(isDirty, ({ data }) => {
+    if (submitNavigationRef.current) {
+      submitNavigationRef.current = false;
+      navigation.dispatch(data.action);
+      return;
+    }
+    if (pendingRef.current) return;
 
-  useEffect(() => {
-    if (!isDirty || !navigation?.addListener) return;
-
-    const unsubscribe = navigation.addListener('beforeRemove', (e: any) => {
-      e.preventDefault();
-
-      Alert.alert(
-        'Discard Changes?',
-        message,
-        [
-          { text: 'Keep Editing', style: 'cancel', onPress: () => {} },
-          {
-            text: 'Discard',
-            style: 'destructive',
-            onPress: () => navigation.dispatch(e.data.action),
-          },
-        ]
-      );
+    pendingRef.current = true;
+    confirmation.confirm(options).then((shouldDiscard) => {
+      pendingRef.current = false;
+      if (shouldDiscard) navigation.dispatch(data.action);
     });
+  });
 
-    return unsubscribe;
-  }, [navigation, isDirty, message]);
+  const allowNavigationAfterSubmit = useCallback(() => {
+    submitNavigationRef.current = true;
+  }, []);
+  return {
+    isOpen: confirmation.isOpen,
+    options: confirmation.options,
+    handleConfirm: confirmation.handleConfirm,
+    handleCancel: confirmation.handleCancel,
+    allowNavigationAfterSubmit,
+  };
 }
 
 export default useUnsavedChangesGuard;

@@ -22,12 +22,16 @@ import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerErrorHaptic, triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
+import { useUnsavedChangesGuard } from '../../../../../core/hooks/useUnsavedChangesGuard';
+import { UserTodosUnsavedChangesDialog } from './UserTodosUnsavedChangesDialog';
+import { createUserTodosTodoFormStyles } from './UserTodosTodoForm.styles';
 
 interface UserTodosTodoFormProps {
   initialValues?: Partial<TodoFormInput>;
   submitLabel?: string;
   isSubmitting?: boolean;
   onSubmit: (values: TodoFormInput) => void | Promise<void>;
+  onSubmitSuccess?: () => void;
   categories: string[];
 }
 
@@ -42,6 +46,7 @@ export function UserTodosTodoForm({
   submitLabel = '',
   isSubmitting = false,
   onSubmit,
+  onSubmitSuccess,
   categories,
 }: UserTodosTodoFormProps) {
   const tokens = useThemeTokens();
@@ -49,7 +54,7 @@ export function UserTodosTodoForm({
   const minTarget = getMinTouchTarget();
   const {
     control, handleSubmit, watch, setValue, setError, clearErrors,
-    formState: { errors, isSubmitting: formSubmitting },
+    formState: { errors, isSubmitting: formSubmitting, isDirty },
   } = useForm<TodoFormInput>({
     mode: 'onSubmit',
     defaultValues: {
@@ -62,6 +67,13 @@ export function UserTodosTodoForm({
       reminderTime: initialValues?.reminderTime ?? '',
       recurrence: initialValues?.recurrence ?? 'none',
     },
+  });
+  const guard = useUnsavedChangesGuard(isDirty, {
+    title: t('user_todos_management.DISCARD_CHANGES_TITLE'),
+    description: t('user_todos_management.DISCARD_CHANGES_DESCRIPTION'),
+    confirmLabel: t('user_todos_management.DISCARD_CHANGES_CONFIRM'),
+    cancelLabel: t('user_todos_management.CANCEL'),
+    isDestructive: true,
   });
   const priority = watch('priority');
   const category = watch('category');
@@ -85,6 +97,10 @@ export function UserTodosTodoForm({
     clearErrors();
     try {
       await onSubmit(parsed.data);
+      if (onSubmitSuccess) {
+        guard.allowNavigationAfterSubmit();
+        onSubmitSuccess();
+      }
       triggerSuccessHaptic();
     } catch {
       setError('root', { type: 'server', message: 'user_todos_management.SUBMIT_FAILED' });
@@ -97,16 +113,7 @@ export function UserTodosTodoForm({
     <Text accessibilityRole="alert" style={{ ...tokens.typography.caption, color: tokens.color.statusDangerText, marginTop: tokens.space[1] }}>{t(message)}</Text>
   ) : null;
 
-  const styles = StyleSheet.create({
-    flex: { flex: 1 },
-    container: { padding: tokens.space[4], paddingBottom: tokens.space[9] },
-    fieldGroup: { marginBottom: tokens.space[4] },
-    label: { ...tokens.typography.caption, color: tokens.color.foreground, fontWeight: '600', marginBottom: tokens.space[2], textTransform: 'uppercase', letterSpacing: 0.5 },
-    submitButton: { minHeight: minTarget, backgroundColor: tokens.color.primary, borderRadius: tokens.radius.md, alignItems: 'center', justifyContent: 'center', marginTop: tokens.space[5], minWidth: tokens.layout.buttonMinWidth, opacity: (isSubmitting || formSubmitting) ? tokens.opacity.loading : 1 },
-    submitButtonText: { ...tokens.typography.body, color: tokens.color.onPrimary, fontWeight: '700' },
-    reminderToggle: { minHeight: minTarget, justifyContent: 'center', paddingHorizontal: tokens.space[3], borderRadius: tokens.radius.md, borderWidth: 1, borderColor: reminder ? tokens.color.primary : tokens.color.border, backgroundColor: reminder ? tokens.color.primarySubtle : tokens.color.card },
-    reminderToggleText: { ...tokens.typography.bodySm, color: reminder ? tokens.color.primaryText : tokens.color.foreground, fontWeight: '600' },
-  });
+  const styles = createUserTodosTodoFormStyles(tokens, minTarget, reminder, isSubmitting || formSubmitting);
 
   return (
     <KeyboardAvoidingView
@@ -178,6 +185,7 @@ export function UserTodosTodoForm({
           </Text>
         </Pressable>
       </ScrollView>
+      <UserTodosUnsavedChangesDialog guard={guard} />
     </KeyboardAvoidingView>
   );
 }
