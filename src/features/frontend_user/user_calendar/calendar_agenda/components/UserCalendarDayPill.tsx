@@ -6,12 +6,13 @@
 import React from 'react';
 import { Text, StyleSheet, Pressable } from 'react-native';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import { useTranslation } from '../../../../../core/i18n/useTranslation';
 
 interface UserCalendarDayPillProps {
   dateStr: string;
   dayNum: number;
   dayName: string;
+  dateLabel: string;
   isActive: boolean;
   onSelect: (dateStr: string) => void;
 }
@@ -20,10 +21,12 @@ export function UserCalendarDayPill({
   dateStr,
   dayNum,
   dayName,
+  dateLabel,
   isActive,
   onSelect,
 }: UserCalendarDayPillProps) {
   const tokens = useThemeTokens();
+  const { t } = useTranslation();
 
   const styles = StyleSheet.create({
     dayPill: {
@@ -52,12 +55,10 @@ export function UserCalendarDayPill({
   return (
     <Pressable
       style={styles.dayPill}
-      onPress={() => {
-        triggerLightImpact();
-        onSelect(dateStr);
-      }}
+      onPress={() => onSelect(dateStr)}
       accessibilityRole="button"
-      accessibilityLabel={`Select date ${dayName} ${dayNum}`}
+      accessibilityLabel={t('user_calendar_agenda.SELECT_DATE').replace('{date}', dateLabel)}
+      accessibilityState={{ selected: isActive }}
     >
       <Text style={styles.dayName}>{dayName}</Text>
       <Text style={styles.dayNum}>{dayNum}</Text>

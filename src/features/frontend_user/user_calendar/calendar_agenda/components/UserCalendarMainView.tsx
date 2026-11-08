@@ -45,14 +45,20 @@ export function UserCalendarMainView({
       list.push({
         dateStr: formatCalendarDateKey(d),
         dayNum: d.getDate(),
-        dayName: d.toLocaleDateString('en-US', { weekday: 'short' }),
+        dayName: d.toLocaleDateString(undefined, { weekday: 'short' }),
+        dateLabel: d.toLocaleDateString(undefined, {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
       });
     }
     return list;
   }, []);
 
   const tasksOnSelectedDate = useMemo(() => {
-    return todos.filter((t) => !t.deleted && t.dueDate === selectedDate);
+    return todos.filter((task) => !task.deleted && task.dueDate === selectedDate);
   }, [todos, selectedDate]);
 
   const styles = StyleSheet.create({
@@ -63,6 +69,7 @@ export function UserCalendarMainView({
     daysScroll: { paddingHorizontal: tokens.space[4], paddingBottom: tokens.space[3], gap: tokens.space[2] },
     listContent: { paddingHorizontal: tokens.space[4], paddingBottom: tokens.space[8] },
     agendaCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: tokens.color.card, borderRadius: tokens.radius.lg, borderWidth: 1, borderColor: tokens.color.border, padding: tokens.space[4], marginBottom: tokens.space[3] },
+    checkboxButton: { width: minTarget, height: minTarget, alignItems: 'center', justifyContent: 'center' },
     taskTitle: { ...tokens.typography.body, color: tokens.color.foreground, flex: 1, marginLeft: tokens.space[3] },
     emptyState: { padding: tokens.space[8], alignItems: 'center', justifyContent: 'center' },
     emptyText: { ...tokens.typography.body, color: tokens.color.muted, textAlign: 'center' },
@@ -101,6 +108,7 @@ export function UserCalendarMainView({
             dateStr={item.dateStr}
             dayNum={item.dayNum}
             dayName={item.dayName}
+            dateLabel={item.dateLabel}
             isActive={item.dateStr === selectedDate}
             onSelect={onSelectDate}
           />
@@ -120,12 +128,16 @@ export function UserCalendarMainView({
             testID="mobile:user_calendar:agenda:task_card"
           >
             <Pressable
+              style={styles.checkboxButton}
               onPress={() => {
                 triggerLightImpact();
                 if (onToggleTask) onToggleTask(String(item.id));
               }}
-              hitSlop={8}
               accessibilityRole="checkbox"
+              accessibilityLabel={t('user_calendar_agenda.TOGGLE_TASK_COMPLETION').replace(
+                '{task}',
+                displayValue(item.title),
+              )}
               accessibilityState={{ checked: item.completed }}
               testID="mobile:user_calendar:agenda:toggle_task"
             >
