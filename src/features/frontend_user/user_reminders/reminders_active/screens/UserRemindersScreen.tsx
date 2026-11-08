@@ -7,13 +7,15 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
+import { UserRemindersSkeleton } from '../components/UserRemindersSkeleton';
+import { UserRemindersErrorFallback } from '../components/UserRemindersErrorFallback';
 import { UserRemindersMainView } from '../components/UserRemindersMainView';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useUserReminders } from '../hooks/useUserReminders';
 
 export function UserRemindersScreen({ navigation }: { navigation?: any }) {
   const tokens = useThemeTokens();
-  const { reminders, snoozeReminder } = useUserReminders();
+  const { loading, loadError, retryLoad, reminders, snoozeReminder } = useUserReminders();
 
   const handleOpenDrawer = () => {
     if (navigation?.dispatch) {
@@ -33,7 +35,7 @@ export function UserRemindersScreen({ navigation }: { navigation?: any }) {
       <StatusBar
         barStyle={tokens.isDark ? 'light-content' : 'dark-content'}
       />
-      <UserRemindersMainView reminders={reminders} onOpenDrawer={handleOpenDrawer} onSnoozeReminder={snoozeReminder} />
+      {loading ? <UserRemindersSkeleton /> : loadError ? <UserRemindersErrorFallback onRetry={retryLoad} /> : <UserRemindersMainView reminders={reminders} onOpenDrawer={handleOpenDrawer} onSnoozeReminder={snoozeReminder} />}
     </SafeAreaView>
   );
 }
