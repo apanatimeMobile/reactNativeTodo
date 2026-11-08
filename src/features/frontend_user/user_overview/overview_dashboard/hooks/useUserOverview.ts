@@ -49,6 +49,9 @@ export function useUserOverview() {
   const activityData = useMemo(() => buildWeeklyCompletionActivity(tasks), [tasks]);
 
   return {
+    loading: Boolean(todoCtx.loading),
+    loadError: Boolean(todoCtx.loadError),
+    retryLoad: todoCtx.loadTodos,
     metrics,
     categoryData,
     activityData,

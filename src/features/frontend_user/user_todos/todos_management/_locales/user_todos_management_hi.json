@@ -70,6 +70,10 @@
     "VALIDATION_CATEGORY_REQUIRED": "एक श्रेणी चुनें।",
     "VALIDATION_PRIORITY_INVALID": "मान्य प्राथमिकता चुनें।",
     "VALIDATION_DUE_DATE_INVALID": "अंतिम तारीख YYYY-MM-DD प्रारूप में लिखें।",
-    "VALIDATION_REMINDER_TIME_INVALID": "रिमाइंडर समय HH:mm प्रारूप में लिखें।"
+    "VALIDATION_REMINDER_TIME_INVALID": "रिमाइंडर समय HH:mm प्रारूप में लिखें।",
+    "TAB_UPCOMING": "आगामी",
+    "SUBMIT_FAILED": "कार्य सहेजा नहीं जा सका। फिर प्रयास करें।",
+    "TASK_NOT_FOUND": "यह कार्य अब उपलब्ध नहीं है।",
+    "BACK_TO_TASKS": "कार्यों पर वापस जाएँ"
   }
 }
