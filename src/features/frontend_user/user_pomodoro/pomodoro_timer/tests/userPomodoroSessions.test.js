@@ -1,4 +1,4 @@
-import * as storage from '../../../../../storage/storage';
+import * as storage from "../../../../../core/storage/jsonStorage";
 import { calculateFocusStats, getFocusDateKey } from '../utils/userPomodoroSessionStats';
 import {
   clearFocusSessions,

@@ -1,0 +1,195 @@
+/**
+ * RESPONSIBILITY: Coordinate app lock through hardware-backed device authentication.
+ * FLOW: App composition and feature adapters consume this shared host contract.
+ */
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
+import {AppState} from 'react-native';
+import * as Keychain from 'react-native-keychain';
+import {getItem, setItem, removeItem} from "../storage/jsonStorage";
+
+const AppLockContext = createContext(null);
+
+const KEY_ENABLED = '@todomaster/app_lock_enabled';
+const KEYCHAIN_SERVICE = 'com.todonative.applock';
+
+export function AppLockProvider({children}) {
+  const [isLockEnabled, setIsLockEnabled] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const appStateRef = useRef(AppState.currentState);
+  const promptingRef = useRef(false);
+
+  // Authenticate using device's native fingerprint, face, or screen lock (Pattern/PIN)
+  const authenticateWithDevice = useCallback(async () => {
+    if (promptingRef.current) return false;
+    promptingRef.current = true;
+    try {
+      const creds = await Keychain.getGenericPassword({
+        service: KEYCHAIN_SERVICE,
+        authenticationPrompt: {
+          title: 'Unlock Tasklume',
+          subtitle: 'Use your fingerprint, face, or device screen lock',
+          description: 'Confirm your identity to open the app',
+          cancel: 'Cancel',
+        },
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+      });
+
+      if (creds && creds.password) {
+        setIsLocked(false);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log('Biometric auth failed or dismissed', error);
+      return false;
+    } finally {
+      promptingRef.current = false;
+    }
+  }, []);
+
+  // Load initial lock status
+  useEffect(() => {
+    async function loadLockConfig() {
+      try {
+        const enabled = await getItem(KEY_ENABLED, false);
+        if (enabled) {
+          setIsLockEnabled(true);
+          setIsLocked(true); // App starts in locked state
+        } else {
+          setIsLockEnabled(false);
+          setIsLocked(false);
+        }
+      } catch (e) {
+        console.warn('Failed to load app lock config', e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadLockConfig();
+  }, []);
+
+  // Auto-prompt device biometric on app start if locked
+  useEffect(() => {
+    if (isLockEnabled && isLocked && !loading) {
+      const t = setTimeout(() => {
+        authenticateWithDevice();
+      }, 400);
+      return () => clearTimeout(t);
+    }
+  }, [isLockEnabled, isLocked, loading, authenticateWithDevice]);
+
+  // Listen to AppState changes (background -> active)
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', nextState => {
+      if (
+        appStateRef.current.match(/inactive|background/) &&
+        nextState === 'active'
+      ) {
+        // App resumed from background
+        if (isLockEnabled) {
+          setIsLocked(true);
+          // Auto-prompt biometric when returning from background
+          setTimeout(() => {
+            authenticateWithDevice();
+          }, 300);
+        }
+      }
+      appStateRef.current = nextState;
+    });
+
+    return () => sub.remove();
+  }, [isLockEnabled, authenticateWithDevice]);
+
+  // Toggle App Lock ON using device lock
+  const enableDeviceLock = useCallback(async () => {
+    try {
+      const res = await Keychain.setGenericPassword('device_user', 'app_locked', {
+        service: KEYCHAIN_SERVICE,
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+        authenticationPrompt: {
+          title: 'Enable App Lock',
+          subtitle: 'Authenticate to secure Tasklume',
+          cancel: 'Cancel',
+        },
+      });
+
+      if (res) {
+        await setItem(KEY_ENABLED, true);
+        setIsLockEnabled(true);
+        setIsLocked(false);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log('Failed to enable device lock:', error);
+      const msg = (error?.message || '').toLowerCase();
+      const err = new Error(error?.message || 'Device lock setup failed');
+      if (msg.includes('cancel') || msg.includes('user cancel')) {
+        err.code = 'USER_CANCELLED';
+      } else if (
+        msg.includes('passcode') ||
+        msg.includes('not enrolled') ||
+        msg.includes('no biometric') ||
+        msg.includes('credentials') ||
+        msg.includes('key permanently invalidated') ||
+        msg.includes('could not set')
+      ) {
+        err.code = 'NO_DEVICE_CREDENTIALS';
+      } else {
+        err.code = 'UNKNOWN';
+      }
+      throw err;
+    }
+  }, []);
+
+  // Toggle App Lock OFF (verifies device credentials first)
+  const disableDeviceLock = useCallback(async () => {
+    try {
+      const verified = await authenticateWithDevice();
+      if (!verified) {
+        return false;
+      }
+
+      await Keychain.resetGenericPassword({
+        service: KEYCHAIN_SERVICE,
+      });
+      await removeItem(KEY_ENABLED);
+      setIsLockEnabled(false);
+      setIsLocked(false);
+      return true;
+    } catch (error) {
+      console.log('Failed to disable device lock', error);
+      return false;
+    }
+  }, [authenticateWithDevice]);
+
+  return (
+    <AppLockContext.Provider
+      value={{
+        isLockEnabled,
+        isLocked,
+        loading,
+        authenticateWithDevice,
+        enableDeviceLock,
+        disableDeviceLock,
+      }}>
+      {children}
+    </AppLockContext.Provider>
+  );
+}
+
+export function useAppLock() {
+  const context = useContext(AppLockContext);
+  if (!context) {
+    throw new Error('useAppLock must be used within an AppLockProvider');
+  }
+  return context;
+}

@@ -1,4 +1,4 @@
-import {parseTaskDueDate, toDateOnlyTimestamp} from '../src/utils/dateUtils';
+import {parseTaskDueDate, toDateOnlyTimestamp} from "../src/core/utils/localDate";
 
 describe('parseTaskDueDate', () => {
   const now = new Date(2026, 0, 15, 17, 45, 0, 0);

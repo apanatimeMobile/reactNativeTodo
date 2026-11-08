@@ -13,7 +13,7 @@ import {
   Pressable,
 } from 'react-native';
 import { Fingerprint, ShieldCheck } from 'lucide-react-native';
-import { useAppLock } from '../../context/AppLockContext';
+import { useAppLock } from "../security/AppLockProvider";
 import { useThemeTokens } from '../theme/useThemeTokens';
 import { triggerLightImpact } from '../interaction/haptics';
 
