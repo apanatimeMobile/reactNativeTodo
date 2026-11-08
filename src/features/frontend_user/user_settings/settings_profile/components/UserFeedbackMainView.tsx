@@ -12,7 +12,7 @@ import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerSuccessNotification, triggerLightImpact } from '../../../../../core/interaction/haptics';
 
 interface UserFeedbackMainViewProps {
-  onSubmit: (feedback: { category: string; rating: number; message: string }) => void;
+  onSubmit: (feedback: { category: string; rating: number; message: string }) => Promise<boolean>;
   onBack?: () => void;
 }
 
@@ -23,10 +23,12 @@ export function UserFeedbackMainView({ onSubmit, onBack }: UserFeedbackMainViewP
   const [rating, setRating] = useState(5);
   const [message, setMessage] = useState('');
 
-  const handleSubmit = () => {
-    triggerSuccessNotification();
-    onSubmit({ category: selectedCategory, rating, message });
-    setMessage('');
+  const handleSubmit = async () => {
+    const submitted = await onSubmit({ category: selectedCategory, rating, message });
+    if (submitted) {
+      triggerSuccessNotification();
+      setMessage('');
+    }
   };
 
   const styles = StyleSheet.create({

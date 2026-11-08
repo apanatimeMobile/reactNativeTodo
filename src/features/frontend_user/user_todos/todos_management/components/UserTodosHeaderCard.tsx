@@ -36,7 +36,6 @@ export function UserTodosHeaderCard({
   completedTasks,
 }: UserTodosHeaderCardProps) {
   const tokens = useThemeTokens();
-  const { t } = useTranslation();
   const minTarget = getMinTouchTarget();
   const greeting = getGreeting();
   const progressPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;

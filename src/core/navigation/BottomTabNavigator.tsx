@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, Animated, useWindowDimensions, Platform } from 'react-native';
+import { StyleSheet, View, Animated, useWindowDimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   CheckSquare2,

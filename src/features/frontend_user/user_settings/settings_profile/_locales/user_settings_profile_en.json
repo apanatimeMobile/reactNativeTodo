@@ -62,6 +62,7 @@
     "PROFILE_SAVE": "Save profile changes",
     "NAME_PLACEHOLDER": "Your name",
     "EMAIL_PLACEHOLDER": "Your email",
-    "PHONE_PLACEHOLDER": "Your mobile"
+    "PHONE_PLACEHOLDER": "Your mobile",
+    "FEEDBACK_UNAVAILABLE": "Feedback cannot be submitted because the approved server endpoint is not configured."
   }
 }

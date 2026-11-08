@@ -2,7 +2,7 @@
  * RESPONSIBILITY: Owns Settings task export, restore, and cleanup actions. No UI rendering lives here.
  * FLOW: UserSettingsDataSection → this hook → TodoContext data operations / native Share UI.
  */
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Share } from 'react-native';
 import { useTodoContext } from '../../../../../context/TodoContext';
 import { showToast } from '../../../../../core/toast/showToast';
@@ -16,7 +16,7 @@ import { selectCompletedTaskIds, selectTrashedTaskIds, type SettingsTaskSummary 
  */
 export function useUserSettingsData() {
   const todoCtx = useTodoContext();
-  const tasks = (todoCtx?.tasks ?? []) as SettingsTaskSummary[];
+  const tasks = useMemo(() => (todoCtx?.tasks ?? []) as SettingsTaskSummary[], [todoCtx?.tasks]);
 
   const exportData = useCallback(async (): Promise<boolean> => {
     try {

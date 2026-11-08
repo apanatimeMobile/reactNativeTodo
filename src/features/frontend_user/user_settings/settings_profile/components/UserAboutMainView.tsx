@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Linking } from 'react-native';
-import { ArrowLeft, User, MessageCircle, Camera, Globe, Heart, Code2 } from 'lucide-react-native';
+import { ArrowLeft, User, MessageCircle, Camera, Code2 } from 'lucide-react-native';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerLightImpact } from '../../../../../core/interaction/haptics';
@@ -33,7 +33,7 @@ export function UserAboutMainView({ onBack }: UserAboutMainViewProps = {}) {
     const url = `https://wa.me/${DEVELOPER.whatsapp}`;
     try {
       await Linking.openURL(url);
-    } catch (_) {
+    } catch {
       showToast('Unable to open WhatsApp.', 'error');
     }
   };
@@ -43,7 +43,7 @@ export function UserAboutMainView({ onBack }: UserAboutMainViewProps = {}) {
     const url = `https://www.instagram.com/${DEVELOPER.instagram}/`;
     try {
       await Linking.openURL(url);
-    } catch (_) {
+    } catch {
       showToast('Unable to open Instagram.', 'error');
     }
   };
@@ -52,7 +52,7 @@ export function UserAboutMainView({ onBack }: UserAboutMainViewProps = {}) {
     triggerLightImpact();
     try {
       await Linking.openURL(DEVELOPER.portfolio);
-    } catch (_) {
+    } catch {
       showToast('Unable to open Portfolio.', 'error');
     }
   };

@@ -62,6 +62,7 @@
     "PROFILE_SAVE": "प्रोफ़ाइल परिवर्तन सहेजें",
     "NAME_PLACEHOLDER": "आपका नाम",
     "EMAIL_PLACEHOLDER": "आपका ईमेल",
-    "PHONE_PLACEHOLDER": "आपका मोबाइल"
+    "PHONE_PLACEHOLDER": "आपका मोबाइल",
+    "FEEDBACK_UNAVAILABLE": "स्वीकृत सर्वर एंडपॉइंट उपलब्ध न होने के कारण प्रतिक्रिया भेजी नहीं जा सकती।"
   }
 }

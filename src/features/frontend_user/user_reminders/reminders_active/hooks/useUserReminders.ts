@@ -17,7 +17,7 @@ type ReminderTaskWithDueTime = ReminderTaskEntity & { dueTime?: string | null };
  */
 export function useUserReminders() {
   const todoCtx = useTodoContext();
-  const tasks = (todoCtx?.tasks ?? []) as ReminderTaskWithDueTime[];
+  const tasks = useMemo(() => (todoCtx?.tasks ?? []) as ReminderTaskWithDueTime[], [todoCtx?.tasks]);
 
   const activeReminders = useMemo(
     () => tasks.filter((task) => (task.reminder || task.dueTime) && !task.completed && !task.deleted),

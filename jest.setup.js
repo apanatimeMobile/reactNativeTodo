@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 // Jest setup for React Native environment
+require('react-native-gesture-handler/jestSetup');
 
 // Mock AsyncStorage
 jest.mock('@react-native-async-storage/async-storage', () => {
