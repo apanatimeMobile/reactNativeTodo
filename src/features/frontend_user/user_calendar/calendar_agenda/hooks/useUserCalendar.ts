@@ -3,7 +3,7 @@
  * FLOW: UserCalendarScreen → useUserCalendar → selectedDate/selectDate props → UserCalendarMainView.
  */
 import { useState, useCallback } from 'react';
-import { useTodoContext } from '../../../../../context/TodoContext';
+import { useTodoContext } from "../../../user_todos/todos_management/state/UserTodosContext";
 import { formatCalendarDateKey } from '../utils/userCalendarFormatters';
 import type { CalendarTaskEntity } from '../types/user_calendar.types';
 

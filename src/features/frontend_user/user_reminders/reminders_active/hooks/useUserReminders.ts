@@ -3,7 +3,7 @@
  * FLOW: UserRemindersScreen → useUserReminders → TodoContext.updateTodo → scheduleTodoReminder.
  */
 import { useMemo, useCallback } from 'react';
-import { useTodoContext } from '../../../../../context/TodoContext';
+import { useTodoContext } from "../../../user_todos/todos_management/state/UserTodosContext";
 import { showToast } from '../../../../../core/toast/showToast';
 import type { ReminderTaskEntity } from '../types/user_reminders.types';
 import { calculateSnoozedReminderSchedule } from '../utils/userRemindersSnooze';

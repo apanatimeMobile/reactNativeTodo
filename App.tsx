@@ -8,40 +8,36 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import notifee, {EventType} from '@notifee/react-native';
 
 import {
-  AuthProvider,
-} from './src/context/AuthContext';
+  LocalProfileProvider,
+} from "./src/core/auth/LocalProfileProvider";
 
 import {
   TodoProvider,
-} from './src/context/TodoContext';
+} from "./src/features/frontend_user/user_todos/todos_management/state/UserTodosContext";
 
 import {
-  ThemeProvider,
-} from './src/context/ThemeContext';
+  AccentPreferencesProvider,
+} from "./src/core/theme/AccentThemeProvider";
 
 import {
-  SettingsProvider,
-} from './src/context/SettingsContext';
+  PreferencesProvider,
+} from "./src/core/preferences/PreferencesProvider";
 
 import RootNavigator from './src/core/navigation/RootNavigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { I18nProvider } from './src/core/i18n/useTranslation';
 
-import {
-  prepareTodoTimerNotifications,
-} from './src/utils/todoTimerNotifications';
-import {
-  initSoundService,
-  playAlarmSound,
-  playAlertSound,
-  stopSound,
-} from './src/services/soundService';
+import { prepareTodoTimerNotifications } from './src/core/notifications/prepareTodoTimerNotifications';
+import { initSoundService } from './src/core/audio/soundInitialization';
+import { playAlarmSound } from './src/core/audio/alarmPlayback';
+import { playAlertSound } from './src/core/audio/alertPlayback';
+import { stopSound } from './src/core/audio/audioState';
 
 import Toast from 'react-native-toast-message';
 
 import {
   AppLockProvider,
-} from './src/context/AppLockContext';
+} from "./src/core/security/AppLockProvider";
 import LockScreen from './src/core/ui/LockScreen';
 import ErrorBoundary from './src/core/ui/ErrorBoundary';
 
@@ -105,19 +101,19 @@ function App() {
           <CoreThemeProvider>
             <QueryClientProvider client={queryClient}>
               <I18nProvider>
-                <ThemeProvider>
-                  <SettingsProvider>
+                <AccentPreferencesProvider>
+                  <PreferencesProvider>
                 <AppLockProvider>
-                  <AuthProvider>
+                  <LocalProfileProvider>
                     <TodoProvider>
                       <RootNavigator />
                       <LockScreen />
                       <Toast />
                     </TodoProvider>
-                  </AuthProvider>
+                  </LocalProfileProvider>
                 </AppLockProvider>
-                  </SettingsProvider>
-                </ThemeProvider>
+                  </PreferencesProvider>
+                </AccentPreferencesProvider>
               </I18nProvider>
             </QueryClientProvider>
           </CoreThemeProvider>
