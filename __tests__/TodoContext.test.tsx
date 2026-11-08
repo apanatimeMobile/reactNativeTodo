@@ -2,7 +2,7 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
 import { TodoProvider, useTodoContext } from '../src/context/TodoContext';
-import APP_CONFIG from '../src/constants/appConfig';
+import APP_CONFIG from "../src/core/config/appConfig";
 
 let state: ReturnType<typeof useTodoContext>;
 function Capture() {

@@ -2,7 +2,7 @@ import { Platform, Vibration } from 'react-native';
 import Sound from 'react-native-sound';
 import RNFS from 'react-native-fs';
 import { SOUND_DATA } from '../assets/soundsData';
-import { haptic } from '../utils/haptics';
+import { haptic } from "../core/interaction/deviceHaptics";
 
 // Safe category setup
 try {

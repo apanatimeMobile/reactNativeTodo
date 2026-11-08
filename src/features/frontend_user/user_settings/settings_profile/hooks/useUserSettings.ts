@@ -4,10 +4,10 @@
  */
 
 import { useCallback, useMemo } from 'react';
-import { useSettings } from '../../../../../context/SettingsContext';
-import { useAppLock } from '../../../../../context/AppLockContext';
+import { useSettings } from "../../../../../core/preferences/PreferencesProvider";
+import { useAppLock } from "../../../../../core/security/AppLockProvider";
 import { useTodoContext } from '../../../../../context/TodoContext';
-import useAuth from '../../../../../hooks/useAuth';
+import useAuth from "../../../../../core/auth/useLocalProfile";
 import { showToast } from '../../../../../core/toast/showToast';
 import { useUserSettingsData } from './useUserSettingsData';
 import { calculateTaskCompletionStreak, type SettingsTaskSummary } from '../utils/userSettingsTaskStats';

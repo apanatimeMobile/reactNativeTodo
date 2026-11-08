@@ -1,4 +1,4 @@
-import {useThemeContext} from '../context/ThemeContext';
+import {useThemeContext} from "./AccentThemeProvider";
 
 function useTheme() {
   return useThemeContext();

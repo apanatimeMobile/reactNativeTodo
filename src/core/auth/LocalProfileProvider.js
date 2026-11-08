@@ -10,9 +10,9 @@ import {
 import {
   getItem,
   setItem,
-} from '../storage/storage';
+} from "../storage/jsonStorage";
 
-import APP_CONFIG from '../constants/appConfig';
+import APP_CONFIG from "../config/appConfig";
 
 const DEFAULT_PROFILE = {
   name: '',

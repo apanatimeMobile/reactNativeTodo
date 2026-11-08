@@ -1,36 +1,8 @@
-import {createId} from './helpers';
-import {toDateOnlyTimestamp} from './dateUtils';
+import {createId} from "../../../../../core/utils/runtimeHelpers";
+import {toDateOnlyTimestamp} from "../../../../../core/utils/localDate";
 
 /**
  * Normalize category name (trim + collapse spaces)
- */
-export function normalizeCategoryName(name) {
-  if (typeof name !== 'string') return '';
-  return name.trim().replace(/\s+/g, ' ');
-}
-
-/**
- * Normalize and dedupe a list of category names
- */
-export function normalizeCategoryList(value) {
-  if (!Array.isArray(value)) return [];
-  const seen = new Set();
-  const result = [];
-  value.forEach(entry => {
-    const name = normalizeCategoryName(entry);
-    const key = name.toLowerCase();
-    if (name && !seen.has(key)) {
-      seen.add(key);
-      result.push(name);
-    }
-  });
-  return result;
-}
-
-/**
- * Normalize dueDate to a consistent value.
- * Keeps "No date", converts Today/Tomorrow to ISO YYYY-MM-DD,
- * and preserves already valid ISO dates.
  */
 export function normalizeDueDate(dueDate) {
   if (!dueDate || dueDate === 'No date' || dueDate === 'no date') {
@@ -114,17 +86,3 @@ export function normalizeTodo(todo) {
   };
 }
 
-export const TRASH_RETENTION_DAYS = 30;
-export const TRASH_RETENTION_MS = TRASH_RETENTION_DAYS * 24 * 60 * 60 * 1000;
-
-/**
- * Filter out tasks in trash that have exceeded retention period (30 days)
- */
-export function purgeExpiredTrash(todoList, retentionDays = TRASH_RETENTION_DAYS) {
-  const cutoff = Date.now() - retentionDays * 24 * 60 * 60 * 1000;
-  return todoList.filter(task => {
-    if (!task.deleted) return true;
-    if (!task.deletedAt) return true; // keep if no timestamp
-    return task.deletedAt > cutoff;
-  });
-}
