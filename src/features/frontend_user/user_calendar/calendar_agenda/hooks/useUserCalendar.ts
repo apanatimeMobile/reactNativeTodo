@@ -3,9 +3,9 @@
  * FLOW: UserCalendarScreen → useUserCalendar → selectedDate/selectDate props → UserCalendarMainView.
  */
 import { useState, useCallback } from 'react';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import { formatCalendarDateKey } from '../utils/userCalendarFormatters';
-import type { CalendarTaskEntity } from '../types/user_calendar.types';
+import { useTaskHost } from "@/core/contracts/taskHost";
+import { formatCalendarDateKey } from "@/features/frontend_user/user_calendar/calendar_agenda/utils/userCalendarFormatters";
+import type { CalendarTaskEntity } from "@/features/frontend_user/user_calendar/calendar_agenda/types/user_calendar.types";
 
 /**
  * Provides one authoritative date selection and the current task collection.
@@ -13,7 +13,7 @@ import type { CalendarTaskEntity } from '../types/user_calendar.types';
  * @sideEffects Reads and updates local UI state and subscribes to the host TodoContext.
  */
 export function useUserCalendar() {
-  const todoCtx = useTodoContext();
+  const todoCtx = useTaskHost();
   const [selectedDate, setSelectedDate] = useState(() => formatCalendarDateKey(new Date()));
   const todos = (todoCtx?.tasks ?? []) as CalendarTaskEntity[];
   const loading = todoCtx?.loading ?? false;

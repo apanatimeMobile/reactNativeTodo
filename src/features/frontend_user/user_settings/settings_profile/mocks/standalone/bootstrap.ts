@@ -3,7 +3,7 @@
  * FLOW: Configures mock network interceptors, seeds initial test fixtures, and mounts harness.
  */
 
-import { UserSettingsHarness } from '../../tests/harness/UserSettingsHarness';
+import { UserSettingsHarness } from "@/features/frontend_user/user_settings/settings_profile/tests/harness/UserSettingsHarness";
 
 export function bootstrapUserSettings() {
   return {

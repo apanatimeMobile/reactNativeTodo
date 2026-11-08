@@ -5,11 +5,11 @@
 import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { UserProfileEditSchema, type UserProfileEditValues } from '../schemas/user_settings.schema';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerErrorHaptic, triggerSuccessNotification } from '../../../../../core/interaction/haptics';
+import { UserProfileEditSchema, type UserProfileEditValues } from "@/features/frontend_user/user_settings/settings_profile/schemas/user_settings.schema";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerErrorHaptic, triggerSuccessNotification } from "@/core/interaction/haptics";
 
 interface UserProfileEditFormProps {
   initialName: string;

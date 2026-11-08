@@ -5,10 +5,10 @@
 
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
-import { I18nProvider } from '../../../../../../core/i18n/useTranslation';
-import { ThemeProvider } from '../../../../../../core/theme/ThemeProvider';
-import { useThemeTokens } from '../../../../../../core/theme/useThemeTokens';
-import { UserSettingsMainView } from '../../components/UserSettingsMainView';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { UserSettingsMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsMainView";
 
 function HarnessInner({ title, children }: { title: string; children: React.ReactNode }) {
   const tokens = useThemeTokens();

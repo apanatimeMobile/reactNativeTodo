@@ -1,8 +1,8 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { I18nProvider } from '../../../../../core/i18n/useTranslation';
-import { ThemeProvider } from '../../../../../core/theme/ThemeProvider';
-import { UserTodosMissingRecord } from './UserTodosMissingRecord';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { UserTodosMissingRecord } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosMissingRecord";
 
 it('explains missing tasks and provides an explicit back action', async () => {
   const onBack = jest.fn();

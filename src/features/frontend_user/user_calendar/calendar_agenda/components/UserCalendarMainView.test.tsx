@@ -1,8 +1,8 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { UserCalendarMainView } from './UserCalendarMainView';
+import { UserCalendarMainView } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarMainView";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: {
       background: '#fff', card: '#fff', border: '#ddd', foreground: '#111',
@@ -14,7 +14,7 @@ jest.mock('../../../../../core/theme/useThemeTokens', () => ({
   }),
 }));
 
-jest.mock('../../../../../core/i18n/useTranslation', () => ({
+jest.mock("@/core/i18n/useTranslation", () => ({
   useTranslation: () => ({
     t: (key: string) => ({
       'user_calendar_agenda.TASK_ACCESSIBILITY': 'Task',
@@ -27,7 +27,7 @@ jest.mock('../../../../../core/i18n/useTranslation', () => ({
   }),
 }));
 
-jest.mock('../../../../../core/interaction/haptics', () => ({ triggerLightImpact: jest.fn() }));
+jest.mock("@/core/interaction/haptics", () => ({ triggerLightImpact: jest.fn() }));
 
 describe('UserCalendarMainView accessibility', () => {
   it('provides a localized task checkbox label and platform-sized target', async () => {

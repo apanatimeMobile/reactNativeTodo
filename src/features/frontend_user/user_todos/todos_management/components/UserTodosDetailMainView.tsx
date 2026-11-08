@@ -6,14 +6,14 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { Calendar, Tag, Trash2, Edit3, CheckCircle2, Star, ArrowLeft } from 'lucide-react-native';
-import type { TodoEntity } from '../types/user_todos.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { UserTodosConfirmDialog } from './UserTodosConfirmDialog';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { getPriorityBadgeStyle } from '../utils/userTodosFormatters';
-import { displayValue } from '../../../../../core/utils/displayValue';
-import { triggerLightImpact, triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { UserTodosConfirmDialog } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosConfirmDialog";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { getPriorityBadgeStyle } from "@/features/frontend_user/user_todos/todos_management/utils/userTodosFormatters";
+import { displayValue } from "@/core/utils/displayValue";
+import { triggerLightImpact, triggerSuccessHaptic } from "@/core/interaction/haptics";
 
 interface UserTodosDetailMainViewProps {
   todo: TodoEntity;

@@ -1,25 +1,25 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { UserCalendarScreen } from './UserCalendarScreen';
-import { useUserCalendar } from '../hooks/useUserCalendar';
+import { UserCalendarScreen } from "@/features/frontend_user/user_calendar/calendar_agenda/screens/UserCalendarScreen";
+import { useUserCalendar } from "@/features/frontend_user/user_calendar/calendar_agenda/hooks/useUserCalendar";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({ color: { background: '#fff', isDark: false } }),
 }));
-jest.mock('../hooks/useUserCalendar', () => ({ useUserCalendar: jest.fn() }));
-jest.mock('../components/UserCalendarMainView', () => ({
+jest.mock("@/features/frontend_user/user_calendar/calendar_agenda/hooks/useUserCalendar", () => ({ useUserCalendar: jest.fn() }));
+jest.mock("@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarMainView", () => ({
   UserCalendarMainView: () => {
     const { Text } = require('react-native');
     return <Text testID="calendar-main" />;
   },
 }));
-jest.mock('../components/UserCalendarSkeleton', () => ({
+jest.mock("@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarSkeleton", () => ({
   UserCalendarSkeleton: () => {
     const { Text } = require('react-native');
     return <Text testID="calendar-loading" />;
   },
 }));
-jest.mock('../components/UserCalendarErrorFallback', () => ({
+jest.mock("@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarErrorFallback", () => ({
   UserCalendarErrorFallback: ({ onRetry }: { onRetry: () => void }) => {
     const { Pressable } = require('react-native');
     return <Pressable testID="calendar-error" onPress={onRetry} />;

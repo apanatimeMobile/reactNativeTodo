@@ -6,10 +6,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { HelpCircle, MessageSquare, AppWindow, User, Shield, FileText, ChevronRight } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { showToast } from '../../../../../core/toast/showToast';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { showToast } from "@/core/toast/showToast";
 
 interface UserSettingsLinksSectionProps {
   onOpenFaq: () => void;

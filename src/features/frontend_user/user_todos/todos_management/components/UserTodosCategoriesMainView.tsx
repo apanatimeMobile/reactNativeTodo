@@ -6,11 +6,11 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput, FlatList } from 'react-native';
 import { Plus, Tag, Trash2, ArrowLeft } from 'lucide-react-native';
-import type { TodoEntity } from '../types/user_todos.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { displayValue } from '../../../../../core/utils/displayValue';
-import { triggerLightImpact, triggerSuccessHaptic, triggerErrorHaptic } from '../../../../../core/interaction/haptics';
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { displayValue } from "@/core/utils/displayValue";
+import { triggerLightImpact, triggerSuccessHaptic, triggerErrorHaptic } from "@/core/interaction/haptics";
 
 interface UserTodosCategoriesMainViewProps {
   categories: string[];

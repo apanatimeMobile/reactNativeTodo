@@ -4,11 +4,11 @@
  */
 
 import { useMemo, useCallback } from 'react';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import type { TodoEntity } from '../types/user_todos.types';
+import { useTaskHost } from "@/core/contracts/taskHost";
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
 
 export function useUserTodos() {
-  const ctx = useTodoContext();
+  const ctx = useTaskHost();
   const tasks = useMemo<TodoEntity[]>(() => ctx.tasks ?? [], [ctx.tasks]);
 
   const categories = useMemo(() => {

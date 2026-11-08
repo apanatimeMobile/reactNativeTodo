@@ -5,14 +5,14 @@
 
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
-import { showToast } from '../../../../../core/toast/showToast';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { createId } from '../../../../../utils/helpers';
+import { showToast } from "@/core/toast/showToast";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { createId } from "@/core/utils/runtimeHelpers";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { userSettingsApi } from '../api/user_settings.api';
-import { UserFeedbackMainView } from '../components/UserFeedbackMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { userSettingsApi } from "@/features/frontend_user/user_settings/settings_profile/api/user_settings.api";
+import { UserFeedbackMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserFeedbackMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 export function UserFeedbackScreen() {
   const navigation = useNavigation<any>();

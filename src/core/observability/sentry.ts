@@ -3,7 +3,7 @@
  * FLOW: Dispatches scrubbed breadcrumbs and error reports to host observability sink.
  */
 
-import { sanitizeTelemetry } from './sanitizeTelemetry';
+import { sanitizeTelemetry } from "@/core/observability/sanitizeTelemetry";
 
 export interface TelemetryBreadcrumb {
   category: string;

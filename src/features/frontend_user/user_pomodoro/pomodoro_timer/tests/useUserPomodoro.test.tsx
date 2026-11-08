@@ -1,8 +1,8 @@
 import { act, create } from 'react-test-renderer';
-import { clearFocusSessions, getFocusSessions } from '../utils/userPomodoroSessions';
-import { useUserPomodoro } from '../hooks/useUserPomodoro';
+import { clearFocusSessions, getFocusSessions } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/utils/userPomodoroSessions";
+import { useUserPomodoro } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/hooks/useUserPomodoro";
 
-jest.mock('../../../../../core/interaction/haptics', () => ({
+jest.mock("@/core/interaction/haptics", () => ({
   triggerSuccessHaptic: jest.fn(),
 }));
 

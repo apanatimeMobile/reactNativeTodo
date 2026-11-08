@@ -6,13 +6,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Menu } from 'lucide-react-native';
-import type { PomodoroMode } from '../types/user_pomodoro.types';
-import { UserPomodoroControls } from './UserPomodoroControls';
-import { UserPomodoroModeSelector } from './UserPomodoroModeSelector';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { useUserPomodoro } from '../hooks/useUserPomodoro';
+import type { PomodoroMode } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/types/user_pomodoro.types";
+import { UserPomodoroControls } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/components/UserPomodoroControls";
+import { UserPomodoroModeSelector } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/components/UserPomodoroModeSelector";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { useUserPomodoro } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/hooks/useUserPomodoro";
 
 interface UserPomodoroTimerMainViewProps {
   onSessionComplete?: (mode: PomodoroMode, duration: number) => void;

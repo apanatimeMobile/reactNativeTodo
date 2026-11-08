@@ -6,8 +6,8 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserMoreAppsMainView } from '../components/UserMoreAppsMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { UserMoreAppsMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserMoreAppsMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 export function UserMoreAppsScreen({ navigation }: { navigation?: any } = {}) {
   const tokens = useThemeTokens();

@@ -7,11 +7,11 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
-import { UserCalendarMainView } from '../components/UserCalendarMainView';
-import { UserCalendarSkeleton } from '../components/UserCalendarSkeleton';
-import { UserCalendarErrorFallback } from '../components/UserCalendarErrorFallback';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserCalendar } from '../hooks/useUserCalendar';
+import { UserCalendarMainView } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarMainView";
+import { UserCalendarSkeleton } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarSkeleton";
+import { UserCalendarErrorFallback } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarErrorFallback";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserCalendar } from "@/features/frontend_user/user_calendar/calendar_agenda/hooks/useUserCalendar";
 
 export function UserCalendarScreen({ navigation }: { navigation: any }) {
   const tokens = useThemeTokens();

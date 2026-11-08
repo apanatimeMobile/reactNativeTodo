@@ -3,8 +3,8 @@
  * FLOW: Consumed by ThemeProvider to provide active light tokens to the application UI.
  */
 
-import type { Tokens, TokenColors } from './tokenDefinitions';
-import { STABLE_SCALES } from './tokenDefinitions';
+import type { Tokens, TokenColors } from "@/core/theme/tokenDefinitions";
+import { STABLE_SCALES } from "@/core/theme/tokenDefinitions";
 
 export const lightColors: TokenColors = {
   // Core surfaces (Section 1)

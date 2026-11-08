@@ -3,9 +3,9 @@
  * FLOW: App → I18nProvider → useTranslation().t('namespace.KEY'); locale is shared with networkClient.
  */
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { en } from '../../i18n/generated/en';
-import { hi } from '../../i18n/generated/hi';
-import { detectDeviceLocale, setActiveLocale, type SupportedLocale } from './locale';
+import { en } from "@/i18n/generated/en";
+import { hi } from "@/i18n/generated/hi";
+import { detectDeviceLocale, setActiveLocale, type SupportedLocale } from "@/core/i18n/locale";
 
 export type TranslationResources = Record<SupportedLocale, Record<string, Record<string, string>>>;
 type TranslationMap = Record<string, Record<string, string>>;

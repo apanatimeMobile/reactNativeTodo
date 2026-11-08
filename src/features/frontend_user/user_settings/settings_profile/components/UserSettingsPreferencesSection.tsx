@@ -6,9 +6,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
 import { Vibrate, Bell, Clock } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserSettingsPreferencesSectionProps {
   hapticsEnabled: boolean;

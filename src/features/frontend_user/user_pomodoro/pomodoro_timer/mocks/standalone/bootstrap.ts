@@ -3,7 +3,7 @@
  * FLOW: Exposes the isolated timer harness; session persistence and network interception are intentionally absent.
  */
 
-import { UserPomodoroHarness } from '../../tests/harness/UserPomodoroHarness';
+import { UserPomodoroHarness } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/tests/harness/UserPomodoroHarness";
 
 export function bootstrapUserPomodoro() {
   return {

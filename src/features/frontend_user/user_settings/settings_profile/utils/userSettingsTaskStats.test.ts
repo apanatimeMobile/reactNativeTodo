@@ -7,7 +7,7 @@ import {
   selectCompletedTaskIds,
   selectTrashedTaskIds,
   type SettingsTaskSummary,
-} from './userSettingsTaskStats';
+} from "@/features/frontend_user/user_settings/settings_profile/utils/userSettingsTaskStats";
 
 describe('Settings task data helpers', () => {
   it('selects only completed tasks that are not already in Trash', () => {

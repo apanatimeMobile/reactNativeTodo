@@ -4,7 +4,7 @@
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { VoiceMemoEntity } from '../types/user_voice.types';
+import type { VoiceMemoEntity } from "@/features/frontend_user/user_voice/voice_memos/types/user_voice.types";
 
 const STORAGE_KEY = '@tasklume/voice-memos/v1';
 

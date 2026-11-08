@@ -4,13 +4,13 @@
  */
 import { useCallback } from 'react';
 import RNFS from 'react-native-fs';
-import { useTodoContext } from '../../../../../context/TodoContext';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { showToast } from '../../../../../core/toast/showToast';
-import type { VoiceMemoEntity } from '../types/user_voice.types';
-import { useUserVoiceMemos } from './useUserVoiceMemos';
-import { useVoicePlayback } from './useVoicePlayback';
-import { useVoiceRecorder } from './useVoiceRecorder';
+import { useTaskHost } from "@/core/contracts/taskHost";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { showToast } from "@/core/toast/showToast";
+import type { VoiceMemoEntity } from "@/features/frontend_user/user_voice/voice_memos/types/user_voice.types";
+import { useUserVoiceMemos } from "@/features/frontend_user/user_voice/voice_memos/hooks/useUserVoiceMemos";
+import { useVoicePlayback } from "@/features/frontend_user/user_voice/voice_memos/hooks/useVoicePlayback";
+import { useVoiceRecorder } from "@/features/frontend_user/user_voice/voice_memos/hooks/useVoiceRecorder";
 
 /**
  * Exposes the complete local audio memo workflow and transcript-to-task action.
@@ -19,7 +19,7 @@ import { useVoiceRecorder } from './useVoiceRecorder';
  */
 export function useUserVoice() {
   const { t } = useTranslation();
-  const todoCtx = useTodoContext();
+  const todoCtx = useTaskHost();
   const addTodo = todoCtx?.addTodo;
   const memoState = useUserVoiceMemos();
   const playback = useVoicePlayback();

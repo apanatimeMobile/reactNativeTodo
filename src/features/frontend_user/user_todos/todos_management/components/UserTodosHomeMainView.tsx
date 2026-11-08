@@ -6,13 +6,13 @@
 import React, { useState, useMemo } from 'react';
 import { View, StyleSheet, Pressable, TextInput } from 'react-native';
 import { Plus, Search } from 'lucide-react-native';
-import type { TodoEntity, TodoFilterType } from '../types/user_todos.types';
-import { UserTodosTodoList } from './UserTodosTodoList';
-import { UserTodosHeaderCard } from './UserTodosHeaderCard';
-import { UserTodosQuickFilters, QuickFilterKey } from './UserTodosQuickFilters';
-import { UserTodosFilterTabs } from './UserTodosFilterTabs';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import type { TodoEntity, TodoFilterType } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { UserTodosTodoList } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosTodoList";
+import { UserTodosHeaderCard } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosHeaderCard";
+import { UserTodosQuickFilters, QuickFilterKey } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosQuickFilters";
+import { UserTodosFilterTabs } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosFilterTabs";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 interface UserTodosHomeMainViewProps {
   todos: TodoEntity[];

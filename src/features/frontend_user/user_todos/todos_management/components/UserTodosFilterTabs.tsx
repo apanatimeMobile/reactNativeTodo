@@ -5,10 +5,10 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import type { TodoFilterType } from '../types/user_todos.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import type { TodoFilterType } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserTodosFilterTabsProps {
   activeTab: TodoFilterType;
