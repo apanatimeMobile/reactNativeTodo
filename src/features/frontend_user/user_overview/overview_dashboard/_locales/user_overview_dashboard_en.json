@@ -14,6 +14,13 @@
     "TOTAL_FOCUS": "Total Focus",
     "LAST_7_DAYS": "Last 7 Days Activity",
     "TASKS_BY_CATEGORY": "Tasks by Category",
-    "PRODUCTIVITY_ADVICE": "Productivity Advice"
+    "PRODUCTIVITY_ADVICE": "Productivity Advice",
+    "DONE_RATE": "Completion rate",
+    "COMPLETED": "Completed tasks",
+    "INSIGHT_EMPTY": "Add a task to start tracking your progress.",
+    "INSIGHT_HIGH": "Great progress. Keep your momentum going.",
+    "INSIGHT_PROGRESS": "Complete one task at a time to build momentum.",
+    "LOAD_ERROR": "Unable to read productivity data. Please try again.",
+    "RETRY": "Retry"
   }
 }

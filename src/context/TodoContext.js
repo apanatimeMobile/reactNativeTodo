@@ -42,6 +42,7 @@ const CUSTOM_CATEGORIES_KEY = '@todomaster/custom_categories';
 function TodoProvider({children}) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [customCategories, setCustomCategories] = useState([]);
   const [categoriesLoaded, setCategoriesLoaded] = useState(false);
 
@@ -79,18 +80,22 @@ function TodoProvider({children}) {
   }, [customCategories, categoriesLoaded]);
 
   const loadTodos = useCallback(async () => {
+    setLoading(true);
     try {
-      const savedTodos = await getItem(APP_CONFIG.STORAGE_KEYS.TODOS, null);
+      const savedTodos = await getItem(APP_CONFIG.STORAGE_KEYS.TODOS, null, true);
 
       let loaded;
       if (Array.isArray(savedTodos)) {
         const normalized = savedTodos.map(normalizeTodo);
         loaded = purgeExpiredTrash(normalized);
-      } else {
+      } else if (savedTodos === null) {
         loaded = [];
+      } else {
+        throw new Error('Invalid task storage format');
       }
 
       setTasks(loaded);
+      setLoadError(false);
       setLoading(false);
 
       prepareTodoTimerNotifications()
@@ -99,9 +104,8 @@ function TodoProvider({children}) {
         })
         .catch(() => {});
       return loaded;
-    } catch (error) {
-      console.log('Failed to load todos:', error);
-      setTasks([]);
+    } catch {
+      setLoadError(true);
       setLoading(false);
       return [];
     }
@@ -112,12 +116,12 @@ function TodoProvider({children}) {
   }, [loadTodos]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && !loadError) {
       setItem(APP_CONFIG.STORAGE_KEYS.TODOS, tasks).catch(error => {
         console.log('Failed to save todos:', error);
       });
     }
-  }, [tasks, loading]);
+  }, [tasks, loading, loadError]);
 
   useEffect(() => {
     const handleChange = next => {
@@ -644,6 +648,7 @@ function TodoProvider({children}) {
       value={{
         tasks,
         loading,
+        loadError,
         loadTodos,
         TRASH_RETENTION_DAYS,
         autoCleanTrash,

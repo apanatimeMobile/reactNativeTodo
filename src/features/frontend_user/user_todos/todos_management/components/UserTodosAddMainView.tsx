@@ -15,6 +15,7 @@ import { triggerLightImpact } from '../../../../../core/interaction/haptics';
 interface UserTodosAddMainViewProps {
   categories: string[];
   onSubmit: (values: TodoFormInput) => void;
+  onSubmitSuccess?: () => void;
   isSubmitting?: boolean;
   onBack?: () => void;
 }
@@ -22,6 +23,7 @@ interface UserTodosAddMainViewProps {
 export function UserTodosAddMainView({
   categories,
   onSubmit,
+  onSubmitSuccess,
   isSubmitting = false,
   onBack,
 }: UserTodosAddMainViewProps) {
@@ -80,6 +82,7 @@ export function UserTodosAddMainView({
       <UserTodosTodoForm
         categories={categories}
         onSubmit={onSubmit}
+        onSubmitSuccess={onSubmitSuccess}
         isSubmitting={isSubmitting}
         submitLabel="Create Task"
       />

@@ -12,6 +12,7 @@ export interface OverviewTaskRecord {
 
 export interface WeeklyCompletionPoint {
   label: string;
+  accessibilityLabel: string;
   value: number;
   isCurrent: boolean;
 }
@@ -53,8 +54,7 @@ export function calculateTaskCompletionStreak(tasks: readonly OverviewTaskRecord
  * @param now - Current date, injectable for deterministic tests.
  * @returns Last seven calendar days in chronological order; missing activity is zero, not synthesized.
  */
-export function buildWeeklyCompletionActivity(tasks: readonly OverviewTaskRecord[], now: Date = new Date()): WeeklyCompletionPoint[] {
-  const weekdayLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+export function buildWeeklyCompletionActivity(tasks: readonly OverviewTaskRecord[], now: Date = new Date(), locale: string = 'en'): WeeklyCompletionPoint[] {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   return Array.from({ length: 7 }, (_, index) => {
     const date = new Date(today);
@@ -66,6 +66,6 @@ export function buildWeeklyCompletionActivity(tasks: readonly OverviewTaskRecord
       typeof task.completedAt === 'number' &&
       localDateKey(new Date(task.completedAt)) === dayKey,
     ).length;
-    return { label: weekdayLabels[date.getDay()], value, isCurrent: dayKey === localDateKey(today) };
+    return { label: date.toLocaleDateString(locale, { weekday: 'narrow' }), accessibilityLabel: date.toLocaleDateString(locale, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }), value, isCurrent: dayKey === localDateKey(today) };
   });
 }
