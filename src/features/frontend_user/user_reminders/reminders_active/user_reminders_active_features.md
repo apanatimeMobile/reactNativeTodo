@@ -208,3 +208,9 @@ This feature is **NOT production-verified**. Findings and current status:
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Legacy context dependency, unverified server API contract, incomplete mock/test wiring and deferred runtime checks remain open.
+
+### Source repair follow-up — 2026-11-08
+
+The connected screen now renders storage skeleton/error/ready branches from the live host load state with retry, rather than presenting an empty list during failure. Error recovery copy is localized. Notification authorization/native scheduling, module isolation and full standalone scenarios remain unverified.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

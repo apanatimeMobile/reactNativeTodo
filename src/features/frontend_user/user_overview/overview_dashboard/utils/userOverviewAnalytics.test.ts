@@ -32,6 +32,8 @@ describe('user overview task analytics', () => {
     ];
     const points = buildWeeklyCompletionActivity(tasks, today);
     expect(points).toHaveLength(7);
+    expect(points[6].accessibilityLabel).toContain('Sunday');
+    expect(new Set(points.map((point) => point.accessibilityLabel)).size).toBe(7);
     expect(points[5].value).toBe(1);
     expect(points[6].value).toBe(2);
     expect(points[6].isCurrent).toBe(true);

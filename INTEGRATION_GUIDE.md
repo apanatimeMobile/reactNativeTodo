@@ -1,43 +1,37 @@
 # TaskLume Mobile Integration Guide
 
-**Target:** bare React Native with the New Architecture (Fabric/TurboModules)
+**Target:** bare React Native, New Architecture (Fabric/TurboModules).
 
-**Active repair branch:** `temp`
+**Repair branch:** `temp`.
 
-**Source status:** partial Mode D audit and repair; this guide does not certify the app as release-ready.
+**Status:** source repairs and safe legacy migration; not a full compliance/release certification.
 
-## 1. Current change summary
+## 1. Changelog
 
-This branch repairs telemetry redaction for `auth`/`ssn`, masks the email in the profile summary, prevents voice memo deletion from reporting success when audio cleanup fails, prevents the feedback screen from claiming an unconfigured submission succeeded, and fixes focused test/lint/type issues. See `RE_AUDIT_CHECKLIST_RESULT.md` for verified findings and the remaining scope.
+The follow-up cleanup moved the unused global focus-history service and its tests into the owning Pomodoro capability, retained the stored history key/cap, and connected timer completion to real local history. Live contexts, audio/notification services, declarations and integration artifacts were retained after reference tracing.
 
-## 2. App integration points
+Additional repairs cover strict storage recovery (including corrupt task payloads), real loading/error branches, missing-record navigation, safe crash recovery, fail-closed unconfigured token refresh, feedback validation/pending state, dirty todo-form confirmation, localized accessible controls, and voice-file/permission recovery tests. See `RE_AUDIT_CHECKLIST_RESULT.md` for evidence and remaining gates.
 
-- Native entry point: `index.js` → `App.tsx`.
-- App-level providers and navigation are composed in `App.tsx` and `src/core/navigation/`.
-- Feature code is organized beneath `src/features/frontend_user/`.
-- Secure session token storage is centralized in `src/core/auth/authSession.ts` and `src/core/storage/secureStorage.ts`.
-- Theme and shared visual tokens are provided by `src/core/theme/ThemeProvider.tsx` and `useThemeTokens()`.
+## 2. Integration points
 
-## 3. Local checks
+- Entry: `index.js` → `App.tsx`; navigation: `src/core/navigation/`.
+- Host providers remain in `App.tsx`; their live consumers must not be removed as unused legacy code.
+- Feature ownership: `src/features/frontend_user/`.
+- Focus-session persistence: `user_pomodoro/pomodoro_timer/utils/userPomodoroSessions.js`; no backend is required for local history. The prior global `focusService.js` path is removed.
+- Theme: `src/core/theme/ThemeProvider.tsx` and `useThemeTokens()`; outermost crash recovery uses the existing static dark tokens because providers may themselves have failed.
+- Credentials: centralized auth/secure-storage modules. Unconfigured refresh returns `null`; callers must require re-authentication rather than use a refresh token as an access token.
+
+## 3. Verification commands
 
 ```bash
 npm test -- --runInBand
 npm run typecheck
 npm run lint
+npm audit --omit=dev
 ```
 
-Native builds and Maestro scenarios require the corresponding host toolchain/device. The repository has Maestro flows in `mobile_e2e/`, but they are not yet a complete, audited role/module suite.
+Executed final results are recorded in `compliance_manifest.json`. Native builds and device interaction checks have not been run. On a configured native host, use the existing `npm run android` / `npm run ios` scripts and `maestro test mobile_e2e/`; the current Maestro suite still needs coverage and hierarchy repairs before it can certify the feature set.
 
-## 4. Verified checks on this branch
+## 4. Release limitations
 
-- Jest: 19 suites / 57 tests pass.
-- TypeScript: `npm run typecheck` passes.
-- ESLint: exits successfully with 64 warnings remaining.
-- `git diff --check`: passes.
-- Maestro, Android/iOS builds, and device accessibility behavior: `DEFERRED_TO_HOST_RUNTIME`.
-
-## 5. Contract and release limitations
-
-Backend contracts for profile/feedback endpoints, calendar day/reschedule flows, overview activity/recalculation, Pomodoro session/settings persistence, and token refresh were not supplied or are inconsistent with current feature documentation. Do not invent endpoints, permissions, payload fields, or persistence behavior. These items remain explicitly open in `RE_AUDIT_CHECKLIST_RESULT.md`.
-
-The dependency audit reports production dependency findings (1 critical, 4 high, 7 moderate, 4 low); dependency upgrades were not included because approved compatible versions and migration scope have not been established. Required all-item 43P evidence, complete scenario mocks/tests, role/module-nested Maestro suites, and a final archive are also still pending. This branch must not be treated as an `ALL-RBGS-COMPLETE` delivery.
+No backend contract pack or source web ZIP was supplied. Documented API routes that conflict with local implementation are not authorization to invent server behavior. No dependency upgrades or native project modifications were made. The production dependency audit, remaining architecture/design/mock/E2E findings and full item-by-item rule evidence are still open. Do not describe this branch as `ALL-RBGS-COMPLETE` or production-ready based only on passing source tests.

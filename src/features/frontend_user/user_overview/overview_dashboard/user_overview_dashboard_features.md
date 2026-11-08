@@ -213,3 +213,9 @@ This feature is **NOT production-verified**. Source-level findings and current r
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Legacy context coupling, incomplete API/mock/test wiring, localization and runtime verification remain open.
+
+### Source repair follow-up — 2026-11-08
+
+The screen now selects real host storage loading/error branches with retry. KPI labels and advice are localized; activity bars expose labelled numeric values to accessibility. Metrics still derive from the live host task context; no unverified backend data or focus totals were invented. Full mock scenarios and device accessibility remain open.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

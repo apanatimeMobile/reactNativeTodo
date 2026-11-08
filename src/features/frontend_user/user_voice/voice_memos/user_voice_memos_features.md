@@ -211,3 +211,9 @@ This feature is **PARTIALLY IMPLEMENTED and NOT production-verified**.
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Voice capture is blocked, API/mock/test wiring is incomplete, and device/runtime evidence is absent.
+
+### Source repair follow-up — 2026-11-08
+
+Deletion tests cover existence/unlink failures, metadata-removal failure and success. Microphone rationale is localized; Android permanent denial exposes Settings recovery without starting recording, and settings-launch failure is reported safely. Permission requesting is extracted into utils/userVoiceMicrophonePermission.ts to keep the recorder hook within its ceiling. Cloud/API sync, retention-policy decisions and actual device permission behavior remain unverified.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

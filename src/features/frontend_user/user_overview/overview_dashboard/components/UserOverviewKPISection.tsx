@@ -8,6 +8,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Flame, CheckCircle2, Target } from 'lucide-react-native';
 import type { OverviewMetrics } from '../types/user_overview.types';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { displayValue } from '../../../../../core/utils/displayValue';
 
 interface UserOverviewKPISectionProps {
@@ -16,6 +17,7 @@ interface UserOverviewKPISectionProps {
 
 export function UserOverviewKPISection({ metrics }: UserOverviewKPISectionProps) {
   const tokens = useThemeTokens();
+  const { t } = useTranslation();
 
   const styles = StyleSheet.create({
     container: {
@@ -33,8 +35,7 @@ export function UserOverviewKPISection({ metrics }: UserOverviewKPISectionProps)
       alignItems: 'center',
     },
     iconWrapper: {
-      width: 36,
-      height: 36,
+      padding: tokens.space[2],
       borderRadius: tokens.radius.full,
       alignItems: 'center',
       justifyContent: 'center',
@@ -42,10 +43,8 @@ export function UserOverviewKPISection({ metrics }: UserOverviewKPISectionProps)
     },
     value: {
       ...tokens.typography.kpi,
-      fontSize: 22,
-      lineHeight: 26,
       color: tokens.color.foreground,
-      marginBottom: 2,
+      marginBottom: tokens.space[1],
     },
     label: {
       ...tokens.typography.labelUppercase,
@@ -58,28 +57,28 @@ export function UserOverviewKPISection({ metrics }: UserOverviewKPISectionProps)
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={[styles.iconWrapper, { backgroundColor: tokens.color.primarySubtle }]}>
-          <Target size={18} color={tokens.color.primary} />
+          <Target size={tokens.icon.md} color={tokens.color.primary} />
         </View>
         <Text style={styles.value}>{metrics.completionRate}%</Text>
-        <Text style={styles.label}>Done Rate</Text>
+        <Text style={styles.label}>{t('user_overview_dashboard.DONE_RATE')}</Text>
       </View>
 
       <View style={styles.card}>
         <View style={[styles.iconWrapper, { backgroundColor: tokens.color.statusSuccessBg }]}>
-          <CheckCircle2 size={18} color={tokens.color.statusSuccessText} />
+          <CheckCircle2 size={tokens.icon.md} color={tokens.color.statusSuccessText} />
         </View>
         <Text style={styles.value}>
           {displayValue(metrics.completedTasks)}/{displayValue(metrics.totalTasks)}
         </Text>
-        <Text style={styles.label}>Completed</Text>
+        <Text style={styles.label}>{t('user_overview_dashboard.COMPLETED')}</Text>
       </View>
 
       <View style={styles.card}>
         <View style={[styles.iconWrapper, { backgroundColor: tokens.color.statusWarningBg }]}>
-          <Flame size={18} color={tokens.color.statusWarningText} />
+          <Flame size={tokens.icon.md} color={tokens.color.statusWarningText} />
         </View>
-        <Text style={styles.value}>{metrics.currentStreak}d</Text>
-        <Text style={styles.label}>Streak</Text>
+        <Text style={styles.value}>{metrics.currentStreak} {t('user_overview_dashboard.DAYS')}</Text>
+        <Text style={styles.label}>{t('user_overview_dashboard.CURRENT_STREAK')}</Text>
       </View>
     </View>
   );

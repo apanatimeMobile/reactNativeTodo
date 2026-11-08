@@ -17,6 +17,7 @@ interface UserTodosEditMainViewProps {
   todo: TodoEntity;
   categories: string[];
   onSubmit: (values: TodoFormInput) => void;
+  onSubmitSuccess?: () => void;
   isSubmitting?: boolean;
   onBack?: () => void;
 }
@@ -25,6 +26,7 @@ export function UserTodosEditMainView({
   todo,
   categories,
   onSubmit,
+  onSubmitSuccess,
   isSubmitting = false,
   onBack,
 }: UserTodosEditMainViewProps) {
@@ -84,6 +86,7 @@ export function UserTodosEditMainView({
         initialValues={todo}
         categories={categories}
         onSubmit={onSubmit}
+        onSubmitSuccess={onSubmitSuccess}
         isSubmitting={isSubmitting}
         submitLabel="Update Task"
       />
