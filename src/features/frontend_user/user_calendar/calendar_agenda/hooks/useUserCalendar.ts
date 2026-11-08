@@ -16,6 +16,9 @@ export function useUserCalendar() {
   const todoCtx = useTodoContext();
   const [selectedDate, setSelectedDate] = useState(() => formatCalendarDateKey(new Date()));
   const todos = (todoCtx?.tasks ?? []) as CalendarTaskEntity[];
+  const loading = todoCtx?.loading ?? false;
+  const loadError = todoCtx?.loadError ?? false;
+  const loadTodos = useCallback(() => todoCtx?.loadTodos?.(), [todoCtx]);
 
   const selectDate = useCallback((dateStr: string) => {
     setSelectedDate(dateStr);
@@ -25,5 +28,5 @@ export function useUserCalendar() {
     return todoCtx?.toggleTodo ? todoCtx.toggleTodo(id) : undefined;
   }, [todoCtx]);
 
-  return { todos, selectedDate, selectDate, toggleComplete };
+  return { todos, selectedDate, selectDate, toggleComplete, loading, loadError, loadTodos };
 }

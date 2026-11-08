@@ -3,7 +3,8 @@
  * FLOW: useUserVoice injects the metadata persistence callback; this hook returns recording state/actions.
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { PermissionsAndroid, Platform } from 'react-native';
+import { Linking, Platform } from 'react-native';
+import { requestMicrophonePermission } from '../utils/userVoiceMicrophonePermission';
 import RNFS from 'react-native-fs';
 import Sound from 'react-native-nitro-sound';
 import { useTranslation } from '../../../../../core/i18n/useTranslation';
@@ -12,21 +13,6 @@ import type { VoiceMemoEntity } from '../types/user_voice.types';
 
 const RECORDINGS_DIRECTORY = `${RNFS.DocumentDirectoryPath}/tasklume-voice-memos`;
 type SaveMemo = (memo: VoiceMemoEntity) => Promise<boolean>;
-
-/**
- * Requests microphone permission where Android requires an explicit runtime prompt.
- * @returns True only when audio recording permission is granted.
- */
-async function requestMicrophonePermission(): Promise<boolean> {
-  if (Platform.OS !== 'android') return true;
-  const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO, {
-    title: 'Microphone permission',
-    message: 'TaskLume uses your microphone only while you record a voice memo.',
-    buttonPositive: 'Allow',
-    buttonNegative: 'Not now',
-  });
-  return result === PermissionsAndroid.RESULTS.GRANTED;
-}
 
 /** Creates a per-recording ID that is stable for the local audio file and metadata record. */
 function createVoiceMemoId(): string {
@@ -45,6 +31,7 @@ export function useVoiceRecorder(saveMemo: SaveMemo, stopPlayback: () => Promise
   const [isProcessing, setIsProcessing] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
   const [recordingError, setRecordingError] = useState(false);
+  const [permissionBlocked, setPermissionBlocked] = useState(false);
   const operationRef = useRef(false);
   const recordingRef = useRef(false);
   const startTimeRef = useRef<number | null>(null);
@@ -62,10 +49,17 @@ export function useVoiceRecorder(saveMemo: SaveMemo, stopPlayback: () => Promise
     operationRef.current = true;
     setIsProcessing(true);
     setRecordingError(false);
+    setPermissionBlocked(false);
     try {
-      const permitted = await requestMicrophonePermission();
-      if (!permitted) {
+      const permission = await requestMicrophonePermission({
+        title: t('user_voice_memos.MIC_PERMISSION_TITLE'),
+        message: t('user_voice_memos.MIC_PERMISSION_DESCRIPTION'),
+        buttonPositive: t('user_voice_memos.MIC_PERMISSION_ALLOW'),
+        buttonNegative: t('user_voice_memos.MIC_PERMISSION_LATER'),
+      });
+      if (!permission.granted) {
         setRecordingError(true);
+        setPermissionBlocked(permission.permanentlyDenied);
         showToast(t('user_voice_memos.MIC_PERMISSION_DENIED'), 'error', 'user_voice:permission:denied');
         return;
       }
@@ -138,5 +132,13 @@ export function useVoiceRecorder(saveMemo: SaveMemo, stopPlayback: () => Promise
     }
   }, [saveMemo, t]);
 
-  return { isRecording, isProcessing, elapsedMs, recordingError, startRecording, stopRecording };
+  const openPermissionSettings = useCallback(async () => {
+    try {
+      await Linking.openSettings();
+    } catch {
+      showToast(t('user_voice_memos.PERMISSION_SETTINGS_FAILED'), 'error', 'user_voice:permission:settings-failed');
+    }
+  }, [t]);
+
+  return { isRecording, isProcessing, elapsedMs, recordingError, permissionBlocked, openPermissionSettings, startRecording, stopRecording };
 }
