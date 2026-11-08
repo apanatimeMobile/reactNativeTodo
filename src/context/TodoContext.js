@@ -8,11 +8,11 @@ import {
 } from 'react';
 import {AppState} from 'react-native';
 
-import {getItem, setItem} from '../storage/storage';
+import {getItem, setItem} from "../core/storage/jsonStorage";
 
-import APP_CONFIG from '../constants/appConfig';
-import {createId} from '../utils/helpers';
-import {getNextDueDate, isRecurring} from '../utils/recurrence';
+import APP_CONFIG from "../core/config/appConfig";
+import {createId} from "../core/utils/runtimeHelpers";
+import {getNextDueDate, isRecurring} from "../features/frontend_user/user_todos/todos_management/utils/userTodosRecurrence";
 import {stopSound} from '../services/soundService';
 
 import {
@@ -34,7 +34,7 @@ import {
   purgeExpiredTrash,
   TRASH_RETENTION_DAYS,
   TRASH_RETENTION_MS,
-} from '../utils/todoHelpers';
+} from "../features/frontend_user/user_todos/todos_management/utils/userTodosNormalization";
 
 const TodoContext = createContext(/** @type {any} */ (null));
 const CUSTOM_CATEGORIES_KEY = '@todomaster/custom_categories';

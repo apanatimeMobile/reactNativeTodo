@@ -5,8 +5,8 @@ import {
   useState,
   useCallback,
 } from 'react';
-import {getItem, setItem} from '../storage/storage';
-import {setHapticsEnabled} from '../utils/haptics';
+import {getItem, setItem} from "../storage/jsonStorage";
+import {setHapticsEnabled} from "../interaction/deviceHaptics";
 import {setNotificationsEnabled} from '../utils/todoTimerNotifications';
 
 export const SETTINGS_STORAGE_KEY = '@todomaster/settings';

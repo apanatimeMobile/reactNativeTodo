@@ -45,8 +45,8 @@ import {
 
 import { useThemeTokens } from '../theme/useThemeTokens';
 import { useThemeContext } from '../theme/ThemeProvider';
-import useAuth from '../../hooks/useAuth';
-import useTheme from '../../hooks/useTheme';
+import useAuth from "../auth/useLocalProfile";
+import useTheme from "../theme/useAccentTheme";
 import { CORE_ROUTES } from './routes';
 
 function IconBox({

@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import {AppState} from 'react-native';
 import * as Keychain from 'react-native-keychain';
-import {getItem, setItem, removeItem} from '../storage/storage';
+import {getItem, setItem, removeItem} from "../storage/jsonStorage";
 
 const AppLockContext = createContext(null);
 
