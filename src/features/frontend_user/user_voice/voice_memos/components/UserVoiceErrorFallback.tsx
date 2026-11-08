@@ -13,11 +13,13 @@ import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 interface UserVoiceErrorFallbackProps {
   message?: string;
   onRetry?: () => void;
+  onOpenSettings?: () => void;
 }
 
 export function UserVoiceErrorFallback({
   message,
   onRetry,
+  onOpenSettings,
 }: UserVoiceErrorFallbackProps) {
   const tokens = useThemeTokens();
   const { t } = useTranslation();
@@ -88,6 +90,16 @@ export function UserVoiceErrorFallback({
         >
           <RefreshCw size={16} color={tokens.color.foreground} />
           <Text style={styles.retryText}>{t('user_voice_memos.START_RECORDING')}</Text>
+        </Pressable>
+      )}
+      {onOpenSettings && (
+        <Pressable
+          style={styles.retryButton}
+          onPress={onOpenSettings}
+          accessibilityRole="button"
+          accessibilityLabel={t('user_voice_memos.OPEN_APP_SETTINGS')}
+        >
+          <Text style={styles.retryText}>{t('user_voice_memos.OPEN_APP_SETTINGS')}</Text>
         </Pressable>
       )}
     </View>
