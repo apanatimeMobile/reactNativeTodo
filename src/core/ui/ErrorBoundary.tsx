@@ -1,147 +1,98 @@
 /**
- * RESPONSIBILITY: Enterprise Mobile Error Boundary for TaskLume (Rule 44, Rule 56).
- * FLOW: Catches unhandled JavaScript component errors; displays a Luxury Gold branded crash screen with a retry action.
+ * RESPONSIBILITY: Catch render failures without exposing error payloads.
+ * FLOW: Render tree failure → token-based recovery UI → explicit retry.
  */
-
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { darkTheme as tokens } from '../theme/darkTheme';
+import { getMinTouchTarget } from '../theme/getMinTouchTarget';
+import { getActiveLocale } from '../i18n/locale';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-}
+const messages = {
+  en: {
+    title: 'Something went wrong',
+    message: 'An unexpected error occurred. Try again or restart the app.',
+    retry: 'Try again',
+  },
+  hi: {
+    title: 'कुछ गलत हो गया',
+    message: 'एक अप्रत्याशित त्रुटि हुई। फिर प्रयास करें या ऐप दोबारा शुरू करें।',
+    retry: 'फिर प्रयास करें',
+  },
+};
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
+// This boundary also catches provider failures, so recovery cannot depend on provider hooks.
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, { hasError: boolean }> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    if (__DEV__) {
-      console.error('[ErrorBoundary] Caught crash in render tree:', error, errorInfo);
-    }
-  }
-
-  handleRetry = () => {
-    this.setState({ hasError: false, error: null });
-  };
+  handleRetry = () => this.setState({ hasError: false });
 
   render() {
-    if (this.state.hasError) {
-      return (
-        <View style={styles.container}>
-          <View style={styles.card}>
-            <View style={styles.iconCircle}>
-              <Text style={styles.emoji}>⚠️</Text>
-            </View>
-            <Text style={styles.title}>Something went wrong</Text>
-            <Text style={styles.message}>
-              An unexpected error occurred. You can tap the button below to recover or restart the app.
-            </Text>
-            {__DEV__ && this.state.error ? (
-              <Text style={styles.errorText} numberOfLines={5}>
-                {String(this.state.error?.message || this.state.error)}
-              </Text>
-            ) : null}
-            <Pressable
-              style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
-              onPress={this.handleRetry}
-              accessibilityRole="button"
-              accessibilityLabel="Try again and recover"
-            >
-              <Text style={styles.buttonText}>Try Again</Text>
-            </Pressable>
-          </View>
+    if (!this.state.hasError) return this.props.children;
+    const copy = messages[getActiveLocale()];
+    return (
+      <View style={styles.container}>
+        <View style={styles.card}>
+          <Text style={styles.title} accessibilityRole="header">{copy.title}</Text>
+          <Text style={styles.message} accessibilityRole="alert">{copy.message}</Text>
+          <Pressable
+            style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+            onPress={this.handleRetry}
+            accessibilityRole="button"
+            accessibilityLabel={copy.retry}
+            testID="app-error-retry"
+          >
+            <Text style={styles.buttonText}>{copy.retry}</Text>
+          </Pressable>
         </View>
-      );
-    }
-
-    return this.props.children;
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#050505', // Luxury Gold dark background
-    alignItems: 'center',
+    backgroundColor: tokens.color.background,
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    padding: tokens.space[6],
   },
   card: {
-    width: '100%',
-    maxWidth: 380,
-    backgroundColor: '#111111',
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#27272A',
-    padding: 24,
-    alignItems: 'center',
-  },
-  iconCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: 'rgba(250,204,21,0.15)',
-    borderWidth: 1.5,
-    borderColor: '#FACC15',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  emoji: {
-    fontSize: 28,
+    backgroundColor: tokens.color.card,
+    borderRadius: tokens.radius.xl,
+    borderColor: tokens.color.border,
+    padding: tokens.space[6],
   },
   title: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    marginBottom: 8,
+    ...tokens.typography.headingLg,
+    color: tokens.color.foreground,
+    marginBottom: tokens.space[2],
     textAlign: 'center',
   },
   message: {
-    fontSize: 14,
-    color: '#A1A1AA',
+    ...tokens.typography.bodySm,
+    color: tokens.color.muted,
     textAlign: 'center',
-    lineHeight: 20,
-    marginBottom: 20,
-  },
-  errorText: {
-    fontSize: 11,
-    color: '#FCA5A5',
-    backgroundColor: '#450A0A',
-    padding: 10,
-    borderRadius: 8,
-    textAlign: 'left',
-    marginBottom: 16,
-    width: '100%',
-    fontFamily: 'monospace',
+    marginBottom: tokens.space[5],
   },
   button: {
-    backgroundColor: '#FACC15',
-    paddingHorizontal: 32,
-    paddingVertical: 14,
-    borderRadius: 12,
-    width: '100%',
+    minHeight: getMinTouchTarget(),
+    backgroundColor: tokens.color.primary,
+    padding: tokens.space[4],
+    borderRadius: tokens.radius.lg,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  buttonPressed: {
-    backgroundColor: '#EAB308',
-  },
-  buttonText: {
-    color: '#111111',
-    fontSize: 15,
-    fontWeight: '800',
-  },
+  buttonPressed: { backgroundColor: tokens.color.primaryPressed },
+  buttonText: { ...tokens.typography.body, color: tokens.color.onPrimary },
 });
 
 export default ErrorBoundary;

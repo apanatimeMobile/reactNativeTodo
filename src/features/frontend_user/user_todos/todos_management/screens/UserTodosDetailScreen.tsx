@@ -9,12 +9,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { UserTodosDetailMainView } from '../components/UserTodosDetailMainView';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useUserTodos } from '../hooks/useUserTodos';
+import { UserTodosMissingRecord } from '../components/UserTodosMissingRecord';
+import { UserTodosSkeleton } from '../components/UserTodosSkeleton';
+import { UserTodosErrorFallback } from '../components/UserTodosErrorFallback';
 import { USER_TODOS_ROUTES } from '../config/user_todos.url_config';
 
 export function UserTodosDetailScreen({ route, navigation }: { route: any; navigation: any }) {
   const tokens = useThemeTokens();
   const { id } = route?.params || {};
-  const { todos, deleteTodo, toggleComplete, toggleFavorite } = useUserTodos();
+  const { todos, deleteTodo, toggleComplete, toggleFavorite, loading, loadError, refreshTodos } = useUserTodos();
 
   const todo = useMemo(() => todos.find((t: any) => String(t.id) === String(id)), [todos, id]);
 
@@ -34,23 +37,19 @@ export function UserTodosDetailScreen({ route, navigation }: { route: any; navig
     },
   });
 
-  if (!todo) {
-    return null;
-  }
-
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <StatusBar
         barStyle={tokens.isDark ? 'light-content' : 'dark-content'}
       />
-      <UserTodosDetailMainView
+      {loading ? <UserTodosSkeleton /> : loadError ? <UserTodosErrorFallback onRetry={refreshTodos} /> : !todo ? <UserTodosMissingRecord onBack={() => navigation.goBack()} /> : <UserTodosDetailMainView
         todo={todo}
         onEdit={handleEdit}
         onDelete={handleDelete}
         onToggleComplete={() => toggleComplete(id)}
         onToggleFavorite={() => toggleFavorite(id)}
         onBack={() => navigation.goBack()}
-      />
+      />}
     </SafeAreaView>
   );
 }
