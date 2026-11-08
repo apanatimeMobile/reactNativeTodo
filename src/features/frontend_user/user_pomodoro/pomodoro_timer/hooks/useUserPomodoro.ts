@@ -6,6 +6,7 @@
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
+import { recordFocusSession } from '../utils/userPomodoroSessions';
 import type { PomodoroMode } from '../types/user_pomodoro.types';
 
 /**
@@ -51,6 +52,7 @@ export function useUserPomodoro(
       if (!completionHandledRef.current) {
         completionHandledRef.current = true;
         triggerSuccessHaptic();
+        void recordFocusSession({ mode, durationMinutes: selectedMinutes });
         onSessionComplete?.(mode, selectedMinutes);
       }
       return undefined;
