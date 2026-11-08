@@ -1,14 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-async function setItem(key, value) {
+async function setItem(key, value, strict = false) {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
-    console.warn('[storage] setItem error for key ' + key, err);
+    if (strict) throw err;
+    console.warn('[storage] setItem error for key ' + key);
   }
 }
 
-async function getItem(key, fallback = null) {
+async function getItem(key, fallback = null, strict = false) {
   try {
     const value = await AsyncStorage.getItem(key);
 
@@ -18,6 +19,7 @@ async function getItem(key, fallback = null) {
 
     return JSON.parse(value);
   } catch (err) {
+    if (strict) throw err;
     return fallback;
   }
 }

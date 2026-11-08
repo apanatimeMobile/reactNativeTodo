@@ -19,6 +19,7 @@ interface UserTodosEditMainViewProps {
   onSubmit: (values: TodoFormInput) => void;
   isSubmitting?: boolean;
   onBack?: () => void;
+  onSubmitSuccess?: () => void;
 }
 
 export function UserTodosEditMainView({
@@ -27,6 +28,7 @@ export function UserTodosEditMainView({
   onSubmit,
   isSubmitting = false,
   onBack,
+  onSubmitSuccess,
 }: UserTodosEditMainViewProps) {
   const tokens = useThemeTokens();
   const minTarget = getMinTouchTarget();
@@ -84,6 +86,7 @@ export function UserTodosEditMainView({
         initialValues={todo}
         categories={categories}
         onSubmit={onSubmit}
+        onSubmitSuccess={onSubmitSuccess}
         isSubmitting={isSubmitting}
         submitLabel="Update Task"
       />
