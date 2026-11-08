@@ -8,7 +8,6 @@ export interface SettingsTaskSummary {
   completed?: boolean;
   deleted?: boolean;
   completedAt?: number | null;
-  [key: string]: unknown;
 }
 
 /**

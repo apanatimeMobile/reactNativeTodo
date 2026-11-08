@@ -13,17 +13,17 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import type { TodoPriority, TodoRecurrence } from '../types/user_todos.types';
-import { TodoFormSchema, type TodoFormInput } from '../schemas/user_todos.schemas';
-import { UserTodosPillSelector } from './UserTodosPillSelector';
-import { UserTodosFormTextField } from './UserTodosFormTextField';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerErrorHaptic, triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
-import { useUnsavedChangesGuard } from '../../../../../core/hooks/useUnsavedChangesGuard';
-import { UserTodosUnsavedChangesDialog } from './UserTodosUnsavedChangesDialog';
-import { createUserTodosTodoFormStyles } from './UserTodosTodoForm.styles';
+import type { TodoPriority, TodoRecurrence } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import { TodoFormSchema, type TodoFormInput } from "@/features/frontend_user/user_todos/todos_management/schemas/user_todos.schemas";
+import { UserTodosPillSelector } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosPillSelector";
+import { UserTodosFormTextField } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosFormTextField";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerErrorHaptic, triggerSuccessHaptic } from "@/core/interaction/haptics";
+import { useUnsavedChangesGuard } from "@/core/hooks/useUnsavedChangesGuard";
+import { UserTodosUnsavedChangesDialog } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosUnsavedChangesDialog";
+import { createUserTodosTodoFormStyles } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosTodoForm.styles";
 
 interface UserTodosTodoFormProps {
   initialValues?: Partial<TodoFormInput>;

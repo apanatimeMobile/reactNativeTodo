@@ -2,7 +2,7 @@
  * RESPONSIBILITY: Tests local date-key formatting to prevent UTC calendar-day shifts.
  * FLOW: Provide local Date values → assert the formatter uses local year/month/day fields.
  */
-import { formatCalendarDateHeader, formatCalendarDateKey } from './userCalendarFormatters';
+import { formatCalendarDateHeader, formatCalendarDateKey } from "@/features/frontend_user/user_calendar/calendar_agenda/utils/userCalendarFormatters";
 
 describe('formatCalendarDateKey', () => {
   it('formats a local date-only header without interpreting it as UTC midnight', () => {

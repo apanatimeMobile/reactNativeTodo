@@ -3,8 +3,8 @@
  * FLOW: Consumed by every styled screen and component to access active design tokens without magic values.
  */
 
-import { useThemeContext } from './ThemeProvider';
-import type { Tokens } from './tokenDefinitions';
+import { useThemeContext } from "@/core/theme/ThemeProvider";
+import type { Tokens } from "@/core/theme/tokenDefinitions";
 
 /**
  * Returns the currently active Tokens object (light or dark).

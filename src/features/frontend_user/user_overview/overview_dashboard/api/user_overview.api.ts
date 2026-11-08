@@ -3,9 +3,9 @@
  * FLOW: Fetches productivity stats and chart data via networkClient.
  */
 
-import { networkClient } from '../../../../../core/network/networkClient';
-import type { ApiResponse } from '../../../../../core/network/apiResponse.types';
-import { USER_OVERVIEW_URL_CONFIG } from '../config/user_overview.url_config';
+import { networkClient } from "@/core/network/networkClient";
+import type { ApiResponse } from "@/core/network/apiResponse.types";
+import { USER_OVERVIEW_URL_CONFIG } from "@/features/frontend_user/user_overview/overview_dashboard/config/user_overview.url_config";
 
 export interface OverviewMetricsDto {
   completedToday: number;

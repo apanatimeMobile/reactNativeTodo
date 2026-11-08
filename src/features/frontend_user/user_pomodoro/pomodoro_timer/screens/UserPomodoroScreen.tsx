@@ -7,8 +7,8 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
-import { UserPomodoroTimerMainView } from '../components/UserPomodoroTimerMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
+import { UserPomodoroTimerMainView } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/components/UserPomodoroTimerMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
 
 export function UserPomodoroScreen({ navigation }: { navigation?: any }) {
   const tokens = useThemeTokens();

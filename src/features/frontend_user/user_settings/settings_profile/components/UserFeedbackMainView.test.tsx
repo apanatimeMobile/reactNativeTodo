@@ -5,12 +5,12 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
 import { Text, TextInput } from 'react-native';
-import { I18nProvider } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerSuccessNotification } from '../../../../../core/interaction/haptics';
-import { UserFeedbackMainView } from './UserFeedbackMainView';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerSuccessNotification } from "@/core/interaction/haptics";
+import { UserFeedbackMainView } from "@/features/frontend_user/user_settings/settings_profile/components/UserFeedbackMainView";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: {
       background: '#fff', card: '#fff', border: '#ddd', foreground: '#111', muted: '#555',
@@ -26,7 +26,7 @@ jest.mock('../../../../../core/theme/useThemeTokens', () => ({
   }),
 }));
 
-jest.mock('../../../../../core/interaction/haptics', () => ({
+jest.mock("@/core/interaction/haptics", () => ({
   triggerLightImpact: jest.fn(),
   triggerSuccessNotification: jest.fn(),
 }));

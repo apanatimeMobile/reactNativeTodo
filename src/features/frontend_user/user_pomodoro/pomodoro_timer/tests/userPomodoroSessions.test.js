@@ -1,10 +1,10 @@
-import * as storage from '../../../../../storage/storage';
-import { calculateFocusStats, getFocusDateKey } from '../utils/userPomodoroSessionStats';
+import * as storage from "@/core/storage/jsonStorage";
+import { calculateFocusStats, getFocusDateKey } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/utils/userPomodoroSessionStats";
 import {
   clearFocusSessions,
   getFocusSessions,
   recordFocusSession,
-} from '../utils/userPomodoroSessions';
+} from "@/features/frontend_user/user_pomodoro/pomodoro_timer/utils/userPomodoroSessions";
 
 describe('Pomodoro session history and analytics', () => {
   beforeEach(async () => {

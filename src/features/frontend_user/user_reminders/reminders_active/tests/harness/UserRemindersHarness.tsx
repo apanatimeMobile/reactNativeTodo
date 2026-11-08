@@ -5,10 +5,10 @@
 
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
-import { I18nProvider } from '../../../../../../core/i18n/useTranslation';
-import { ThemeProvider } from '../../../../../../core/theme/ThemeProvider';
-import { useThemeTokens } from '../../../../../../core/theme/useThemeTokens';
-import { UserRemindersMainView } from '../../components/UserRemindersMainView';
+import { I18nProvider } from "@/core/i18n/useTranslation";
+import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { UserRemindersMainView } from "@/features/frontend_user/user_reminders/reminders_active/components/UserRemindersMainView";
 
 function HarnessInner({ title, children }: { title: string; children: React.ReactNode }) {
   const tokens = useThemeTokens();

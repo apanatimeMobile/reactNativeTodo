@@ -1,8 +1,8 @@
 import React from 'react';
 import { act, create, type ReactTestInstance } from 'react-test-renderer';
-import { UserPomodoroModeSelector } from './UserPomodoroModeSelector';
+import { UserPomodoroModeSelector } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/components/UserPomodoroModeSelector";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: { card: '#fff', border: '#ddd', primary: '#06c', muted: '#555', onPrimary: '#fff' },
     space: { 2: 8, 4: 16, 8: 40 },
@@ -10,7 +10,7 @@ jest.mock('../../../../../core/theme/useThemeTokens', () => ({
     typography: { caption: {} },
   }),
 }));
-jest.mock('../../../../../core/i18n/useTranslation', () => ({
+jest.mock("@/core/i18n/useTranslation", () => ({
   useTranslation: () => ({
     t: (key: string) => ({
       'user_pomodoro_timer.MODE_FOCUS': 'Focus',
@@ -20,7 +20,7 @@ jest.mock('../../../../../core/i18n/useTranslation', () => ({
     }[key] ?? key),
   }),
 }));
-jest.mock('../../../../../core/interaction/haptics', () => ({ triggerLightImpact: jest.fn() }));
+jest.mock("@/core/interaction/haptics", () => ({ triggerLightImpact: jest.fn() }));
 
 describe('UserPomodoroModeSelector', () => {
   it('localizes mode labels, marks the selected mode, and meets the touch target', () => {

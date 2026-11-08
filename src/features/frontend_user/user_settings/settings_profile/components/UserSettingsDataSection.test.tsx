@@ -4,9 +4,9 @@
  */
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { UserSettingsDataSection } from './UserSettingsDataSection';
+import { UserSettingsDataSection } from "@/features/frontend_user/user_settings/settings_profile/components/UserSettingsDataSection";
 
-jest.mock('../../../../../core/theme/useThemeTokens', () => ({
+jest.mock("@/core/theme/useThemeTokens", () => ({
   useThemeTokens: () => ({
     color: {
       card: '#FFFFFF', border: '#E4E4E7', foreground: '#000000',
@@ -20,12 +20,12 @@ jest.mock('../../../../../core/theme/useThemeTokens', () => ({
   }),
 }));
 
-jest.mock('../../../../../core/interaction/haptics', () => ({
+jest.mock("@/core/interaction/haptics", () => ({
   triggerLightImpact: jest.fn(),
   triggerWarningNotification: jest.fn(),
 }));
 
-jest.mock('./UserSettingsConfirmDialog', () => {
+jest.mock("@/features/frontend_user/user_settings/settings_profile/components/UserSettingsConfirmDialog", () => {
   const ReactMock = require('react');
   const { View, Text, Pressable } = require('react-native');
   return {
@@ -42,11 +42,11 @@ jest.mock('./UserSettingsConfirmDialog', () => {
   };
 });
 
-jest.mock('./UserSettingsBackupRestoreDialog', () => ({
+jest.mock("@/features/frontend_user/user_settings/settings_profile/components/UserSettingsBackupRestoreDialog", () => ({
   UserSettingsBackupRestoreDialog: () => null,
 }));
 
-jest.mock('../../../../../core/i18n/useTranslation', () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
+jest.mock("@/core/i18n/useTranslation", () => ({ useTranslation: () => ({ t: (key: string) => key }) }));
 
 describe('UserSettingsDataSection destructive actions', () => {
   it('does not clear completed tasks until the user confirms', () => {

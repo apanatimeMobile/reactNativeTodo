@@ -4,9 +4,9 @@
  */
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { darkTheme as tokens } from '../theme/darkTheme';
-import { getMinTouchTarget } from '../theme/getMinTouchTarget';
-import { getActiveLocale } from '../i18n/locale';
+import { darkTheme as tokens } from "@/core/theme/darkTheme";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { getActiveLocale } from "@/core/i18n/locale";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;

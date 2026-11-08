@@ -6,9 +6,9 @@
 import React, { useMemo } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserTodosTrashMainView } from '../components/UserTodosTrashMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserTodos } from '../hooks/useUserTodos';
+import { UserTodosTrashMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosTrashMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserTodos } from "@/features/frontend_user/user_todos/todos_management/hooks/useUserTodos";
 
 export function UserTodosTrashScreen({ navigation }: { navigation?: any }) {
   const tokens = useThemeTokens();

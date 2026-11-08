@@ -3,7 +3,7 @@
  * FLOW: Configures mock network interceptors, seeds initial test fixtures, and mounts harness.
  */
 
-import { UserCalendarHarness } from '../../tests/harness/UserCalendarHarness';
+import { UserCalendarHarness } from "@/features/frontend_user/user_calendar/calendar_agenda/tests/harness/UserCalendarHarness";
 
 export function bootstrapUserCalendar() {
   return {

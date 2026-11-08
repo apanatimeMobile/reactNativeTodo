@@ -3,9 +3,9 @@
  * FLOW: useUnsavedChangesGuard state → Todo-local dialog → cancel or discard handler.
  */
 import React from 'react';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import type { useUnsavedChangesGuard } from '../../../../../core/hooks/useUnsavedChangesGuard';
-import { UserTodosConfirmDialog } from './UserTodosConfirmDialog';
+import { useTranslation } from "@/core/i18n/useTranslation";
+import type { useUnsavedChangesGuard } from "@/core/hooks/useUnsavedChangesGuard";
+import { UserTodosConfirmDialog } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosConfirmDialog";
 
 interface UserTodosUnsavedChangesDialogProps {
   guard: ReturnType<typeof useUnsavedChangesGuard>;

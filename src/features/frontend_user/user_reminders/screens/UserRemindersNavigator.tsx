@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_REMINDERS_ROUTES } from '../reminders_active/config/user_reminders.url_config';
-import { UserRemindersScreen } from '../reminders_active/screens/UserRemindersScreen';
+import { USER_REMINDERS_ROUTES } from "@/features/frontend_user/user_reminders/reminders_active/config/user_reminders.url_config";
+import { UserRemindersScreen } from "@/features/frontend_user/user_reminders/reminders_active/screens/UserRemindersScreen";
 
 const Stack = createNativeStackNavigator();
 

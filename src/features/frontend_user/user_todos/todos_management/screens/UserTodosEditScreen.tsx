@@ -6,14 +6,14 @@
 import React, { useMemo, useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UserTodosEditMainView } from '../components/UserTodosEditMainView';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useUserTodos } from '../hooks/useUserTodos';
-import { UserTodosMissingRecord } from '../components/UserTodosMissingRecord';
-import { UserTodosSkeleton } from '../components/UserTodosSkeleton';
-import { UserTodosErrorFallback } from '../components/UserTodosErrorFallback';
-import type { TodoEntity } from '../types/user_todos.types';
-import type { TodoFormInput } from '../schemas/user_todos.schemas';
+import { UserTodosEditMainView } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosEditMainView";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useUserTodos } from "@/features/frontend_user/user_todos/todos_management/hooks/useUserTodos";
+import { UserTodosMissingRecord } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosMissingRecord";
+import { UserTodosSkeleton } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosSkeleton";
+import { UserTodosErrorFallback } from "@/features/frontend_user/user_todos/todos_management/components/UserTodosErrorFallback";
+import type { TodoEntity } from "@/features/frontend_user/user_todos/todos_management/types/user_todos.types";
+import type { TodoFormInput } from "@/features/frontend_user/user_todos/todos_management/schemas/user_todos.schemas";
 
 export function UserTodosEditScreen({ route, navigation }: { route: { params?: { id?: string } }; navigation: { goBack: () => void } }) {
   const tokens = useThemeTokens();
@@ -24,6 +24,7 @@ export function UserTodosEditScreen({ route, navigation }: { route: { params?: {
   const todo = useMemo<TodoEntity | undefined>(() => todos.find((item: TodoEntity) => String(item.id) === String(id)), [todos, id]);
 
   const handleSubmit = async (values: TodoFormInput) => {
+    if (!id) throw new Error('Task identifier is missing.');
     setIsSubmitting(true);
     try {
       await updateTodo(id, values);

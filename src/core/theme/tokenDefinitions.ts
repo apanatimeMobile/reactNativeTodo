@@ -155,4 +155,4 @@ export interface Tokens {
   };
 }
 
-export { STABLE_SCALES } from './stableScales';
+export { STABLE_SCALES } from "@/core/theme/stableScales";

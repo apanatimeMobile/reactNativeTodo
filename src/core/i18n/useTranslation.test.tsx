@@ -5,7 +5,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
-import { I18nProvider, resolveTranslation, useTranslation, type TranslationResources } from './useTranslation';
+import { I18nProvider, resolveTranslation, useTranslation, type TranslationResources } from "@/core/i18n/useTranslation";
 
 function TranslationLabel({ translationKey }: { translationKey: string }) {
   const { t } = useTranslation();

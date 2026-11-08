@@ -6,11 +6,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Bug, Lightbulb, Heart, MessageCircle } from 'lucide-react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import type { UserFeedbackSubmitValues } from '../schemas/user_settings.schema';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import type { UserFeedbackSubmitValues } from "@/features/frontend_user/user_settings/settings_profile/schemas/user_settings.schema";
 
 interface UserFeedbackCategorySelectorProps {
   selectedCategory: UserFeedbackSubmitValues['category'];

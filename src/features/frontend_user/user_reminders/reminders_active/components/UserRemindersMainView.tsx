@@ -6,13 +6,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { Bell, Clock, Menu } from 'lucide-react-native';
-import type { ReminderTaskEntity } from '../types/user_reminders.types';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { displayValue } from '../../../../../core/utils/displayValue';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { UserRemindersSnoozeSheet } from './UserRemindersSnoozeSheet';
+import type { ReminderTaskEntity } from "@/features/frontend_user/user_reminders/reminders_active/types/user_reminders.types";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { displayValue } from "@/core/utils/displayValue";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { UserRemindersSnoozeSheet } from "@/features/frontend_user/user_reminders/reminders_active/components/UserRemindersSnoozeSheet";
 
 interface UserRemindersMainViewProps {
   reminders: ReminderTaskEntity[];

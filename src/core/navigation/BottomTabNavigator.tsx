@@ -14,14 +14,14 @@ import {
   Timer,
 } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useThemeTokens } from '../theme/useThemeTokens';
-import { getShadowStyle } from '../theme/getShadowStyle';
-import { checkReduceMotion } from '../theme/animationConfig';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getShadowStyle } from "@/core/theme/getShadowStyle";
+import { checkReduceMotion } from "@/core/theme/animationConfig";
 
-import { UserTodosNavigator } from '../../features/frontend_user/user_todos/screens/UserTodosNavigator';
-import { UserCalendarNavigator } from '../../features/frontend_user/user_calendar/screens/UserCalendarNavigator';
-import { UserOverviewNavigator } from '../../features/frontend_user/user_overview/screens/UserOverviewNavigator';
-import { UserPomodoroNavigator } from '../../features/frontend_user/user_pomodoro/screens/UserPomodoroNavigator';
+import { UserTodosNavigator } from "@/features/frontend_user/user_todos/screens/UserTodosNavigator";
+import { UserCalendarNavigator } from "@/features/frontend_user/user_calendar/screens/UserCalendarNavigator";
+import { UserOverviewNavigator } from "@/features/frontend_user/user_overview/screens/UserOverviewNavigator";
+import { UserPomodoroNavigator } from "@/features/frontend_user/user_pomodoro/screens/UserPomodoroNavigator";
 
 const Tab = createBottomTabNavigator();
 

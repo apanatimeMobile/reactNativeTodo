@@ -6,12 +6,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { User, ArrowLeft } from 'lucide-react-native';
-import { UserProfileStatsCards } from './UserProfileStatsCards';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { UserProfileEditForm } from './UserProfileEditForm';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
+import { UserProfileStatsCards } from "@/features/frontend_user/user_settings/settings_profile/components/UserProfileStatsCards";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { UserProfileEditForm } from "@/features/frontend_user/user_settings/settings_profile/components/UserProfileEditForm";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { triggerLightImpact } from "@/core/interaction/haptics";
 
 interface UserProfileMainViewProps {
   initialName: string;

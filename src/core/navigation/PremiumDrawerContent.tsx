@@ -43,11 +43,11 @@ import {
   ChevronDown,
 } from 'lucide-react-native';
 
-import { useThemeTokens } from '../theme/useThemeTokens';
-import { useThemeContext } from '../theme/ThemeProvider';
-import useAuth from '../../hooks/useAuth';
-import useTheme from '../../hooks/useTheme';
-import { CORE_ROUTES } from './routes';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useThemeContext } from "@/core/theme/ThemeProvider";
+import useLocalProfile from "@/core/auth/useLocalProfile";
+import { useAccentPreferences } from "@/core/theme/AccentThemeProvider";
+import { CORE_ROUTES } from "@/core/navigation/routes";
 
 function IconBox({
   icon: Icon,
@@ -168,8 +168,8 @@ export function PremiumDrawerContent() {
   const navigation = useNavigation<any>();
   const tokens = useThemeTokens();
   const { toggleTheme, isDarkMode } = useThemeContext();
-  const { accentColor, setAccentColor, palettes = [] } = (useTheme() || {}) as any;
-  const { user } = (useAuth() || {}) as any;
+  const { accentColor, setAccentColor, palettes = [] } = (useAccentPreferences() || {}) as any;
+  const { user } = (useLocalProfile() || {}) as any;
   const insets = useSafeAreaInsets();
   const navState = useNavigationState(state => state);
   const activeRoute = getActiveRouteName(navState);
@@ -255,7 +255,7 @@ export function PremiumDrawerContent() {
                 { overflow: 'hidden', borderColor: tokens.color.border },
               ]}>
               <Image
-                source={require('../../assets/images/tasklume_icon.png')}
+                source={require("@/assets/images/tasklume_icon.png")}
                 style={{ width: '100%', height: '100%' }}
                 resizeMode="cover"
               />

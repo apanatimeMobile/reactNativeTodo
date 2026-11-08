@@ -4,9 +4,9 @@
  */
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 export function UserTodosMissingRecord({ onBack }: { onBack: () => void }) {
   const tokens = useThemeTokens();

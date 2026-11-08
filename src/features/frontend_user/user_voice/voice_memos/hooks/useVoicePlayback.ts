@@ -4,9 +4,9 @@
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Sound from 'react-native-nitro-sound';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { showToast } from '../../../../../core/toast/showToast';
-import type { VoiceMemoEntity } from '../types/user_voice.types';
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { showToast } from "@/core/toast/showToast";
+import type { VoiceMemoEntity } from "@/features/frontend_user/user_voice/voice_memos/types/user_voice.types";
 
 /**
  * Provides single-player playback for locally stored memo files.

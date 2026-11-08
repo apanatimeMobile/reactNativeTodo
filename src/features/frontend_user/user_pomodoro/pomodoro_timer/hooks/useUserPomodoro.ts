@@ -3,9 +3,9 @@
  * FLOW: UserPomodoroTimerMainView → useUserPomodoro → timer state and local session history.
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
-import { recordFocusSession } from '../utils/userPomodoroSessions';
-import type { PomodoroMode } from '../types/user_pomodoro.types';
+import { triggerSuccessHaptic } from "@/core/interaction/haptics";
+import { recordFocusSession } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/utils/userPomodoroSessions";
+import type { PomodoroMode } from "@/features/frontend_user/user_pomodoro/pomodoro_timer/types/user_pomodoro.types";
 
 /**
  * Manages the countdown timer, mode durations, start/pause, reset, and completion.

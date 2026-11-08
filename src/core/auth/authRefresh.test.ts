@@ -1,7 +1,7 @@
-import { refreshAuthToken } from './authRefresh';
-import { getRefreshToken, clearAuthSession } from './authSession';
+import { refreshAuthToken } from "@/core/auth/authRefresh";
+import { getRefreshToken, clearAuthSession } from "@/core/auth/authSession";
 
-jest.mock('./authSession', () => ({
+jest.mock("@/core/auth/authSession", () => ({
   getRefreshToken: jest.fn(async () => 'private-refresh-token'),
   clearAuthSession: jest.fn(),
 }));

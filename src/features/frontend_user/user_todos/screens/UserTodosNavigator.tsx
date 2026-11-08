@@ -5,14 +5,14 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { USER_TODOS_ROUTES } from '../todos_management/config/user_todos.url_config';
-import { UserTodosHomeScreen } from '../todos_management/screens/UserTodosHomeScreen';
-import { UserTodosAddScreen } from '../todos_management/screens/UserTodosAddScreen';
-import { UserTodosEditScreen } from '../todos_management/screens/UserTodosEditScreen';
-import { UserTodosDetailScreen } from '../todos_management/screens/UserTodosDetailScreen';
-import { UserTodosTrashScreen } from '../todos_management/screens/UserTodosTrashScreen';
-import { UserTodosFavoritesScreen } from '../todos_management/screens/UserTodosFavoritesScreen';
-import { UserTodosCategoriesScreen } from '../todos_management/screens/UserTodosCategoriesScreen';
+import { USER_TODOS_ROUTES } from "@/features/frontend_user/user_todos/todos_management/config/user_todos.url_config";
+import { UserTodosHomeScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosHomeScreen";
+import { UserTodosAddScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosAddScreen";
+import { UserTodosEditScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosEditScreen";
+import { UserTodosDetailScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosDetailScreen";
+import { UserTodosTrashScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosTrashScreen";
+import { UserTodosFavoritesScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosFavoritesScreen";
+import { UserTodosCategoriesScreen } from "@/features/frontend_user/user_todos/todos_management/screens/UserTodosCategoriesScreen";
 
 const Stack = createNativeStackNavigator();
 

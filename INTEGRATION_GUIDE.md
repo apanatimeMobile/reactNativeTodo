@@ -1,37 +1,49 @@
 # TaskLume Mobile Integration Guide
 
-**Target:** bare React Native, New Architecture (Fabric/TurboModules).
+## 1. Changelog — legacy runtime migration
 
-**Repair branch:** `temp`.
+Branch: `temp`. Live runtime code has been migrated out of the old `src/context`, `src/hooks`, `src/services`, `src/storage`, `src/constants`, `src/types`, `src/utils`, and `src/i18n` locations. Those directories are no longer retained as compatibility facades. Static app images remain in `src/assets/images`.
 
-**Status:** source repairs and safe legacy migration; not a full compliance/release certification.
+This migration preserves local/offline features, stored task/profile/preferences/history keys, trash retention, audio payloads, and native notification identifiers. It does not invent backend contracts or change dependency versions/native project configuration.
 
-## 1. Changelog
+## 2. Ownership and integration map
 
-The follow-up cleanup moved the unused global focus-history service and its tests into the owning Pomodoro capability, retained the stored history key/cap, and connected timer completion to real local history. Live contexts, audio/notification services, declarations and integration artifacts were retained after reference tracing.
+| Previous location | Current owner |
+|---|---|
+| `context/TodoContext.js` | `features/frontend_user/user_todos/todos_management/state/UserTodosContext.js`, composed from lifecycle/category/CRUD/import/completion/timer/trash/selector hooks. |
+| Task-aware consumers in other domains | `core/contracts/taskHost.js` and `taskHost.types.ts`: host-injected port; the owning feature remains the single state owner. No cross-feature store import is required. |
+| `utils/todoHelpers.js`, `utils/recurrence.js` | Todos feature-local normalization, category, recurrence, summary, and trash-retention utilities. |
+| `utils/todoTimerNotifications.js` | Domain notification behavior in Todos/Pomodoro utilities; shared native channel/configuration/permission/state/vibration plumbing in `core/notifications`. All callers import concrete modules. |
+| `services/soundService.js`, `assets/soundsData.js` | Focused `core/audio` initialization/loading/playback/priority/state/data modules. Task/focus conflict decisions remain with Todos. Embedded sound data is preserved. |
+| `context/AuthContext.js`, `hooks/useAuth.js` | `core/auth/LocalProfileProvider.js` and `useLocalProfile.js`; local profile is not remote session authentication. |
+| `context/SettingsContext.js` | `core/preferences/PreferencesProvider.js`; existing preference values and keys retained. |
+| `context/AppLockContext.js` | `core/security/AppLockProvider.js`; device authentication and Keychain service retained. |
+| `context/ThemeContext.js`, `hooks/useTheme.js`, `constants/colors.js` | Canonical `core/theme/ThemeProvider.tsx` owns mode; `AccentThemeProvider.js` owns the existing accent preference. Legacy saved mode is read when the canonical key is absent; palettes and stored accent selection remain available. |
+| `storage/storage.js` | `core/storage/jsonStorage.js`; existing fallback/strict I/O semantics retained. Secure credentials still use the separate secure-storage gateway. |
+| `constants/appConfig.js` | `core/config/appConfig.js`; original storage-key values retained. |
+| `utils/helpers.js`, `utils/dateUtils.js`, `utils/haptics.js` | Generic helpers in `core/utils`; preference-aware device feedback in `core/interaction`. Todo-specific summaries moved to their owning feature. |
+| `types/index.d.ts` | Generic preferences/appearance declarations in `core/contracts`; Todo/Pomodoro declarations in owning feature `types` folders. |
+| `i18n/generated` | `core/i18n/generated`; feature-local locale JSONs remain with their features. |
 
-Additional repairs cover strict storage recovery (including corrupt task payloads), real loading/error branches, missing-record navigation, safe crash recovery, fail-closed unconfigured token refresh, feedback validation/pending state, dirty todo-form confirmation, localized accessible controls, and voice-file/permission recovery tests. See `RE_AUDIT_CHECKLIST_RESULT.md` for evidence and remaining gates.
+## 3. Host composition and imports
 
-## 2. Integration points
+`index.js` mounts `App.tsx`. App composition supplies the canonical theme, accent preferences, global preferences, local profile, app lock, task host, and navigation. Feature screens consume canonical theme tokens and typed host contracts.
 
-- Entry: `index.js` → `App.tsx`; navigation: `src/core/navigation/`.
-- Host providers remain in `App.tsx`; their live consumers must not be removed as unused legacy code.
-- Feature ownership: `src/features/frontend_user/`.
-- Focus-session persistence: `user_pomodoro/pomodoro_timer/utils/userPomodoroSessions.js`; no backend is required for local history. The prior global `focusService.js` path is removed.
-- Theme: `src/core/theme/ThemeProvider.tsx` and `useThemeTokens()`; outermost crash recovery uses the existing static dark tokens because providers may themselves have failed.
-- Credentials: centralized auth/secure-storage modules. Unconfigured refresh returns `null`; callers must require re-authentication rather than use a refresh token as an access token.
+Repository source imports now use `@/` for paths below `src/`. The same mapping is configured in `tsconfig.json`, `jest.config.js`, and Metro's resolver. No new resolver dependency or Babel plugin was installed. Direct module imports replace legacy barrels or forwarding files.
 
-## 3. Verification commands
+## 4. Verification
 
 ```bash
 npm test -- --runInBand
 npm run typecheck
 npm run lint
-npm audit --omit=dev
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output /tmp/mobile-migration/index.android.bundle --assets-dest /tmp/mobile-migration/assets --max-workers 2
 ```
 
-Jest: **33 suites / 94 tests passed**. TypeScript: **PASS**. ESLint: **0 errors / 63 warnings**. `git diff --check`: **PASS**. Exact command results are recorded in `compliance_manifest.json`. Native builds and device interaction checks have not been run. On a configured native host, use the existing `npm run android` / `npm run ios` scripts and `maestro test mobile_e2e/`; the current Maestro suite still needs coverage and hierarchy repairs before it can certify the feature set.
+Final executed counts and bundle status are recorded in `compliance_manifest.json` and `RE_AUDIT_CHECKLIST_RESULT.md`. Native device/emulator execution is separate from Metro bundling: no device appearance, permissions, alarms, biometrics, or Maestro execution is certified by a JavaScript bundle or component tests.
 
-## 4. Release limitations
+**Final verification:** 39 Jest suites / 103 tests passed; TypeScript passed; ESLint has 0 errors and 61 warnings; diff checks passed. Both Android and iOS production Metro bundles were generated successfully. Metro emitted an upstream React Native private-feature-flags exports warning and used its documented file-resolution fallback; neither bundle failed.
 
-No backend contract pack or source web ZIP was supplied. Documented API routes that conflict with local implementation are not authorization to invent server behavior. No dependency upgrades or native project modifications were made. The production dependency audit, remaining architecture/design/mock/E2E findings and full item-by-item rule evidence are still open. Do not describe this branch as `ALL-RBGS-COMPLETE` or production-ready based only on passing source tests.
+## 5. Remaining release gates
+
+Structural migration is not a certification that every original prompt rule is satisfied. Dependency advisories, backend contracts, full item-by-item rule evidence, standalone mock/host coverage, remaining UI/token/typed-source cleanup, oversized existing navigation shells, and full Maestro/device checks remain open. Local data was not converted to a newly invented server or storage schema. Do not label this `ALL-RBGS-COMPLETE` solely because structural checks and tests pass.

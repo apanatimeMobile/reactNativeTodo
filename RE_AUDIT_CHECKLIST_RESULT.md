@@ -1,61 +1,48 @@
-# Mobile re-audit and cleanup result
+# Mobile structural migration re-audit
 
-**Mode:** D — existing native React Native application.
+**Mode:** D. **Branch:** `temp`.
 
-**Branch:** `temp`.
+## Scope and completion boundary
 
-**Release classification:** verified source repairs and retention-safe cleanup, not an all-rules-compliant release. Backend-dependent behavior, full individual-rule evidence, and native runtime verification remain open. Passing tests are not a substitute for those gates.
+The remaining live legacy runtime has been migrated to explicit feature/core owners with all consumers rewritten. Old runtime directories are removed, not retained as shims. Existing business behavior and storage contracts are preserved. This completes the requested structural migration; it is not full production/native-runtime or all-numbered-rule compliance.
 
-## 1. Legacy deletion and retention decisions
+## Structural acceptance evidence
 
-| Path | Decision and evidence |
+- Old `src/context`, `src/hooks`, `src/services`, `src/storage`, `src/constants`, `src/types`, `src/utils`, and `src/i18n` directories no longer exist; `src/assets` retains only static images.
+- `App.tsx` composes the migrated providers and direct audio/notification modules; `index.js` imports migrated audio stop logic.
+- Task state is owned by `features/frontend_user/user_todos/todos_management/state/UserTodosContext.js`; purpose-specific hooks are below the 150-line hook ceiling. Shared consumers use `core/contracts/taskHost.js`, with the typed DTO/capability contract in `taskHost.types.ts`.
+- Task normalization/category/recurrence/trash decisions are feature-local; Todos and Pomodoro own their domain-specific notification behavior. Shared native channels/state/permissions remain in core.
+- The old 807-line notification service and 466-line audio service are split into focused concrete modules without runtime business export facades. Export-symbol checks preserved all 27 notification and 10 audio capabilities. Sound data contents were compared against the prior revision.
+- Source imports use the `@/` alias resolved consistently by TypeScript, Jest and Metro. No dependency or native project changes were introduced for aliasing.
+- Mode and accent no longer have two competing mode owners. The canonical theme provider restores legacy mode when needed; saved mode/accent migration is covered by `core/theme/ThemeMigration.test.tsx`.
+- Canonical haptics now respect persisted preference gating, covered by `core/interaction/haptics.test.ts`.
+
+## Behavior regression evidence
+
+- `__tests__/TodoContext.test.tsx`: storage failure/invalid-shape recovery still avoids overwriting tasks and supports retry.
+- `features/frontend_user/user_todos/todos_management/state/UserTodosContext.test.js`: migrated provider retains load-error write protection and exposes existing task operations.
+- `features/frontend_user/user_todos/todos_management/tests/userTodosNotificationMigration.test.js`: scheduling and cancellation retain the existing reminder identifier and shared notification enable/disable state.
+- `core/audio/__tests__/audioModules.test.js`: initialization, audio priority/conflict behavior, active source and stopping alarm/alert/tick playback.
+- `core/auth/LocalProfileProvider.test.js`: restored profile and updates use the existing storage key.
+- Existing CRUD/trash/forms/import, voice cleanup/permission recovery, i18n, storage, analytics, and Pomodoro persistence tests remain enabled; no tests were deleted to weaken coverage.
+
+## Executed checks
+
+Exact final commands/counts and Metro bundle result are recorded in `compliance_manifest.json`. Bundle output is a local verification artifact, not an APK or device proof. Native build/emulator/Maestro/device visual/accessibility checks remain `DEFERRED_TO_HOST_RUNTIME`.
+
+**Final verification:** 39 Jest suites / 103 tests passed; TypeScript passed; ESLint has 0 errors and 61 warnings; diff checks passed. Both Android and iOS production Metro bundles were generated successfully. Metro emitted an upstream React Native private-feature-flags exports warning and used its documented file-resolution fallback; neither bundle failed.
+
+## Open release requirements
+
+| Gate | Current status |
 |---|---|
-| `src/services/focusService.js` | Removed from the global services folder by migration, not feature eviction. Its session persistence and statistics now live in `user_pomodoro/pomodoro_timer/utils/userPomodoroSessions.js` and `userPomodoroSessionStats.js`. |
-| `__tests__/focusService.test.js` | Moved into the owning Pomodoro capability's `tests/userPomodoroSessions.test.js`; behavior and retention coverage are preserved and extended. |
-| Focus history data | The key `@todomaster/focus_sessions_history` and 100-session retention limit are preserved. The timer now records one local completed session; pausing does not record one. |
-| `src/context/*`, `src/hooks/useAuth.js`, `src/hooks/useTheme.js` | Retained: these are live app dependencies, not unused files. `App.tsx:12-24,44` imports the host providers; feature hooks still consume them. |
-| `src/services/soundService.js`, `src/utils/todoTimerNotifications.js` | Retained: imported by `App.tsx:32,38`, `index.js:8`, `src/context/TodoContext.js:16,27`, and `SettingsContext.js:10`. Deletion would break alarms/audio. |
-| `src/types/index.d.ts`, generated locales, domain navigator shells, API/mocks/contracts documentation | Retained as compiler declarations, live translations/navigation, or intentionally standalone/integration artifacts. Lack of a direct import is not proof of deletion safety. |
+| Legacy runtime placement/imports | Migrated to explicit owners; no old-path forwarding files. |
+| Source-level behavioral checks | See final test/typecheck/lint results in the manifest; warnings are not hidden. |
+| Native runtime and visual proof | Not executed; no emulator/ADB/native toolchain is available in this workspace. |
+| Backend/auth/API contracts | `CONTRACT_MISSING` / `SOURCE_CONFLICT`: no invented endpoints, server DTOs, tenant rules, or remote refresh behavior. |
+| Dependency advisories | Still open; compatible dependency remediation was excluded from the previously approved plan. No force-upgrades applied. |
+| Full architecture/design/43P ledger | Not individually certified. Existing JS typing, remaining visual/token/string gaps, full standalone mocks/host stubs, and oversized pre-existing navigation shells remain separate work. |
+| Maestro hierarchy/scenarios | Incomplete and unexecuted; JavaScript tests do not replace device E2E. |
+| Final all-RBG ZIP | Not issued while the broader release gates remain open. |
 
-No stored user data or native project files were removed. No dependency version changes were made.
-
-## 2. Verified repairs
-
-### Privacy, recovery, and storage
-
-- `src/core/observability/sanitizeTelemetry.ts`: redacts authentication keys and structured email/phone/address/birth/full-name fields. `sanitizeTelemetry.test.ts` covers nested redaction; `sentry.test.ts` verifies raw exception payloads are not logged by `captureException`.
-- `src/core/ui/ErrorBoundary.tsx`: token-based recovery outside provider dependencies; localized English/Hindi safe copy, accessible retry, no raw exception display or authored raw-error logging. Its test covers retry and payload exclusion.
-- `src/core/auth/authRefresh.ts:10-11`: fails closed with `null` while no exchange contract exists; never treats a refresh credential as an access token. `authRefresh.test.ts` covers credential/session preservation.
-- `src/storage/storage.js`: opt-in strict reads/writes preserve existing fallback callers while allowing owning flows to observe failures.
-- `src/context/TodoContext.js:45,85-122`: exposes storage loading/error state; failed or malformed reads do not replace task data or trigger an empty-list write. `__tests__/TodoContext.test.tsx` verifies failure, invalid shape, and retry behavior.
-
-### Connected UI and functional behavior
-
-- Calendar, overview, reminders and todos screens now select existing loading/error components from actual local storage state, with retry. Calendar and overview screen-state tests cover the selected branches.
-- Todo edit/detail paths now explain missing records and offer a back action instead of returning a blank screen. `UserTodosMissingRecord.test.tsx` covers the recovery control.
-- Todo create/edit forms propagate persistence failure, exclude the UI-only `All` filter from saved categories, and guard dirty-form navigation with a native confirmation instead of a raw alert. Successful save navigation is separated from persistence.
-- Settings feedback uses React Hook Form and the existing Zod contract, translated inline errors, duplicate-submit protection, and preserved values on failure. Success/reset occurs only after confirmed submission. The missing backend is still reported honestly rather than simulated.
-- Calendar checkboxes have localized labels, checked state and minimum targets; date selection uses locale-aware labels and does not emit navigation haptics. Pomodoro mode controls have localized names, selected state and minimum targets.
-- Overview KPI labels and advice are translated; chart values are exposed as accessible labelled values.
-- Voice deletion tests cover existence/unlink errors, metadata-removal failure, and success. Microphone denial never starts recording; permanent Android denial offers Settings recovery, with localized rationale and settings-failure feedback. Native behavior still needs device verification.
-
-## 3. Verification
-
-Jest: **33 suites / 94 tests passed**. TypeScript: **PASS**. ESLint: **0 errors / 63 warnings**. `git diff --check`: **PASS**. The exact executed command results are recorded in `compliance_manifest.json` and the verification section of `INTEGRATION_GUIDE.md`. Native UI appearance is **not verified**: this workspace has no Java/Android SDK, emulator/ADB, or Maestro executable. Component tests are not screenshots or device proof.
-
-## 4. Remaining gates — not certified complete
-
-| Gate | Status and concrete evidence |
-|---|---|
-| API/auth/backend contracts | `CONTRACT_MISSING` / `SOURCE_CONFLICT`: profile/feedback, calendar day/reschedule, overview activity/recalculation, and remote Pomodoro settings/session contracts are not supplied or conflict with feature prose. No endpoint, permission, tenant rule, or response field was invented. Local session history is now functional independently. |
-| Dependency security | `OPEN`: fresh `npm audit --omit=dev` reports 16 findings: 1 critical, 4 high, 7 moderate, 4 low. Compatible upgrades/migrations were excluded from the approved plan; no force-upgrade was applied. |
-| Architecture isolation and ceilings | `PARTIAL`: shared host contexts remain live. `src/utils/todoTimerNotifications.js` remains 807 lines, `todoHelpers.js` 130, `BottomTabNavigator.tsx` 260, and `PremiumDrawerContent.tsx` 722. They are not made compliant by deletion or by changing the allowed limits. Missing standalone host stubs remain open. |
-| Design/i18n/accessibility | `PARTIAL`: the explicit controls above are repaired; raw visual values and hardcoded strings remain elsewhere. No project-wide token, contrast, Dynamic Type, focus-order or reduced-motion certification is claimed. |
-| Mock and harness coverage | `PARTIAL`: fixture/DTO mismatches, fixed harness scenarios, and absent executable API mock handlers remain in several modules. Future contract artifacts were retained rather than silently removed. |
-| Maestro delivery suite | `OPEN` / `DEFERRED_TO_HOST_RUNTIME`: existing root-level flows are incomplete and do not provide the entire required role/module hierarchy. No Maestro run was performed. |
-| Full 43P and architecture rule ledger | `NOT_VERIFIED`: this scoped re-audit does not individually prove every numbered rule. The presence of this report and manifest does not establish clean compliance. |
-| Packaging/release | No `ALL-RBGS-COMPLETE` archive or production-ready certification is issued while the above source and verification gates remain open. |
-
-## 5. Outcome boundary
-
-The requested safe legacy cleanup and the source repairs documented above are reviewable on `temp`. This is not a declaration that every original prompt requirement is complete. External contracts, dependency remediation, remaining source-level audit findings, and native verification still require completion before a final compliant release.
+Historical baseline documents describe earlier revisions. This report and the integration map supersede their old-path placement statements, not their unresolved external contracts or runtime checks.

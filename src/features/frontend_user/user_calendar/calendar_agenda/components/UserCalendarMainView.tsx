@@ -6,14 +6,14 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { CheckCircle2, Menu } from 'lucide-react-native';
-import type { CalendarTaskEntity } from '../types/user_calendar.types';
-import { UserCalendarDayPill } from './UserCalendarDayPill';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { displayValue } from '../../../../../core/utils/displayValue';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
-import { formatCalendarDateKey } from '../utils/userCalendarFormatters';
+import type { CalendarTaskEntity } from "@/features/frontend_user/user_calendar/calendar_agenda/types/user_calendar.types";
+import { UserCalendarDayPill } from "@/features/frontend_user/user_calendar/calendar_agenda/components/UserCalendarDayPill";
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
+import { getMinTouchTarget } from "@/core/theme/getMinTouchTarget";
+import { displayValue } from "@/core/utils/displayValue";
+import { triggerLightImpact } from "@/core/interaction/haptics";
+import { formatCalendarDateKey } from "@/features/frontend_user/user_calendar/calendar_agenda/utils/userCalendarFormatters";
 
 interface UserCalendarMainViewProps {
   todos: CalendarTaskEntity[];

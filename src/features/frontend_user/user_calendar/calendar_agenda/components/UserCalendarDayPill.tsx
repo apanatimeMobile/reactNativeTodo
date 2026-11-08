@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { Text, StyleSheet, Pressable } from 'react-native';
-import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
-import { useTranslation } from '../../../../../core/i18n/useTranslation';
+import { useThemeTokens } from "@/core/theme/useThemeTokens";
+import { useTranslation } from "@/core/i18n/useTranslation";
 
 interface UserCalendarDayPillProps {
   dateStr: string;
