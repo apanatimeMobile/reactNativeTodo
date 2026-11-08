@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput, Pressable } from 'react-native';
-import { Search, ChevronDown, ChevronUp, HelpCircle, ArrowLeft } from 'lucide-react-native';
+import { Search, ChevronDown, ChevronUp, ArrowLeft } from 'lucide-react-native';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerLightImpact } from '../../../../../core/interaction/haptics';

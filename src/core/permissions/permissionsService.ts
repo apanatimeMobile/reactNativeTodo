@@ -3,7 +3,7 @@
  * FLOW: Queries platform permission status, prompts user via native dialogs, and reports grants.
  */
 
-import { Platform, PermissionsAndroid, PermissionStatus } from 'react-native';
+import { Platform, PermissionsAndroid } from 'react-native';
 
 export type AppPermissionType = 'audio_recording' | 'notifications';
 

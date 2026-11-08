@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Linking } from 'react-native';
-import { Globe, ExternalLink, Sparkles, Rocket, Shield, Clock, ArrowLeft } from 'lucide-react-native';
+import { ExternalLink, ArrowLeft } from 'lucide-react-native';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerLightImpact } from '../../../../../core/interaction/haptics';
@@ -54,7 +54,7 @@ export function UserMoreAppsMainView({ onBack }: UserMoreAppsMainViewProps = {})
     triggerLightImpact();
     try {
       await Linking.openURL(url);
-    } catch (_) {}
+    } catch {}
   };
 
   const styles = StyleSheet.create({

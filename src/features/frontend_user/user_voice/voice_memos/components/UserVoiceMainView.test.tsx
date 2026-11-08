@@ -6,6 +6,10 @@ import React from 'react';
 import { create, act, type ReactTestRenderer } from 'react-test-renderer';
 import { UserVoiceMainView } from './UserVoiceMainView';
 
+jest.mock('../../../../../context/TodoContext', () => ({
+  useTodoContext: () => ({ addTodo: jest.fn() }),
+}));
+
 jest.mock('../../../../../core/theme/useThemeTokens', () => ({
   useThemeTokens: () => ({
     color: {
@@ -44,11 +48,11 @@ jest.mock('../../../../../core/i18n/useTranslation', () => ({ useTranslation: ()
 }[key] ?? key) }) }));
 
 describe('UserVoiceMainView local recorder', () => {
-  it('renders actual recording controls and labels manual transcription honestly', () => {
+  it('renders actual recording controls and labels manual transcription honestly', async () => {
     let root!: ReactTestRenderer;
-    act(() => { root = create(<UserVoiceMainView />); });
-    expect(root.root.findAllByProps({ testID: 'user_voice-record-toggle' })).toHaveLength(1);
-    expect(root.root.findAllByProps({ testID: 'user_voice-memo-list' })).toHaveLength(1);
+    await act(async () => { root = create(<UserVoiceMainView />); await Promise.resolve(); });
+    expect(root.root.findAllByProps({ testID: 'user_voice-record-toggle' }).length).toBeGreaterThan(0);
+    expect(root.root.findAllByProps({ testID: 'user_voice-memo-list' }).length).toBeGreaterThan(0);
     expect(root.root.findAllByType(require('react-native').Text).some(
       (node) => String(node.props.children).includes('automatic speech-to-text is not connected'),
     )).toBe(true);

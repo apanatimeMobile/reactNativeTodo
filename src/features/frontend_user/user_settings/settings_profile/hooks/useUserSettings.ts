@@ -4,7 +4,6 @@
  */
 
 import { useCallback, useMemo } from 'react';
-import { useUserSettingsStore } from '../state/user_settings.store';
 import { useSettings } from '../../../../../context/SettingsContext';
 import { useAppLock } from '../../../../../context/AppLockContext';
 import { useTodoContext } from '../../../../../context/TodoContext';
@@ -15,14 +14,13 @@ import { calculateTaskCompletionStreak, type SettingsTaskSummary } from '../util
 
 
 export function useUserSettings() {
-  const store = useUserSettingsStore();
   const settingsCtx = useSettings() as any;
   const appLock = useAppLock() as any;
   const todoCtx = useTodoContext() as any;
   const dataActions = useUserSettingsData();
   const auth = useAuth() as any;
 
-  const tasks = (todoCtx?.tasks ?? []) as SettingsTaskSummary[];
+  const tasks = useMemo(() => (todoCtx?.tasks ?? []) as SettingsTaskSummary[], [todoCtx?.tasks]);
   const completedTasks = useMemo(() => tasks.filter((task) => task.completed === true && task.deleted !== true).length, [tasks]);
   const activeTasks = useMemo(() => tasks.filter((task) => task.completed !== true && task.deleted !== true).length, [tasks]);
   const streakDays = useMemo(() => calculateTaskCompletionStreak(tasks), [tasks]);

@@ -3,7 +3,7 @@
  * FLOW: Mutex locks concurrent refresh calls; updates authSession with fresh credentials.
  */
 
-import { getRefreshToken, setAccessToken, clearAuthSession } from './authSession';
+import { getRefreshToken, clearAuthSession } from './authSession';
 
 let refreshPromise: Promise<string | null> | null = null;
 
