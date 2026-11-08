@@ -22,6 +22,8 @@ import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerErrorHaptic, triggerSuccessHaptic } from '../../../../../core/interaction/haptics';
+import { useUnsavedChangesGuard } from '../../../../../core/hooks/useUnsavedChangesGuard';
+import { UserTodosUnsavedChangesDialog } from './UserTodosUnsavedChangesDialog';
 
 interface UserTodosTodoFormProps {
   initialValues?: Partial<TodoFormInput>;
@@ -49,7 +51,7 @@ export function UserTodosTodoForm({
   const minTarget = getMinTouchTarget();
   const {
     control, handleSubmit, watch, setValue, setError, clearErrors,
-    formState: { errors, isSubmitting: formSubmitting },
+    formState: { errors, isSubmitting: formSubmitting, isDirty },
   } = useForm<TodoFormInput>({
     mode: 'onSubmit',
     defaultValues: {
@@ -62,6 +64,13 @@ export function UserTodosTodoForm({
       reminderTime: initialValues?.reminderTime ?? '',
       recurrence: initialValues?.recurrence ?? 'none',
     },
+  });
+  const guard = useUnsavedChangesGuard(isDirty, {
+    title: t('user_todos_management.DISCARD_CHANGES_TITLE'),
+    description: t('user_todos_management.DISCARD_CHANGES_DESCRIPTION'),
+    confirmLabel: t('user_todos_management.DISCARD_CHANGES_CONFIRM'),
+    cancelLabel: t('user_todos_management.CANCEL'),
+    isDestructive: true,
   });
   const priority = watch('priority');
   const category = watch('category');
@@ -83,10 +92,12 @@ export function UserTodosTodoForm({
       return;
     }
     clearErrors();
+    guard.allowNavigationAfterSubmit();
     try {
       await onSubmit(parsed.data);
       triggerSuccessHaptic();
     } catch {
+      guard.cancelNavigationAfterSubmit();
       setError('root', { type: 'server', message: 'user_todos_management.SUBMIT_FAILED' });
     }
   }, () => {
@@ -178,6 +189,7 @@ export function UserTodosTodoForm({
           </Text>
         </Pressable>
       </ScrollView>
+      <UserTodosUnsavedChangesDialog guard={guard} />
     </KeyboardAvoidingView>
   );
 }

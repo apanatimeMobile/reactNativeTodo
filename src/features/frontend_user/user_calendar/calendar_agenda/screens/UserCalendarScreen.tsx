@@ -8,12 +8,14 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
 import { UserCalendarMainView } from '../components/UserCalendarMainView';
+import { UserCalendarSkeleton } from '../components/UserCalendarSkeleton';
+import { UserCalendarErrorFallback } from '../components/UserCalendarErrorFallback';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useUserCalendar } from '../hooks/useUserCalendar';
 
 export function UserCalendarScreen({ navigation }: { navigation: any }) {
   const tokens = useThemeTokens();
-  const { todos, selectedDate, selectDate, toggleComplete } = useUserCalendar();
+  const { todos, selectedDate, selectDate, toggleComplete, loading, loadError, loadTodos } = useUserCalendar();
 
   const handleOpenDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -38,14 +40,20 @@ export function UserCalendarScreen({ navigation }: { navigation: any }) {
       <StatusBar
         barStyle={tokens.isDark ? 'light-content' : 'dark-content'}
       />
-      <UserCalendarMainView
-        todos={todos}
-        onOpenDrawer={handleOpenDrawer}
-        selectedDate={selectedDate}
-        onSelectDate={selectDate}
-        onPressTask={handlePressTask}
-        onToggleTask={toggleComplete}
-      />
+      {loadError ? (
+        <UserCalendarErrorFallback onRetry={loadTodos} />
+      ) : loading ? (
+        <UserCalendarSkeleton />
+      ) : (
+        <UserCalendarMainView
+          todos={todos}
+          onOpenDrawer={handleOpenDrawer}
+          selectedDate={selectedDate}
+          onSelectDate={selectDate}
+          onPressTask={handlePressTask}
+          onToggleTask={toggleComplete}
+        />
+      )}
     </SafeAreaView>
   );
 }
