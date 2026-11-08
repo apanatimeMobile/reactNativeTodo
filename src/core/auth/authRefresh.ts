@@ -1,35 +1,14 @@
 /**
- * RESPONSIBILITY: Deduplicated token refresh coordinator preventing parallel refresh races (Section 941).
- * FLOW: Mutex locks concurrent refresh calls; updates authSession with fresh credentials.
+ * RESPONSIBILITY: Fail closed until a verified token-exchange contract is available.
+ * FLOW: Refresh request → unavailable result; never return a refresh token as an access token.
  */
 
-import { getRefreshToken, clearAuthSession } from './authSession';
-
-let refreshPromise: Promise<string | null> | null = null;
-
+/**
+ * No refresh endpoint is supplied. Callers must require re-authentication on null.
+ * Existing stored credentials are not removed by this unavailable exchange.
+ */
 export async function refreshAuthToken(): Promise<string | null> {
-  if (refreshPromise) {
-    return refreshPromise;
-  }
-
-  refreshPromise = (async () => {
-    try {
-      const refreshToken = await getRefreshToken();
-      if (!refreshToken) {
-        await clearAuthSession();
-        return null;
-      }
-      // Stub refresh logic deferred to host backend
-      return refreshToken;
-    } catch {
-      await clearAuthSession();
-      return null;
-    } finally {
-      refreshPromise = null;
-    }
-  })();
-
-  return refreshPromise;
+  return null;
 }
 
 export default { refreshAuthToken };

@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 
 interface ActivityBarItem {
@@ -23,6 +24,7 @@ export function UserOverviewActivityBarChart({
   maxValue,
 }: UserOverviewActivityBarChartProps) {
   const tokens = useThemeTokens();
+  const { t } = useTranslation();
   const CHART_HEIGHT = 120;
   const computedMax = maxValue || Math.max(...data.map((d) => d.value), 1);
 
@@ -46,7 +48,6 @@ export function UserOverviewActivityBarChart({
     },
     barValue: {
       ...tokens.typography.caption,
-      fontSize: 10,
       marginBottom: tokens.space[1],
     },
     bar: {
@@ -80,7 +81,9 @@ export function UserOverviewActivityBarChart({
           const isCurrent = !!d.isCurrent;
 
           return (
-            <View key={i} style={styles.barColumn}>
+            <View key={`${d.label}:${i}`} style={styles.barColumn} accessible accessibilityRole="image"
+              accessibilityLabel={`${d.label}: ${d.value} ${t('user_overview_dashboard.COMPLETED')}`}
+              accessibilityValue={{ min: 0, max: computedMax, now: d.value }}>
               {d.value > 0 ? (
                 <Text
                   style={[
@@ -105,7 +108,7 @@ export function UserOverviewActivityBarChart({
         })}
       </View>
 
-      <View style={styles.labelsRow}>
+      <View style={styles.labelsRow} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
         {data.map((d, i) => (
           <View key={i} style={styles.labelColumn}>
             <Text

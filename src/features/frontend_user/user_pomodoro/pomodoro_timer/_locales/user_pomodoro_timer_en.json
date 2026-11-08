@@ -10,6 +10,10 @@
     "OPEN_DRAWER": "Open navigation drawer",
     "FOCUS_TIMER_TITLE": "Focus Timer",
     "STAY_FOCUSED": "Stay Focused",
-    "REST": "Rest"
+    "REST": "Rest",
+    "MODE_FOCUS": "Focus",
+    "MODE_SHORT_BREAK": "Short Break",
+    "MODE_LONG_BREAK": "Long Break",
+    "SWITCH_TO_MODE": "Switch to {mode} mode"
   }
 }
