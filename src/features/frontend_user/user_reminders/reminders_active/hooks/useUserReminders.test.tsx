@@ -8,7 +8,7 @@ import { act, create, type ReactTestRenderer } from 'react-test-renderer';
 import { useUserReminders } from './useUserReminders';
 import { showToast } from '../../../../../core/toast/showToast';
 
-jest.mock('../../../../../context/TodoContext', () => {
+jest.mock("../../../user_todos/todos_management/state/UserTodosContext", () => {
   const context = {
     tasks: [
       {
@@ -29,7 +29,7 @@ jest.mock('../../../../../context/TodoContext', () => {
   };
 });
 
-const mockTodoContext = jest.requireMock('../../../../../context/TodoContext').__mockContext;
+const mockTodoContext = jest.requireMock("../../../user_todos/todos_management/state/UserTodosContext").__mockContext;
 
 jest.mock('../../../../../core/toast/showToast', () => ({
   showToast: jest.fn(),

@@ -5,7 +5,7 @@
 
 import { useMemo, useState, useCallback } from 'react';
 import { useTranslation } from '../../../../../core/i18n/useTranslation';
-import { useTodoContext } from '../../../../../context/TodoContext';
+import { useTodoContext } from "../../../user_todos/todos_management/state/UserTodosContext";
 import { buildWeeklyCompletionActivity, calculateTaskCompletionStreak, type OverviewTaskRecord } from '../utils/userOverviewAnalytics';
 
 export function useUserOverview() {

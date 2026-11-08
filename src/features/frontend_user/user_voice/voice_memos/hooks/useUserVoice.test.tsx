@@ -9,7 +9,7 @@ import RNFS from 'react-native-fs';
 import { useUserVoice } from './useUserVoice';
 import { showToast } from '../../../../../core/toast/showToast';
 
-jest.mock('../../../../../context/TodoContext', () => {
+jest.mock("../../../user_todos/todos_management/state/UserTodosContext", () => {
   const context = { addTodo: jest.fn() };
   return { useTodoContext: () => context, __mockContext: context };
 });
@@ -38,7 +38,7 @@ jest.mock('./useVoiceRecorder', () => ({
     stopRecording: jest.fn(async () => undefined),
   }),
 }));
-const mockTodoContext = jest.requireMock('../../../../../context/TodoContext').__mockContext;
+const mockTodoContext = jest.requireMock("../../../user_todos/todos_management/state/UserTodosContext").__mockContext;
 const mockUseUserVoiceMemos = jest.requireMock('./useUserVoiceMemos').useUserVoiceMemos as jest.Mock;
 
 const testMemo = {

@@ -6,7 +6,7 @@ import React from 'react';
 import { create, act, type ReactTestRenderer } from 'react-test-renderer';
 import { UserVoiceMainView } from './UserVoiceMainView';
 
-jest.mock('../../../../../context/TodoContext', () => ({
+jest.mock("../../../user_todos/todos_management/state/UserTodosContext", () => ({
   useTodoContext: () => ({ addTodo: jest.fn() }),
 }));
 

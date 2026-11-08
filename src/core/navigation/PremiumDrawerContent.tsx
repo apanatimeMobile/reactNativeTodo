@@ -45,8 +45,8 @@ import {
 
 import { useThemeTokens } from '../theme/useThemeTokens';
 import { useThemeContext } from '../theme/ThemeProvider';
-import useAuth from '../../hooks/useAuth';
-import useTheme from '../../hooks/useTheme';
+import useLocalProfile from "../auth/useLocalProfile";
+import { useAccentPreferences } from '../theme/AccentThemeProvider';
 import { CORE_ROUTES } from './routes';
 
 function IconBox({
@@ -168,8 +168,8 @@ export function PremiumDrawerContent() {
   const navigation = useNavigation<any>();
   const tokens = useThemeTokens();
   const { toggleTheme, isDarkMode } = useThemeContext();
-  const { accentColor, setAccentColor, palettes = [] } = (useTheme() || {}) as any;
-  const { user } = (useAuth() || {}) as any;
+  const { accentColor, setAccentColor, palettes = [] } = (useAccentPreferences() || {}) as any;
+  const { user } = (useLocalProfile() || {}) as any;
   const insets = useSafeAreaInsets();
   const navState = useNavigationState(state => state);
   const activeRoute = getActiveRouteName(navState);

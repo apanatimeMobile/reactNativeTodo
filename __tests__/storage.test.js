@@ -4,7 +4,7 @@ import {
   setItem,
   removeItem,
   clearStorage,
-} from '../src/storage/storage';
+} from "../src/core/storage/jsonStorage";
 
 describe('Storage Service', () => {
   beforeEach(async () => {
