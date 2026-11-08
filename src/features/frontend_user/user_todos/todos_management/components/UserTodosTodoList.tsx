@@ -4,7 +4,7 @@
  */
 
 import React, { useCallback } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import type { TodoEntity } from '../types/user_todos.types';
 import { UserTodosTodoCard } from './UserTodosTodoCard';
 import { UserTodosEmptyState } from './UserTodosEmptyState';

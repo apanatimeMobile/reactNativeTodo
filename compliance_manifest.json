@@ -1,0 +1,72 @@
+{
+  "mode": "MODE_D",
+  "target_role": "user",
+  "target_module": "frontend_user mobile app (multi-domain audit)",
+  "source_scope": "src/features/frontend_user/ plus shared app infrastructure and root tests/docs",
+  "changed_files": [
+    "INTEGRATION_GUIDE.md",
+    "MOBILE_AUDIT_REQUIREMENT_BASELINE.md",
+    "RE_AUDIT_CHECKLIST_RESULT.md",
+    "__tests__/helpers.test.js",
+    "compliance_manifest.json",
+    "jest.setup.js",
+    "src/core/auth/authRefresh.ts",
+    "src/core/navigation/BottomTabNavigator.tsx",
+    "src/core/observability/sanitizeTelemetry.test.ts",
+    "src/core/observability/sanitizeTelemetry.ts",
+    "src/core/permissions/permissionsService.ts",
+    "src/features/frontend_user/user_overview/overview_dashboard/hooks/useUserOverview.ts",
+    "src/features/frontend_user/user_pomodoro/pomodoro_timer/components/UserPomodoroTimerMainView.tsx",
+    "src/features/frontend_user/user_reminders/reminders_active/hooks/useUserReminders.ts",
+    "src/features/frontend_user/user_settings/settings_profile/_locales/user_settings_profile_en.json",
+    "src/features/frontend_user/user_settings/settings_profile/_locales/user_settings_profile_hi.json",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserAboutMainView.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserFaqMainView.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserFeedbackMainView.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserMoreAppsMainView.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserSettingsAppearanceSection.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserSettingsLinksSection.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserSettingsProfileCard.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/components/UserSettingsSecuritySection.tsx",
+    "src/features/frontend_user/user_settings/settings_profile/hooks/useUserSettings.ts",
+    "src/features/frontend_user/user_settings/settings_profile/hooks/useUserSettingsData.ts",
+    "src/features/frontend_user/user_settings/settings_profile/screens/UserFeedbackScreen.tsx",
+    "src/features/frontend_user/user_todos/todos_management/components/UserTodosHeaderCard.tsx",
+    "src/features/frontend_user/user_todos/todos_management/components/UserTodosTodoList.tsx",
+    "src/features/frontend_user/user_todos/todos_management/hooks/useUserTodos.ts",
+    "src/features/frontend_user/user_todos/todos_management/schemas/user_todos.schemas.ts",
+    "src/features/frontend_user/user_todos/todos_management/screens/UserTodosAddScreen.tsx",
+    "src/features/frontend_user/user_todos/todos_management/screens/UserTodosEditScreen.tsx",
+    "src/features/frontend_user/user_voice/voice_memos/components/UserVoiceMainView.test.tsx",
+    "src/features/frontend_user/user_voice/voice_memos/hooks/useUserVoice.test.tsx",
+    "src/features/frontend_user/user_voice/voice_memos/hooks/useUserVoice.ts"
+  ],
+  "static_checks_run": [
+    "npm test -- --runInBand",
+    "npm run typecheck",
+    "npm run lint",
+    "npm audit --omit=dev",
+    "git diff --check"
+  ],
+  "checks_passed": [
+    "npm test -- --runInBand: 19 suites, 57 tests passed",
+    "npm run typecheck: passed",
+    "npm run lint: exit 0, 64 warnings remain",
+    "git diff --check: passed"
+  ],
+  "checks_deferred_to_host_runtime": [
+    "Maestro E2E: Maestro CLI and emulator unavailable",
+    "Android/iOS native build and device accessibility verification not run"
+  ],
+  "blocked_by_supplied_contract": [
+    "Profile and feedback API endpoint authorization/response contract absent or conflicting",
+    "Calendar day/reschedule and overview activity/recalculate endpoints not verified",
+    "Pomodoro session logging/settings persistence contract not supplied",
+    "Auth token refresh contract not supplied"
+  ],
+  "architecture_exceptions": [],
+  "design_exceptions": [],
+  "artifact_status": "SOURCE_AUDIT_PARTIAL",
+  "runtime_verification_status": "DEFERRED_TO_HOST_RUNTIME",
+  "status_note": "SOURCE_AUDIT_PARTIAL is an explicit in-progress extension; this manifest does not claim source completion or an all-RBG-complete package. Root RE_AUDIT_CHECKLIST_RESULT.md records remaining failures and NOT_VERIFIED items."
+}

@@ -9,7 +9,7 @@ import { buildWeeklyCompletionActivity, calculateTaskCompletionStreak, type Over
 
 export function useUserOverview() {
   const todoCtx = useTodoContext();
-  const tasks = (todoCtx?.tasks ?? []) as OverviewTaskRecord[];
+  const tasks = useMemo(() => (todoCtx?.tasks ?? []) as OverviewTaskRecord[], [todoCtx?.tasks]);
   const loadTodos = todoCtx?.loadTodos;
   const [refreshing, setRefreshing] = useState(false);
 

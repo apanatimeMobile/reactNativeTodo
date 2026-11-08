@@ -83,10 +83,10 @@ describe('Helper Utilities', () => {
     it('calculates reminder timestamp for valid due date', () => {
       const ts = calculateReminderTimestamp({
         reminder: true,
-        dueDate: '2026-10-25',
+        dueDate: 'tomorrow',
       });
       expect(typeof ts).toBe('number');
-      expect(ts).toBeGreaterThan(0);
+      expect(ts).toBeGreaterThan(Date.now());
     });
   });
 });

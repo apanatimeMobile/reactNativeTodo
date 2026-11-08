@@ -12,7 +12,6 @@ import { UserPomodoroModeSelector } from './UserPomodoroModeSelector';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
-import { triggerLightImpact } from '../../../../../core/interaction/haptics';
 import { useUserPomodoro } from '../hooks/useUserPomodoro';
 
 interface UserPomodoroTimerMainViewProps {

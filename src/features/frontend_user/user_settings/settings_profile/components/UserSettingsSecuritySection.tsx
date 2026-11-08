@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
-import { Shield, Fingerprint } from 'lucide-react-native';
+import { Fingerprint } from 'lucide-react-native';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { triggerMediumImpact } from '../../../../../core/interaction/haptics';
 

@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
-import { Moon, Sparkles } from 'lucide-react-native';
+import { Moon } from 'lucide-react-native';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useThemeContext } from '../../../../../core/theme/ThemeProvider';
 import { triggerLightImpact } from '../../../../../core/interaction/haptics';

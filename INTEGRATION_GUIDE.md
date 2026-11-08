@@ -1,72 +1,43 @@
-# TaskLume Mobile Integration Guide & Host Hand-Off
+# TaskLume Mobile Integration Guide
 
-**Architecture Standard:** `MOBILE_ARCHITECTURE_AND_DEVELOPMENT_RULES_V1.md`  
-**Design System:** `MOBILE_UI_UX_DESIGN.md` (Luxury Premium Gold Theme)  
-**Target Platform:** React Native Bare-Metal (New Architecture / Fabric + TurboModules)  
-**Active Branch:** `development`
+**Target:** bare React Native with the New Architecture (Fabric/TurboModules)
 
----
+**Active repair branch:** `temp`
 
-## 1. Consolidated Changelog & Migration Summary
+**Source status:** partial Mode D audit and repair; this guide does not certify the app as release-ready.
 
-All features of the TaskLume mobile application have been fully migrated from legacy unstructured screens into the canonical, micro-modularized architecture under `src/features/frontend_user/`. Zero features were evicted or stripped.
+## 1. Current change summary
 
-### Submodules Completed:
-1. `frontend_user/user_todos/todos_management`: Full CRUD, subtasks, categories, favorites, trash, priority pills, Zod validation.
-2. `frontend_user/user_overview/overview_dashboard`: Productivity metrics, daily completion progress ring, 7-day activity bar chart, category distribution, streaks.
-3. `frontend_user/user_pomodoro/pomodoro_timer`: Focus/Short/Long break timer, interactive controls, audio alarms, mode switcher.
-4. `frontend_user/user_reminders/reminders_active`: Scheduled task alarms, snooze bottom sheet, overdue/today/upcoming filtering.
-5. `frontend_user/user_calendar/calendar_agenda`: Monthly calendar grid with date indicator dots, selected day agenda list.
-6. `frontend_user/user_voice/voice_memos`: Audio recording, transcript display, task conversion, memo list.
-7. `frontend_user/user_settings/settings_profile`: Master settings menu, user profile management, biometric/PIN security via Keychain, data export/import (JSON), FAQ accordion, feedback form, developer apps showcase, and developer profile (Rohit Kumar).
+This branch repairs telemetry redaction for `auth`/`ssn`, masks the email in the profile summary, prevents voice memo deletion from reporting success when audio cleanup fails, prevents the feedback screen from claiming an unconfigured submission succeeded, and fixes focused test/lint/type issues. See `RE_AUDIT_CHECKLIST_RESULT.md` for verified findings and the remaining scope.
 
----
+## 2. App integration points
 
-## 2. Navigation Route Registry
+- Native entry point: `index.js` → `App.tsx`.
+- App-level providers and navigation are composed in `App.tsx` and `src/core/navigation/`.
+- Feature code is organized beneath `src/features/frontend_user/`.
+- Secure session token storage is centralized in `src/core/auth/authSession.ts` and `src/core/storage/secureStorage.ts`.
+- Theme and shared visual tokens are provided by `src/core/theme/ThemeProvider.tsx` and `useThemeTokens()`.
 
-All route names are centralized and exported as immutable constants (`as const`):
-
-| Domain | Route Name | Screen Component | Path |
-|---|---|---|---|
-| **Todos** | `UserTodosHome` | `UserTodosHomeScreen` | `user_todos/todos_management/screens/UserTodosHomeScreen.tsx` |
-| **Todos** | `UserTodosAdd` | `UserTodosAddScreen` | `user_todos/todos_management/screens/UserTodosAddScreen.tsx` |
-| **Todos** | `UserTodosEdit` | `UserTodosEditScreen` | `user_todos/todos_management/screens/UserTodosEditScreen.tsx` |
-| **Todos** | `UserTodosDetail` | `UserTodosDetailScreen` | `user_todos/todos_management/screens/UserTodosDetailScreen.tsx` |
-| **Todos** | `UserTodosCategories` | `UserTodosCategoriesScreen` | `user_todos/todos_management/screens/UserTodosCategoriesScreen.tsx` |
-| **Todos** | `UserTodosFavorites` | `UserTodosFavoritesScreen` | `user_todos/todos_management/screens/UserTodosFavoritesScreen.tsx` |
-| **Todos** | `UserTodosTrash` | `UserTodosTrashScreen` | `user_todos/todos_management/screens/UserTodosTrashScreen.tsx` |
-| **Overview** | `UserOverview` | `UserOverviewScreen` | `user_overview/overview_dashboard/screens/UserOverviewScreen.tsx` |
-| **Pomodoro** | `UserPomodoro` | `UserPomodoroScreen` | `user_pomodoro/pomodoro_timer/screens/UserPomodoroScreen.tsx` |
-| **Reminders** | `UserReminders` | `UserRemindersScreen` | `user_reminders/reminders_active/screens/UserRemindersScreen.tsx` |
-| **Calendar** | `UserCalendar` | `UserCalendarScreen` | `user_calendar/calendar_agenda/screens/UserCalendarScreen.tsx` |
-| **Voice** | `UserVoice` | `UserVoiceScreen` | `user_voice/voice_memos/screens/UserVoiceScreen.tsx` |
-| **Settings** | `UserSettings` | `UserSettingsScreen` | `user_settings/settings_profile/screens/UserSettingsScreen.tsx` |
-| **Settings** | `Profile` | `UserProfileScreen` | `user_settings/settings_profile/screens/UserProfileScreen.tsx` |
-| **Settings** | `Feedback` | `UserFeedbackScreen` | `user_settings/settings_profile/screens/UserFeedbackScreen.tsx` |
-| **Settings** | `FAQ` | `UserFaqScreen` | `user_settings/settings_profile/screens/UserFaqScreen.tsx` |
-| **Settings** | `MoreApps` | `UserMoreAppsScreen` | `user_settings/settings_profile/screens/UserMoreAppsScreen.tsx` |
-| **Settings** | `About` | `UserAboutScreen` | `user_settings/settings_profile/screens/UserAboutScreen.tsx` |
-
----
-
-## 3. Host Integration Steps
-
-1. **Root Providers:** Ensure `App.tsx` wraps the application in `CoreThemeProvider` (`src/core/theme/ThemeProvider.tsx`).
-2. **Navigation Wiring:** `DrawerNavigator.js` and `MainNavigator.js` import exclusively from canonical feature screen paths.
-3. **Hardware Storage:** Biometrics and credentials leverage `react-native-keychain` via `src/core/storage/secureStorage.ts`.
-4. **Haptic Feedback:** Interactive touches invoke progressive haptics via `src/core/interaction/haptics.ts`.
-
----
-
-## 4. Verification Commands
+## 3. Local checks
 
 ```bash
-# Diagnostic audit of line ceilings, magic values, and cross-imports
-node scratch/verify_ten_passes.js
-
-# Touch target and accessibility validation
-node scratch/check_touch_accessibility.js
-
-# Run Maestro E2E test suite (on host with mobile device/emulator)
-maestro test mobile_e2e/user_todos_crud.yaml
+npm test -- --runInBand
+npm run typecheck
+npm run lint
 ```
+
+Native builds and Maestro scenarios require the corresponding host toolchain/device. The repository has Maestro flows in `mobile_e2e/`, but they are not yet a complete, audited role/module suite.
+
+## 4. Verified checks on this branch
+
+- Jest: 19 suites / 57 tests pass.
+- TypeScript: `npm run typecheck` passes.
+- ESLint: exits successfully with 64 warnings remaining.
+- `git diff --check`: passes.
+- Maestro, Android/iOS builds, and device accessibility behavior: `DEFERRED_TO_HOST_RUNTIME`.
+
+## 5. Contract and release limitations
+
+Backend contracts for profile/feedback endpoints, calendar day/reschedule flows, overview activity/recalculation, Pomodoro session/settings persistence, and token refresh were not supplied or are inconsistent with current feature documentation. Do not invent endpoints, permissions, payload fields, or persistence behavior. These items remain explicitly open in `RE_AUDIT_CHECKLIST_RESULT.md`.
+
+The dependency audit reports production dependency findings (1 critical, 4 high, 7 moderate, 4 low); dependency upgrades were not included because approved compatible versions and migration scope have not been established. Required all-item 43P evidence, complete scenario mocks/tests, role/module-nested Maestro suites, and a final archive are also still pending. This branch must not be treated as an `ALL-RBGS-COMPLETE` delivery.
