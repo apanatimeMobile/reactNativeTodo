@@ -23,27 +23,36 @@ export function useUserVoice() {
   const addTodo = todoCtx?.addTodo;
   const memoState = useUserVoiceMemos();
   const playback = useVoicePlayback();
+  const { memos, updateTranscript: saveTranscript, removeMemo } = memoState;
+  const { stopPlayback } = playback;
   const recorder = useVoiceRecorder(memoState.addMemo, playback.stopPlayback);
 
   const updateTranscript = useCallback(async (id: string, transcript: string) => {
-    const saved = await memoState.updateTranscript(id, transcript.trim());
+    const saved = await saveTranscript(id, transcript.trim());
     if (!saved) showToast(t('user_voice_memos.TRANSCRIPT_SAVE_FAILED'), 'error', `user_voice:transcript:failed:${id}`);
     return saved;
-  }, [memoState.updateTranscript, t]);
+  }, [saveTranscript, t]);
 
   const deleteMemo = useCallback(async (id: string) => {
-    const memo = memoState.memos.find((item) => item.id === id);
+    const memo = memos.find((item) => item.id === id);
     if (!memo) return false;
-    await playback.stopPlayback(id);
-    const removed = await memoState.removeMemo(id);
+    await stopPlayback(id);
+    if (memo.audioPath) {
+      try {
+        if (await RNFS.exists(memo.audioPath)) await RNFS.unlink(memo.audioPath);
+      } catch {
+        showToast(t('user_voice_memos.MEMO_DELETE_FAILED'), 'error', `user_voice:memo:delete-failed:${id}`);
+        return false;
+      }
+    }
+    const removed = await removeMemo(id);
     if (!removed) {
       showToast(t('user_voice_memos.MEMO_DELETE_FAILED'), 'error', `user_voice:memo:delete-failed:${id}`);
       return false;
     }
-    if (memo.audioPath && await RNFS.exists(memo.audioPath)) await RNFS.unlink(memo.audioPath).catch(() => undefined);
     showToast(t('user_voice_memos.MEMO_DELETED'), 'success', `user_voice:memo:deleted:${id}`);
     return true;
-  }, [memoState.memos, memoState.removeMemo, playback.stopPlayback, t]);
+  }, [memos, removeMemo, stopPlayback, t]);
 
   const saveAsTask = useCallback(async (memo: VoiceMemoEntity): Promise<boolean> => {
     const title = memo.transcript.trim();

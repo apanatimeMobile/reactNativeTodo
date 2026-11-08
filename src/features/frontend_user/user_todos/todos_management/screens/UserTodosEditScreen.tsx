@@ -9,22 +9,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { UserTodosEditMainView } from '../components/UserTodosEditMainView';
 import { useThemeTokens } from '../../../../../core/theme/useThemeTokens';
 import { useUserTodos } from '../hooks/useUserTodos';
+import type { TodoEntity } from '../types/user_todos.types';
+import type { TodoFormInput } from '../schemas/user_todos.schemas';
 
-export function UserTodosEditScreen({ route, navigation }: { route: any; navigation: any }) {
+export function UserTodosEditScreen({ route, navigation }: { route: { params?: { id?: string } }; navigation: { goBack: () => void } }) {
   const tokens = useThemeTokens();
   const { id } = route?.params || {};
-  const { todos, categories, updateTodo } = useUserTodos();
+  const { todos, todoCategories: categories, updateTodo } = useUserTodos();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const todo = useMemo(() => todos.find((t: any) => String(t.id) === String(id)), [todos, id]);
+  const todo = useMemo<TodoEntity | undefined>(() => todos.find((item) => String(item.id) === String(id)), [todos, id]);
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: TodoFormInput) => {
     setIsSubmitting(true);
     try {
       await updateTodo(id, values);
       navigation.goBack();
-    } catch {
+    } catch (error) {
       setIsSubmitting(false);
+      throw error;
     }
   };
 

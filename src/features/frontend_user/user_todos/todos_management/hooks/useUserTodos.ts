@@ -5,14 +5,16 @@
 
 import { useMemo, useCallback } from 'react';
 import { useTodoContext } from '../../../../../context/TodoContext';
+import type { TodoEntity } from '../types/user_todos.types';
 
 export function useUserTodos() {
   const ctx = useTodoContext();
-  const tasks = ctx.tasks || [];
+  const tasks = useMemo<TodoEntity[]>(() => ctx.tasks ?? [], [ctx.tasks]);
 
   const categories = useMemo(() => {
     return ['All', ...(ctx.customCategories || [])];
   }, [ctx.customCategories]);
+  const todoCategories = useMemo(() => categories.filter((category) => category !== 'All'), [categories]);
 
   const toggleComplete = useCallback((id: string) => {
     return ctx.toggleTodo(id);
@@ -33,6 +35,7 @@ export function useUserTodos() {
     ...ctx,
     todos: tasks,
     categories,
+    todoCategories,
     loading: ctx.loading,
     refreshTodos: ctx.loadTodos,
     toggleComplete,

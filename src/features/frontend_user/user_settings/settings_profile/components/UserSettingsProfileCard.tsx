@@ -11,6 +11,7 @@ import { useTranslation } from '../../../../../core/i18n/useTranslation';
 import { getMinTouchTarget } from '../../../../../core/theme/getMinTouchTarget';
 import { triggerLightImpact } from '../../../../../core/interaction/haptics';
 import { displayValue } from '../../../../../core/utils/displayValue';
+import { maskSensitiveData } from '../../../../../core/utils/maskSensitiveData';
 
 interface UserSettingsProfileCardProps {
   name: string;
@@ -79,7 +80,7 @@ export function UserSettingsProfileCard({
       style={styles.card}
       onPress={handlePress}
       accessibilityRole="button"
-      accessibilityLabel={name ? `Profile settings for ${name}` : 'Profile settings'}
+      accessibilityLabel={t('user_settings_profile.OPEN_PROFILE')}
     >
       <View style={styles.avatar}>
         <User size={24} color={tokens.color.primary} />
@@ -89,7 +90,7 @@ export function UserSettingsProfileCard({
           <Text style={styles.name}>{displayValue(name)}</Text>
           <ShieldCheck size={16} color={tokens.color.primary} />
         </View>
-        <Text style={styles.email} numberOfLines={1}>{displayValue(email)}</Text>
+        <Text style={styles.email} numberOfLines={1}>{displayValue(maskSensitiveData(email, 'email'))}</Text>
       </View>
       <ChevronRight size={20} color={tokens.color.muted} />
     </Pressable>
