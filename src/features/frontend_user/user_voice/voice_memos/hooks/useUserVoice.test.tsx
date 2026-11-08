@@ -55,28 +55,28 @@ describe('useUserVoice saveAsTask', () => {
     (showToast as jest.Mock).mockClear();
   });
 
-  it('creates a task from non-empty transcript and only then shows success feedback', () => {
+  it('creates a task from non-empty transcript and only then shows success feedback', async () => {
     let root!: ReactTestRenderer;
     act(() => { root = create(<SaveTaskHarness transcript="  Call the dentist  " />); });
-    act(() => { root.root.findByProps({ testID: 'user_voice-save-as-task-test' }).props.onPress(); });
+    await act(async () => { await root.root.findByProps({ testID: 'user_voice-save-as-task-test' }).props.onPress(); });
     expect(mockTodoContext.addTodo).toHaveBeenCalledWith({
       title: 'Call the dentist',
       category: 'Personal',
       priority: 'medium',
     });
-    expect(showToast).toHaveBeenCalledWith('Task created from voice memo.', 'success', 'user_voice:task:created');
+    expect(showToast).toHaveBeenCalledWith('Task created from voice memo.', 'success', 'user_voice:task:created:test-memo');
     act(() => root.unmount());
   });
 
-  it('rejects an empty transcript without creating a task or showing success', () => {
+  it('rejects an empty transcript without creating a task or showing success', async () => {
     let root!: ReactTestRenderer;
     act(() => { root = create(<SaveTaskHarness transcript="   " />); });
-    act(() => { root.root.findByProps({ testID: 'user_voice-save-as-task-test' }).props.onPress(); });
+    await act(async () => { await root.root.findByProps({ testID: 'user_voice-save-as-task-test' }).props.onPress(); });
     expect(mockTodoContext.addTodo).not.toHaveBeenCalled();
     expect(showToast).toHaveBeenCalledWith(
-      'A non-empty transcript is required to create a task.',
+      'Add transcript or notes before creating a task.',
       'error',
-      'user_voice:task:empty',
+      'user_voice:task:empty:test-memo',
     );
     act(() => root.unmount());
   });
