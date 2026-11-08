@@ -14,6 +14,8 @@
     "SNOOZE": "Snooze",
     "SNOOZE_REMINDER_FOR": "Snooze reminder for",
     "SNOOZE_DESCRIPTION": "Choose when this reminder should be rescheduled.",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "LOAD_ERROR": "Unable to read reminders. Please try again.",
+    "RETRY": "Retry"
   }
 }

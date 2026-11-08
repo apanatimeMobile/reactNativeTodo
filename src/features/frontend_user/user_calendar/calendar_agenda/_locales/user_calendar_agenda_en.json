@@ -7,6 +7,10 @@
     "ERROR_TITLE": "Calendar Error",
     "OPEN_DRAWER": "Open navigation drawer",
     "TASK_ACCESSIBILITY": "Task",
-    "EMPTY_FOR_DATE": "No tasks scheduled for {date}"
+    "EMPTY_FOR_DATE": "No tasks scheduled for {date}",
+    "SELECT_DATE": "Select date {date}",
+    "TOGGLE_TASK_COMPLETION": "Toggle completion for {task}",
+    "LOAD_ERROR": "Unable to read your calendar tasks. Please try again.",
+    "RETRY": "Retry"
   }
 }

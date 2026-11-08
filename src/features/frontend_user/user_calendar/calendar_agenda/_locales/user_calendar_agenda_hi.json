@@ -7,6 +7,10 @@
     "ERROR_TITLE": "कैलेंडर में त्रुटि",
     "OPEN_DRAWER": "खोलें नेविगेशन मेनू",
     "TASK_ACCESSIBILITY": "कार्य",
-    "EMPTY_FOR_DATE": "{date} के लिए कोई कार्य निर्धारित नहीं है"
+    "EMPTY_FOR_DATE": "{date} के लिए कोई कार्य निर्धारित नहीं है",
+    "SELECT_DATE": "तारीख चुनें: {date}",
+    "TOGGLE_TASK_COMPLETION": "{task} की पूर्णता बदलें",
+    "LOAD_ERROR": "कैलेंडर कार्य पढ़े नहीं जा सके। फिर प्रयास करें।",
+    "RETRY": "फिर प्रयास करें"
   }
 }

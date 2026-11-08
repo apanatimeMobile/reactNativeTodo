@@ -7,6 +7,9 @@
     "TASK_CREATE_ERROR": "Task could not be created from this voice memo.",
     "OPEN_DRAWER": "Open navigation drawer",
     "MIC_PERMISSION_DENIED": "Microphone access was denied. Allow microphone access in system settings to record a memo.",
+    "MIC_PERMISSION_BLOCKED": "Microphone access is blocked. Allow microphone access in app settings, then try recording again.",
+    "OPEN_APP_SETTINGS": "Open app settings",
+    "PERMISSION_SETTINGS_FAILED": "App settings could not be opened. Allow microphone access in system settings.",
     "RECORDING_STARTED": "Recording started.",
     "RECORDING_START_FAILED": "Recording could not be started. Check microphone permission and try again.",
     "RECORDING_SAVED": "Voice memo saved on this device.",
@@ -38,6 +41,10 @@
     "TRANSCRIPT_SAVE_FAILED": "Transcript or notes could not be saved.",
     "CONVERT_TO_TASK": "Convert to task",
     "TRANSCRIPT_REQUIRED": "Add transcript or notes before creating a task.",
-    "LOADING_MEMOS": "Loading voice memos"
+    "LOADING_MEMOS": "Loading voice memos",
+    "MIC_PERMISSION_TITLE": "Microphone permission",
+    "MIC_PERMISSION_DESCRIPTION": "TaskLume uses your microphone only while you record a voice memo.",
+    "MIC_PERMISSION_ALLOW": "Allow",
+    "MIC_PERMISSION_LATER": "Not now"
   }
 }

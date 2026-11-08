@@ -236,3 +236,9 @@ This module is **NOT production-verified**. Existing source and the current repa
 ## 22. Deliverables & Version History (Portability Score — NOT VERIFIED)
 - **Version:** 1.0.0
 - **Portability Score:** NOT VERIFIED. Legacy host contexts remain imported, declared dependencies and API/query wiring are incomplete, scenario handlers/tests are not demonstrated, and host runtime verification has not been run.
+
+### Source repair follow-up — 2026-11-08
+
+Feedback now uses React Hook Form and the existing Zod constraints, localized inline errors, pending protection and preserved input on failure. Category and rating controls expose disabled/selected state and minimum targets. The unconfigured backend still returns honest unavailability; no feedback endpoint or server success is simulated. Profile summaries mask email. Full dirty-profile and backend/server validation behavior remains outside these verified changes.
+
+This note supersedes earlier incomplete-status statements only for the explicitly listed source repairs. It is not full rule compliance or native runtime certification; see the root re-audit report for outstanding gates.

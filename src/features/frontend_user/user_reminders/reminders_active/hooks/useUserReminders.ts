@@ -43,5 +43,5 @@ export function useUserReminders() {
     }
   }, [tasks, todoCtx]);
 
-  return { reminders: activeReminders, snoozeReminder };
+  return { loading: Boolean(todoCtx.loading), loadError: Boolean(todoCtx.loadError), retryLoad: todoCtx.loadTodos, reminders: activeReminders, snoozeReminder };
 }

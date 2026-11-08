@@ -25,6 +25,9 @@
     "FILTER_TASKS_BY": "Filter tasks by",
     "CANCEL_ACTION": "Cancel action",
     "CANCEL": "Cancel",
+    "DISCARD_CHANGES_TITLE": "Discard changes?",
+    "DISCARD_CHANGES_DESCRIPTION": "Your unsaved task changes will be lost.",
+    "DISCARD_CHANGES_CONFIRM": "Discard",
     "DELETE_CONFIRM_DESCRIPTION": "This task will be permanently removed. This action cannot be undone.",
     "DELETE_TASK": "Delete Task",
     "EMPTY_TRASH": "Empty Trash",
@@ -70,6 +73,10 @@
     "VALIDATION_CATEGORY_REQUIRED": "Choose a category.",
     "VALIDATION_PRIORITY_INVALID": "Choose a valid priority.",
     "VALIDATION_DUE_DATE_INVALID": "Use YYYY-MM-DD for the due date.",
-    "VALIDATION_REMINDER_TIME_INVALID": "Use HH:mm for the reminder time."
+    "VALIDATION_REMINDER_TIME_INVALID": "Use HH:mm for the reminder time.",
+    "TAB_UPCOMING": "Upcoming",
+    "SUBMIT_FAILED": "Task could not be saved. Please try again.",
+    "TASK_NOT_FOUND": "This task is no longer available.",
+    "BACK_TO_TASKS": "Back to tasks"
   }
 }
