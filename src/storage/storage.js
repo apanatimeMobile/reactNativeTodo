@@ -8,7 +8,7 @@ async function setItem(key, value) {
   }
 }
 
-async function getItem(key, fallback = null) {
+async function getItem(key, fallback = null, strict = false) {
   try {
     const value = await AsyncStorage.getItem(key);
 
@@ -18,6 +18,7 @@ async function getItem(key, fallback = null) {
 
     return JSON.parse(value);
   } catch (err) {
+    if (strict) throw err;
     return fallback;
   }
 }
